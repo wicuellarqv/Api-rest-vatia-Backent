@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.type.DateType;
 
@@ -145,7 +146,7 @@ public class Contratos implements Serializable {
 		this.estadoContrato = estadoContrato;
 	}
     
-
+	
 	
 }
 

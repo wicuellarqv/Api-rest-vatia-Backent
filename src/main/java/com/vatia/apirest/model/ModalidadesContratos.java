@@ -62,7 +62,7 @@ public class ModalidadesContratos implements Serializable {
 		this.siglaModContrato = siglaModContrato;
 	}
 
-	
+
 
     
 }
