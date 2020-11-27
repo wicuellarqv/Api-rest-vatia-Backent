@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
-import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.hibernate.type.DateType;
 
@@ -100,7 +99,17 @@ public class GarantiasContratos implements Serializable {
 		this.vigenciaGarantia = vigenciaGarantia;
 	}
 	
+	@ManyToOne
+	@JoinColumn(name="num_id_contrato", referencedColumnName = "num_id_contrato", insertable=false,updatable=false)
+	Contratos contratosGarantias;
     
+	@ManyToOne
+	@JoinColumn(name="num_id_entrega_garantia", referencedColumnName = "num_id_entrega_garantia", insertable=false,updatable=false)
+	EntregasGarantias entregasGarantia;
+	
+	@ManyToOne
+	@JoinColumn(name="num_id_tipo_garantia", referencedColumnName = "num_id_tipo_garantia", insertable=false,updatable=false)
+	TiposGarantias tiposGarantia;
         
 }
 
