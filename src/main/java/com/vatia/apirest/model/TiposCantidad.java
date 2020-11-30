@@ -36,7 +36,21 @@ public class TiposCantidad implements Serializable {
     @Column(name = "str_desc_tipo_cantidad")
     private String descTipoCantidad;
 
-	
+	public Integer getIdTipoCantidad() {
+		return idTipoCantidad;
+	}
+
+	public void setIdTipoCantidad(Integer idTipoCantidad) {
+		this.idTipoCantidad = idTipoCantidad;
+	}
+
+	public String getDescTipoCantidad() {
+		return descTipoCantidad;
+	}
+
+	public void setDescTipoCantidad(String descTipoCantidad) {
+		this.descTipoCantidad = descTipoCantidad;
+	}
 	 
 }
 

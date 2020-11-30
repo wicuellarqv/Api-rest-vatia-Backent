@@ -10,17 +10,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vatia.apirest.model.TiposMercados;
+import com.vatia.apirest.model.EntregasGarantias;
 import com.vatia.apirest.model.Fuente;
 import com.vatia.apirest.model.ModalidadesContratos;
+import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposContratos;
-
-
+import com.vatia.apirest.model.TiposGarantias;
 import com.vatia.apirest.service.ContratoService;
 
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
-@RequestMapping("v1/TipoMercado")
+@RequestMapping("v1/Contrato")
 public class ContratosController {
 
 	@Autowired
@@ -40,6 +41,26 @@ public class ContratosController {
 	public List<ModalidadesContratos> getAllModalidadContrato() {
 		return contratoService.getAllModalidadContrato();
 	}
+		
+	@GetMapping("/getAllTipoGarantia")
+	public List<TiposGarantias> getAllTipoGarantia() {
+		return contratoService.getAllTipoGarantia();
+	}
+	
+	@GetMapping("/getAllEntregaGarantia")
+	public List<EntregasGarantias> getAllEntregaGarantia() {
+		return contratoService.getAllEntregaGarantia();
+	}
+	
+	@GetMapping("/getAllTipoCantidad")
+	public List<TiposCantidad> getAllTipoCantidad() {
+		return contratoService.getAllTipoCantidad();
+	}
+
+	
+	
+	
+	
 	
 	
 	
@@ -48,21 +69,6 @@ public class ContratosController {
 	@GetMapping("/getAllTipoPrecio")
 	public List<Fuente> getAllTipoPrecio() {
 		return contratoService.getAllTipoPrecio();
-	}
-	
-	@GetMapping("/getAllTipoCantidad")
-	public List<Fuente> getAllTipoCantidad() {
-		return contratoService.getAllTipoCantidad();
-	}
-	
-	@GetMapping("/getAllTipoGarantia")
-	public List<Fuente> getAllTipoGarantia() {
-		return contratoService.getAllTipoGarantia();
-	}
-	
-	@GetMapping("/getAllEntregaGarantia")
-	public List<Fuente> getAllEntregaGarantia() {
-		return contratoService.getAllEntregaGarantia();
 	}
 		
 	@GetMapping("/getAllSicContrato")
