@@ -5,14 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vatia.apirest.model.EntregasGarantias;
 import com.vatia.apirest.model.Fuente;
 import com.vatia.apirest.model.ModalidadesContratos;
+import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposMercados;
 import com.vatia.apirest.model.TiposContratos;
-
+import com.vatia.apirest.model.TiposGarantias;
+import com.vatia.apirest.repository.EntregaGarantiasRepository;
 import com.vatia.apirest.repository.FuenteRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
+import com.vatia.apirest.repository.TipoCantidadRepository;
 import com.vatia.apirest.repository.TipoContratoRepository;
+import com.vatia.apirest.repository.TipoGarantiasRepository;
 import com.vatia.apirest.repository.TiposMercadosRepository;
 import com.vatia.apirest.service.ContratoService;
 
@@ -30,6 +35,18 @@ public class ContratoServiceImpl implements ContratoService {
 	
 	@Autowired
     private ModalidadContratoRepository modalidadContratoRepository;
+	
+	@Autowired
+    private EntregaGarantiasRepository entregaGarantiasRepository;
+	
+	@Autowired
+    private TipoGarantiasRepository tipoGarantiasRepository;
+	
+	@Autowired
+    private TipoCantidadRepository tipoCantidadRepository;
+	
+	
+	
 	
 	@Override
 	public List<TiposMercados> getAllTipoMercado() {
@@ -49,6 +66,28 @@ public class ContratoServiceImpl implements ContratoService {
 		return this.modalidadContratoRepository.findAll();
 	} 
 	
+	@Override
+	public List<TiposGarantias> getAllTipoGarantia() {
+		// TODO Auto-generated method stub
+		return this.tipoGarantiasRepository.findAll();
+	} 
+	
+	@Override
+	public List<EntregasGarantias> getAllEntregaGarantia() {
+		// TODO Auto-generated method stub
+		return this.entregaGarantiasRepository.findAll();
+	} 
+	
+	@Override
+	public List<TiposCantidad> getAllTipoCantidad() {
+		// TODO Auto-generated method stub
+		return this.tipoCantidadRepository.findAll();
+	} 
+	
+	
+	
+	
+	
 	
 	
 	
@@ -58,24 +97,7 @@ public class ContratoServiceImpl implements ContratoService {
 		return this.fuenteRepository.findAll();
 	}	
 	
-	@Override
-	public List<Fuente> getAllTipoCantidad() {
-		// TODO Auto-generated method stub
-		return this.fuenteRepository.findAll();
-	} 
-	
-	@Override
-	public List<Fuente> getAllTipoGarantia() {
-		// TODO Auto-generated method stub
-		return this.fuenteRepository.findAll();
-	} 
-	
-	@Override
-	public List<Fuente> getAllEntregaGarantia() {
-		// TODO Auto-generated method stub
-		return this.fuenteRepository.findAll();
-	} 
-	
+
 	@Override
 	public List<Fuente> getAllSicContrato() {
 		// TODO Auto-generated method stub
