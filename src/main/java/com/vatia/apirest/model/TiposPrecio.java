@@ -19,42 +19,42 @@ import org.hibernate.type.DateType;
  * @author q-vision
  */
 @Entity
-@Table(name = "tbl_tipos_cantidad")
+@Table(name = "tbl_tipos_precio")
 @XmlRootElement
 
-public class TiposCantidad implements Serializable {
+public class TiposPrecio implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "num_id_tipo_cantidad")
-    private Integer idTipoCantidad;
+    @Column(name = "num_id_tipo_precio")
+    private Integer idTipoPrecio;
     
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "str_desc_tipo_cantidad")
-    private String descTipoCantidad;
+    @Column(name = "str_desc_tipo_precio")
+    private String descTipoPrecio;
 
-	public Integer getIdTipoCantidad() {
-		return idTipoCantidad;
+	public Integer getIdTipoPrecio() {
+		return idTipoPrecio;
 	}
 
-	public void setIdTipoCantidad(Integer idTipoCantidad) {
-		this.idTipoCantidad = idTipoCantidad;
+	public void setIdTipoPrecio(Integer idTipoPrecio) {
+		this.idTipoPrecio = idTipoPrecio;
 	}
 
-	public String getDescTipoCantidad() {
-		return descTipoCantidad;
+	public String getDescTipoPrecio() {
+		return descTipoPrecio;
 	}
 
-	public void setDescTipoCantidad(String descTipoCantidad) {
-		this.descTipoCantidad = descTipoCantidad;
+	public void setDescTipoPrecio(String descTipoPrecio) {
+		this.descTipoPrecio = descTipoPrecio;
 	}
 
 	
-    
 	 
+    
 }
 
     
