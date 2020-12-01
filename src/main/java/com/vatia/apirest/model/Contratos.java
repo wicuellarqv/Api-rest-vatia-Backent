@@ -159,6 +159,13 @@ public class Contratos implements Serializable {
 	@JoinColumn(name="num_id_tipo_mercado", referencedColumnName = "num_id_tipo_mercado", insertable=false,updatable=false)
 	TiposMercados tipoMercado;
 	
+	@ManyToOne
+	@JoinColumn(name="num_id_agnte_ccial_comp", referencedColumnName = "num_id_agente_ccial", insertable=false,updatable=false)
+	AgentesComerciales agentesCcialesComp;
+	
+	@ManyToOne
+	@JoinColumn(name="num_id_agnte_ccial_vend", referencedColumnName = "num_id_agente_ccial", insertable=false,updatable=false)
+	AgentesComerciales agentesCcialesVend;
 }
 
     
