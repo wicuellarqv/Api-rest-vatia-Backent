@@ -138,10 +138,6 @@ public class CantidadesContratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "num_h23")
     private BigDecimal cantidadH23;
-    
-    @Basic(optional = false)
-    @Column(name = "num_id_formula_cantidad")
-    private Integer idFormulaCantidad;
 
 	
 	public Integer getIdCantidadContrato() {
@@ -413,15 +409,6 @@ public class CantidadesContratos implements Serializable {
 		this.cantidadH23 = cantidadH23;
 	}
 
-
-	public Integer getIdFormulaCantidad() {
-		return idFormulaCantidad;
-	}
-
-
-	public void setIdFormulaCantidad(Integer idFormulaCantidad) {
-		this.idFormulaCantidad = idFormulaCantidad;
-	}
 	
 
 	public Integer getIdTipoCantidad() {
