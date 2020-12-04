@@ -68,6 +68,25 @@ public class Contratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "num_id_fecha_corte")
     private Integer idFechaCorte;
+        
+    @Basic(optional = false)
+    @Column(name = "str_nombre_contacto")
+    private String nombreContacto;
+    
+    @Basic(optional = false)
+    @Column(name = "str_tel_contacto")
+    private String telContacto;
+    
+    @Basic(optional = false)
+    @Column(name = "str_email_contacto")
+    private String emailContacto;
+    
+    @Basic(optional = false)
+    @Column(name = "str_fecha_firma")
+    private String fechaFirmaContrato;
+    
+    @Column(name = "str_doc_contacto")
+    private String docContacto;
     
     
 	public Integer getIdContrato() {
