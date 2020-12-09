@@ -42,10 +42,6 @@ public class CantidadesContratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "dtm_fecha_cantidad")
     private String fechaCantidad;
-    
-    @Basic(optional = false)
-    @Column(name = "num_h0")
-    private BigDecimal cantidadH0;
       
     @Basic(optional = false)
     @Column(name = "num_h1")
@@ -139,7 +135,11 @@ public class CantidadesContratos implements Serializable {
     @Column(name = "num_h23")
     private BigDecimal cantidadH23;
 
-	
+    @Basic(optional = false)
+    @Column(name = "num_h24")
+    private BigDecimal cantidadH24;
+    
+    
 	public Integer getIdCantidadContrato() {
 		return idCantidadContrato;
 	}
@@ -169,15 +169,6 @@ public class CantidadesContratos implements Serializable {
 		this.fechaCantidad = fechaCantidad;
 	}
 
-
-	public BigDecimal getCantidadH0() {
-		return cantidadH0;
-	}
-
-
-	public void setCantidadH0(BigDecimal cantidadH0) {
-		this.cantidadH0 = cantidadH0;
-	}
 
 
 	public BigDecimal getCantidadH1() {
@@ -408,8 +399,18 @@ public class CantidadesContratos implements Serializable {
 	public void setCantidadH23(BigDecimal cantidadH23) {
 		this.cantidadH23 = cantidadH23;
 	}
-
 	
+	
+
+	public BigDecimal getCantidadH24() {
+		return cantidadH24;
+	}
+
+
+	public void setCantidadH24(BigDecimal cantidadH24) {
+		this.cantidadH24 = cantidadH24;
+	}
+
 
 	public Integer getIdTipoCantidad() {
 		return idTipoCantidad;

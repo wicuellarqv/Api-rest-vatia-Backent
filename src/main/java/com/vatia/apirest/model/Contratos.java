@@ -36,9 +36,11 @@ public class Contratos implements Serializable {
     @Column(name = "num_id_mod_contrato")
     private Integer idModalidadContrato;
     
+    @Basic(optional = false)
     @Column(name = "num_id_agnte_ccial_comp")
     private Integer idAgenteComprador;
     
+    @Basic(optional = false)
     @Column(name = "num_id_agnte_ccial_vend")
     private Integer idAgenteVendedor;
       
