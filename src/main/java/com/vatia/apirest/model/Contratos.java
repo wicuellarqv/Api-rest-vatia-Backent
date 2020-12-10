@@ -7,12 +7,9 @@ package com.vatia.apirest.model;
  */
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.*;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.hibernate.type.DateType;
 
 /**
  *
@@ -179,6 +176,99 @@ public class Contratos implements Serializable {
 	public void setIdFechaCorte(Integer idFechaCorte) {
 		this.idFechaCorte = idFechaCorte;
 	}
+
+	public String getNombreContacto() {
+		return nombreContacto;
+	}
+
+	public void setNombreContacto(String nombreContacto) {
+		this.nombreContacto = nombreContacto;
+	}
+
+	public String getTelContacto() {
+		return telContacto;
+	}
+
+	public void setTelContacto(String telContacto) {
+		this.telContacto = telContacto;
+	}
+
+	public String getEmailContacto() {
+		return emailContacto;
+	}
+
+	public void setEmailContacto(String emailContacto) {
+		this.emailContacto = emailContacto;
+	}
+
+	public String getFechaFirmaContrato() {
+		return fechaFirmaContrato;
+	}
+
+	public void setFechaFirmaContrato(String fechaFirmaContrato) {
+		this.fechaFirmaContrato = fechaFirmaContrato;
+	}
+
+	public String getDocContacto() {
+		return docContacto;
+	}
+
+	public void setDocContacto(String docContacto) {
+		this.docContacto = docContacto;
+	}
+
+	public ModalidadesContratos getModalidadContrato() {
+		return modalidadContrato;
+	}
+
+	public void setModalidadContrato(ModalidadesContratos modalidadContrato) {
+		this.modalidadContrato = modalidadContrato;
+	}
+
+	public TiposContratos getTipoContrato() {
+		return tipoContrato;
+	}
+
+	public void setTipoContrato(TiposContratos tipoContrato) {
+		this.tipoContrato = tipoContrato;
+	}
+
+	public TiposMercados getTipoMercado() {
+		return tipoMercado;
+	}
+
+	public void setTipoMercado(TiposMercados tipoMercado) {
+		this.tipoMercado = tipoMercado;
+	}
+
+	public AgentesComerciales getAgentesCcialesComp() {
+		return agentesCcialesComp;
+	}
+
+	public void setAgentesCcialesComp(AgentesComerciales agentesCcialesComp) {
+		this.agentesCcialesComp = agentesCcialesComp;
+	}
+
+	public AgentesComerciales getAgentesCcialesVend() {
+		return agentesCcialesVend;
+	}
+
+	public void setAgentesCcialesVend(AgentesComerciales agentesCcialesVend) {
+		this.agentesCcialesVend = agentesCcialesVend;
+	}
+
+	public FechasCorteContratos getFechasCorteCont() {
+		return fechasCorteCont;
+	}
+
+	public void setFechasCorteCont(FechasCorteContratos fechasCorteCont) {
+		this.fechasCorteCont = fechasCorteCont;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 
 	@ManyToOne

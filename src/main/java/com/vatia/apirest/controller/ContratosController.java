@@ -1,17 +1,24 @@
 package com.vatia.apirest.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vatia.apirest.model.TiposMercados;
+import com.vatia.apirest.model.TiposPrecio;
+import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.EntregasGarantias;
-import com.vatia.apirest.model.Fuente;
+import com.vatia.apirest.model.FechasCorteContratos;
+import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposContratos;
@@ -57,33 +64,29 @@ public class ContratosController {
 		return contratoService.getAllTipoCantidad();
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-
 	@GetMapping("/getAllTipoPrecio")
-	public List<Fuente> getAllTipoPrecio() {
+	public List<TiposPrecio> getAllTipoPrecio() {
 		return contratoService.getAllTipoPrecio();
 	}
-		
-	@GetMapping("/getAllSicContrato")
-	public List<Fuente> getAllSicContrato() {
-		return contratoService.getAllSicContrato();
+
+	@GetMapping("/getAllSicAgenteComercial")
+	public List<AgentesComerciales> getAllSicAgenteComercial(@RequestParam String valor) {
+		return contratoService.getAllSicAgenteComercial(valor);
 	}
 	
-	@GetMapping("/getAllSicComprador")
-	public List<Fuente> getAllSicComprador() {
-		return contratoService.getAllSicComprador();
+	@GetMapping("/getAllFechaCorte")
+	public List<FechasCorteContratos> getAllFechaCorte() {
+		return contratoService.getAllFechaCorte();
+	}	
+	
+	@GetMapping("/getAllFormulaPrecio")
+	public List<FormulasPrecios> getAllFormulaPrecio() {
+		return contratoService.getAllFormulaPrecio();
 	}
 	
-	@GetMapping("/getAllSicVendedor")
-	public List<Fuente> getAllSicVendedor() {
-		return contratoService.getAllSicVendedor();
+	@PostMapping("/saveContrato")
+	public void updateContrato(@RequestBody Map<String, Object> request) {
+		this.contratoService.saveContrato(request);
 	}
 	
 }

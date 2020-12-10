@@ -1,12 +1,16 @@
 package com.vatia.apirest.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.EntregasGarantias;
-import com.vatia.apirest.model.Fuente;
+import com.vatia.apirest.model.FechasCorteContratos;
+import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposMercados;
+import com.vatia.apirest.model.TiposPrecio;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
 
@@ -24,25 +28,14 @@ public interface ContratoService {
 	
 	public List<TiposCantidad> getAllTipoCantidad(); 
 	
+	public List<TiposPrecio> getAllTipoPrecio(); 
 	
+	public List<FechasCorteContratos> getAllFechaCorte();
 	
-	
-	
-	
-	
-	
-	
-	public List<Fuente> getAllTipoPrecio(); 
-	
- 
-	
-  
-
+	public List<FormulasPrecios> getAllFormulaPrecio();
 		
-	public List<Fuente> getAllSicContrato();
+	public List<AgentesComerciales> getAllSicAgenteComercial(String valor);
 	
-	public List<Fuente> getAllSicComprador();
-	
-	public List<Fuente> getAllSicVendedor();
+	public void saveContrato (Map<String, Object> request);
 	
 }
