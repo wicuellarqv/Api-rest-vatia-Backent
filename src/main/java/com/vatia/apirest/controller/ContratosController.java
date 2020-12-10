@@ -20,6 +20,7 @@ import com.vatia.apirest.model.EntregasGarantias;
 import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
+import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
@@ -85,8 +86,8 @@ public class ContratosController {
 	}
 	
 	@PostMapping("/saveContrato")
-	public void updateContrato(@RequestBody Map<String, Object> request) {
-		this.contratoService.saveContrato(request);
+	public SaveResponse updateContrato(@RequestBody Map<String, Object> request) {
+		return contratoService.saveContrato(request);
 	}
 	
 }

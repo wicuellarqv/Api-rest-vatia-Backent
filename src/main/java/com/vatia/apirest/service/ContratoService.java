@@ -8,6 +8,7 @@ import com.vatia.apirest.model.EntregasGarantias;
 import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
+import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposMercados;
 import com.vatia.apirest.model.TiposPrecio;
@@ -36,6 +37,6 @@ public interface ContratoService {
 		
 	public AgentesComerciales getAllSicAgenteComercial(String valor);
 	
-	public void saveContrato (Map<String, Object> request);
+	public SaveResponse saveContrato (Map<String, Object> request);
 	
 }
