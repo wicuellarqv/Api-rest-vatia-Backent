@@ -120,7 +120,7 @@ public class ContratoServiceImpl implements ContratoService {
 	}	
 	
 	@Override
-	public List<AgentesComerciales> getAllSicAgenteComercial(String valor) {
+	public AgentesComerciales getAllSicAgenteComercial(String valor) {
 		// TODO Auto-generated method stub
 		return this.agenteComercialRepository.findAllCod(valor);
 	} 
@@ -156,13 +156,23 @@ public class ContratoServiceImpl implements ContratoService {
 		if (obj.get("contratoSic").toString() != "") {
 		ContratosList.setCodSicContrato(obj.get("contratoSic").toString());
 		}
+		
 		if (obj.get("Cod_SIC_comprador").toString() != "") {
-		ContratosList.setIdAgenteComprador(Integer.parseInt(obj.get("Cod_SIC_comprador").toString()));
+
+			AgentesComerciales agentesComerciales = new AgentesComerciales();
+			agentesComerciales = agenteComercialRepository.findAllCod(obj.get("Cod_SIC_comprador").toString());
+			ContratosList.setIdAgenteComprador(agentesComerciales.getIdAgenteCcial());
+			
 		}
+		
 		if (obj.get("Cod_SIC_vendedor").toString() != "") {
-		ContratosList.setIdAgenteVendedor(Integer.parseInt(obj.get("Cod_SIC_vendedor").toString()));
-		}
-		if (obj.get("Cod_SIC_vendedor").toString() != "") {
+
+			AgentesComerciales agentesComerciales = new AgentesComerciales();
+			agentesComerciales = agenteComercialRepository.findAllCod(obj.get("Cod_SIC_vendedor").toString());
+			ContratosList.setIdAgenteVendedor(agentesComerciales.getIdAgenteCcial());
+			}
+		
+		if (obj.get("Fechadefirma").toString() != "") {
 		ContratosList.setFechaFirmaContrato(obj.get("Fechadefirma").toString());
 		}
 		if (obj.get("nombreCliente").toString() != "") {

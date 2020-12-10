@@ -70,7 +70,7 @@ public class ContratosController {
 	}
 
 	@GetMapping("/getAllSicAgenteComercial")
-	public List<AgentesComerciales> getAllSicAgenteComercial(@RequestParam String valor) {
+	public AgentesComerciales getAllSicAgenteComercial(@RequestParam String valor) {
 		return contratoService.getAllSicAgenteComercial(valor);
 	}
 	

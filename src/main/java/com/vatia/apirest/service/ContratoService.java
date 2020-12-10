@@ -34,7 +34,7 @@ public interface ContratoService {
 	
 	public List<FormulasPrecios> getAllFormulaPrecio();
 		
-	public List<AgentesComerciales> getAllSicAgenteComercial(String valor);
+	public AgentesComerciales getAllSicAgenteComercial(String valor);
 	
 	public void saveContrato (Map<String, Object> request);
 	
