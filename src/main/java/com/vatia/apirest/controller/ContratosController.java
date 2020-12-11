@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vatia.apirest.model.TiposMercados;
-import com.vatia.apirest.model.EntregasGarantias;
 import com.vatia.apirest.model.Fuente;
 import com.vatia.apirest.model.ModalidadesContratos;
 import com.vatia.apirest.model.TiposCantidad;
@@ -47,23 +46,10 @@ public class ContratosController {
 		return contratoService.getAllTipoGarantia();
 	}
 	
-	@GetMapping("/getAllEntregaGarantia")
-	public List<EntregasGarantias> getAllEntregaGarantia() {
-		return contratoService.getAllEntregaGarantia();
-	}
-	
 	@GetMapping("/getAllTipoCantidad")
 	public List<TiposCantidad> getAllTipoCantidad() {
 		return contratoService.getAllTipoCantidad();
 	}
-
-	
-	
-	
-	
-	
-	
-	
 	
 
 	@GetMapping("/getAllTipoPrecio")

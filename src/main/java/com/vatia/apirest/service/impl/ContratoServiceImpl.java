@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vatia.apirest.model.EntregasGarantias;
+
 import com.vatia.apirest.model.Fuente;
 import com.vatia.apirest.model.ModalidadesContratos;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposMercados;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
-import com.vatia.apirest.repository.EntregaGarantiasRepository;
 import com.vatia.apirest.repository.FuenteRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
 import com.vatia.apirest.repository.TipoCantidadRepository;
@@ -35,9 +34,6 @@ public class ContratoServiceImpl implements ContratoService {
 	
 	@Autowired
     private ModalidadContratoRepository modalidadContratoRepository;
-	
-	@Autowired
-    private EntregaGarantiasRepository entregaGarantiasRepository;
 	
 	@Autowired
     private TipoGarantiasRepository tipoGarantiasRepository;
@@ -70,12 +66,6 @@ public class ContratoServiceImpl implements ContratoService {
 	public List<TiposGarantias> getAllTipoGarantia() {
 		// TODO Auto-generated method stub
 		return this.tipoGarantiasRepository.findAll();
-	} 
-	
-	@Override
-	public List<EntregasGarantias> getAllEntregaGarantia() {
-		// TODO Auto-generated method stub
-		return this.entregaGarantiasRepository.findAll();
 	} 
 	
 	@Override

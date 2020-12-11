@@ -40,72 +40,98 @@ public class GarantiasContratos implements Serializable {
     private Integer idTipoGarantia;
     
     @Basic(optional = false)
-    @Column(name = "num_id_entrega_garantia")
-    private Integer idEntregaGarantia;
+    @Column(name = "dtm_fecha_entrega_garantia")
+    private Integer fechaEntregaGarantia;
       
     @Basic(optional = false)
-    @Column(name = "dtm_fecha_entrega")
-    private String fechaEntregaGarantia;
+    @Column(name = "dtm_fecha_inicio_garantia")
+    private String fechaEntregaInicioGarantia;
     
     @Basic(optional = false)
-    @Column(name = "str_vigencia_garantia")
-    private String vigenciaGarantia;
-
+    @Column(name = "dtm_fecha_fin_garantia")
+    private String fechaEntregaFinGarantia;
+    
+    
+    @Basic(optional = false)
+    @Column(name = "num_valor_garantia")
+    private Integer num_valor_garantia;
+            
+    
+	
 	public Integer getIdGarantiaContrato() {
 		return idGarantiaContrato;
 	}
+
 
 	public void setIdGarantiaContrato(Integer idGarantiaContrato) {
 		this.idGarantiaContrato = idGarantiaContrato;
 	}
 
+
 	public Integer getIdContrato() {
 		return idContrato;
 	}
+
 
 	public void setIdContrato(Integer idContrato) {
 		this.idContrato = idContrato;
 	}
 
+
 	public Integer getIdTipoGarantia() {
 		return idTipoGarantia;
 	}
+
 
 	public void setIdTipoGarantia(Integer idTipoGarantia) {
 		this.idTipoGarantia = idTipoGarantia;
 	}
 
-	public Integer getIdEntregaGarantia() {
-		return idEntregaGarantia;
-	}
 
-	public void setIdEntregaGarantia(Integer idEntregaGarantia) {
-		this.idEntregaGarantia = idEntregaGarantia;
-	}
-
-	public String getFechaEntregaGarantia() {
+	public Integer getFechaEntregaGarantia() {
 		return fechaEntregaGarantia;
 	}
 
-	public void setFechaEntregaGarantia(String fechaEntregaGarantia) {
+
+	public void setFechaEntregaGarantia(Integer fechaEntregaGarantia) {
 		this.fechaEntregaGarantia = fechaEntregaGarantia;
 	}
 
-	public String getVigenciaGarantia() {
-		return vigenciaGarantia;
+
+	public String getFechaEntregaInicioGarantia() {
+		return fechaEntregaInicioGarantia;
 	}
 
-	public void setVigenciaGarantia(String vigenciaGarantia) {
-		this.vigenciaGarantia = vigenciaGarantia;
+
+	public void setFechaEntregaInicioGarantia(String fechaEntregaInicioGarantia) {
+		this.fechaEntregaInicioGarantia = fechaEntregaInicioGarantia;
 	}
-	
+
+
+	public String getFechaEntregaFinGarantia() {
+		return fechaEntregaFinGarantia;
+	}
+
+
+	public void setFechaEntregaFinGarantia(String fechaEntregaFinGarantia) {
+		this.fechaEntregaFinGarantia = fechaEntregaFinGarantia;
+	}
+
+
+	public Integer getNum_valor_garantia() {
+		return num_valor_garantia;
+	}
+
+
+	public void setNum_valor_garantia(Integer num_valor_garantia) {
+		this.num_valor_garantia = num_valor_garantia;
+	}
+
+
 	@ManyToOne
 	@JoinColumn(name="num_id_contrato", referencedColumnName = "num_id_contrato", insertable=false,updatable=false)
 	Contratos contratosGarantias;
-    
-	@ManyToOne
-	@JoinColumn(name="num_id_entrega_garantia", referencedColumnName = "num_id_entrega_garantia", insertable=false,updatable=false)
-	EntregasGarantias entregasGarantia;
+
 	
 	@ManyToOne
 	@JoinColumn(name="num_id_tipo_garantia", referencedColumnName = "num_id_tipo_garantia", insertable=false,updatable=false)
