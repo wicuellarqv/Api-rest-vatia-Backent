@@ -3,8 +3,8 @@ package com.vatia.apirest.service;
 import java.util.List;
 import java.util.Map;
 
+
 import com.vatia.apirest.model.AgentesComerciales;
-import com.vatia.apirest.model.EntregasGarantias;
 import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
@@ -24,8 +24,6 @@ public interface ContratoService {
 	public List<ModalidadesContratos> getAllModalidadContrato();
 	
 	public List<TiposGarantias> getAllTipoGarantia(); 
-	
-	public List<EntregasGarantias> getAllEntregaGarantia(); 
 	
 	public List<TiposCantidad> getAllTipoCantidad(); 
 	
