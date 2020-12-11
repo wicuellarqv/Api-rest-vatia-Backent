@@ -41,7 +41,7 @@ public class GarantiasContratos implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "dtm_fecha_entrega_garantia")
-    private Integer fechaEntregaGarantia;
+    private String fechaEntregaGarantia;
       
     @Basic(optional = false)
     @Column(name = "dtm_fecha_inicio_garantia")
@@ -88,12 +88,12 @@ public class GarantiasContratos implements Serializable {
 	}
 
 
-	public Integer getFechaEntregaGarantia() {
+	public String getFechaEntregaGarantia() {
 		return fechaEntregaGarantia;
 	}
 
 
-	public void setFechaEntregaGarantia(Integer fechaEntregaGarantia) {
+	public void setFechaEntregaGarantia(String fechaEntregaGarantia) {
 		this.fechaEntregaGarantia = fechaEntregaGarantia;
 	}
 
