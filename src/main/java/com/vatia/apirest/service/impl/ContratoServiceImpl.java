@@ -1,5 +1,6 @@
 package com.vatia.apirest.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.Contratos;
 import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
+import com.vatia.apirest.model.GarantiasContratos;
 import com.vatia.apirest.model.ModalidadesContratos;
 import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.model.TiposCantidad;
@@ -17,14 +19,21 @@ import com.vatia.apirest.model.TiposMercados;
 import com.vatia.apirest.model.TiposPrecio;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
+import com.vatia.apirest.repository.AgenteComercialRepository;
+import com.vatia.apirest.repository.ContratosRepository;
+import com.vatia.apirest.repository.FechaCorteRepository;
+import com.vatia.apirest.repository.FormulaPrecioRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
 import com.vatia.apirest.repository.TipoCantidadRepository;
 import com.vatia.apirest.repository.TipoContratoRepository;
 import com.vatia.apirest.repository.TipoGarantiasRepository;
+import com.vatia.apirest.repository.TipoPrecioRepository;
 import com.vatia.apirest.repository.TiposMercadosRepository;
 import com.vatia.apirest.service.ContratoService;
 
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+
 
 @Service
 public class ContratoServiceImpl implements ContratoService {
@@ -176,16 +185,43 @@ public class ContratoServiceImpl implements ContratoService {
 				ContratosList.setTelContacto(obj.get("Telefonocontacto").toString());
 			}
 			
-			ContratosRepository.save(ContratosList);
-			
+	        String llave="";
+	         
+	        for(int i = 1 ; i <= 10 ; i++) {
+	            switch((int) Math.floor(Math.random() * (3 - 1 + 1) + 1)) {
+	                case 1:
+	                	llave += mayuscula();
+	                break;
+	                case 2:
+	                	llave += minuscula();
+	                break;
+	                case 3:
+	                	llave += numero();
+	                break;
+	            }
+	        }
+	         
+	        ContratosList.setLlave(llave);			
+			ContratosRepository.save(ContratosList);		
 			Contratos contratos = new Contratos();
-			contratos = ContratosRepository.findAllMax();
+			contratos = ContratosRepository.findAllMax(llave);	
 			
+			Integer valor = ContratosRepository.findIdCod(contratos.getIdContrato());	
+
+
+			
+			if (valor != 0) {			
 			saveResponse.setCodigoContrato(contratos.getIdContrato());
-			saveResponse.setCodigoSicContrato(contratos.getCodSicContrato());
+			saveResponse.setCodigoSicContrato(contratos.getCodSicContrato());			
 			saveResponse.setMsg("Guardado Correctamente");
 			saveResponse.setEstado(true);
-
+			}else {
+				saveResponse.setCodigoContrato(null);
+				saveResponse.setCodigoSicContrato(null);
+				saveResponse.setMsg("Error al guardar id de contrato");
+				saveResponse.setEstado(false);
+			}
+			
 		} catch (Exception e) {
 			saveResponse.setCodigoContrato(null);
 			saveResponse.setCodigoSicContrato(null);
@@ -195,5 +231,17 @@ public class ContratoServiceImpl implements ContratoService {
 
 		return saveResponse;
 	}
+	
+    public static char mayuscula() {
+        return (char) Math.floor(Math.random() * (90 - 65 + 1) + 65);
+    }
+ 
+    public static char minuscula() {
+        return (char) Math.floor(Math.random() * (122 - 97 + 1) + 97);
+    }
+ 
+    public static int numero() {
+        return (int) Math.floor(Math.random() * (9 + 1));
+    }
 }
 

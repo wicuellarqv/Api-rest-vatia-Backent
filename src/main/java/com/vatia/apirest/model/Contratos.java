@@ -87,6 +87,8 @@ public class Contratos implements Serializable {
     @Column(name = "str_doc_contacto")
     private String docContacto;
     
+    @Column(name = "str_llave")
+    private String llave;
     
 	public Integer getIdContrato() {
 		return idContrato;
@@ -267,6 +269,14 @@ public class Contratos implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getLlave() {
+		return llave;
+	}
+
+	public void setLlave(String llave) {
+		this.llave = llave;
 	}
 
 
