@@ -54,7 +54,7 @@ public class GarantiasContratos implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "num_valor_garantia")
-    private Integer num_valor_garantia;
+    private String num_valor_garantia;
             
     
 	
@@ -118,12 +118,12 @@ public class GarantiasContratos implements Serializable {
 	}
 
 
-	public Integer getNum_valor_garantia() {
+	public String getNum_valor_garantia() {
 		return num_valor_garantia;
 	}
 
 
-	public void setNum_valor_garantia(Integer num_valor_garantia) {
+	public void setNum_valor_garantia(String num_valor_garantia) {
 		this.num_valor_garantia = num_valor_garantia;
 	}
 

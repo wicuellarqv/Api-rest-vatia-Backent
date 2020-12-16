@@ -1,12 +1,17 @@
 package com.vatia.apirest.service.impl;
 
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
 import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.Contratos;
 import com.vatia.apirest.model.FechasCorteContratos;
@@ -23,6 +28,7 @@ import com.vatia.apirest.repository.AgenteComercialRepository;
 import com.vatia.apirest.repository.ContratosRepository;
 import com.vatia.apirest.repository.FechaCorteRepository;
 import com.vatia.apirest.repository.FormulaPrecioRepository;
+import com.vatia.apirest.repository.GarantiaRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
 import com.vatia.apirest.repository.TipoCantidadRepository;
 import com.vatia.apirest.repository.TipoContratoRepository;
@@ -30,8 +36,10 @@ import com.vatia.apirest.repository.TipoGarantiasRepository;
 import com.vatia.apirest.repository.TipoPrecioRepository;
 import com.vatia.apirest.repository.TiposMercadosRepository;
 import com.vatia.apirest.service.ContratoService;
+import com.vatia.apirest.utils.ContratosRequest;
+import com.vatia.apirest.utils.GarantiasRequest;
 
-import net.minidev.json.JSONArray;
+import io.jsonwebtoken.lang.Arrays;
 import net.minidev.json.JSONObject;
 
 
@@ -67,6 +75,10 @@ public class ContratoServiceImpl implements ContratoService {
 
 	@Autowired
 	private FormulaPrecioRepository formulaPrecioRepository;
+	
+	@Autowired
+	private GarantiaRepository garantiaRepository;
+	
 
 	@Override
 	public List<TiposMercados> getAllTipoMercado() {
@@ -122,67 +134,68 @@ public class ContratoServiceImpl implements ContratoService {
 		return this.agenteComercialRepository.findAllCod(valor);
 	}
 
-	public SaveResponse saveContrato(Map<String, Object> request) {
+	@SuppressWarnings("unchecked")
+	public SaveResponse saveContrato(ContratosRequest contratosRequest) {
 
 		// TODO Auto-generated method stub
-		JSONObject obj = new JSONObject(request);
 		Contratos ContratosList = new Contratos();
+		GarantiasContratos garantiasContratos = new GarantiasContratos();
 		SaveResponse saveResponse = new SaveResponse();
 
 		try {
 
 			// Set de campos basicos en la tabla de contratos
-			if (obj.get("TipodeMercado").toString() != "") {
-				ContratosList.setIdTipoMercado(Integer.parseInt(obj.get("TipodeMercado").toString()));
+			if (contratosRequest.getTipodeMercado() != "") {
+				ContratosList.setIdTipoMercado(Integer.parseInt(contratosRequest.getTipodeMercado()));
 			}
-			if (obj.get("estadoContrato").toString() != "") {
-				ContratosList.setEstadoContrato(obj.get("estadoContrato").toString());
+			if (contratosRequest.getEstadoContrato() != "") {
+				ContratosList.setEstadoContrato(contratosRequest.getEstadoContrato());
 			}
-			if (obj.get("TipodeContrato").toString() != "") {
-				ContratosList.setIdTipoContrato(Integer.parseInt(obj.get("TipodeContrato").toString()));
+			if (contratosRequest.getTipodeContrato() != "") {
+				ContratosList.setIdTipoContrato(Integer.parseInt(contratosRequest.getTipodeContrato()));
 			}
-			if (obj.get("Modalidaddelcontrato").toString() != "") {
-				ContratosList.setIdModalidadContrato(Integer.parseInt(obj.get("Modalidaddelcontrato").toString()));
+			if (contratosRequest.getModalidaddelcontrato() != "") {
+				ContratosList.setIdModalidadContrato(Integer.parseInt(contratosRequest.getModalidaddelcontrato()));
 			}
-			if (obj.get("fechadeinicioContrato").toString() != "") {
-				ContratosList.setFecPeriodoInicio(obj.get("fechadeinicioContrato").toString());
+			if (contratosRequest.getFechadeinicioContrato() != "") {
+				ContratosList.setFecPeriodoInicio(contratosRequest.getFechadeinicioContrato());
 			}
-			if (obj.get("fechadefinContrato").toString() != "") {
-				ContratosList.setFecPeriodoFin(obj.get("fechadefinContrato").toString());
+			if (contratosRequest.getFechadefinContrato() != "") {
+				ContratosList.setFecPeriodoFin(contratosRequest.getFechadefinContrato());
 			}
-			if (obj.get("fechaCorte").toString() != "") {
-				ContratosList.setIdFechaCorte(Integer.parseInt(obj.get("fechaCorte").toString()));
+			if (contratosRequest.getFechaCorte() != "") {
+				ContratosList.setIdFechaCorte(Integer.parseInt(contratosRequest.getFechaCorte()));
 			}
-			if (obj.get("contratoSic").toString() != "") {
-				ContratosList.setCodSicContrato(obj.get("contratoSic").toString());
+			if (contratosRequest.getContratoSic() != "") {
+				ContratosList.setCodSicContrato(contratosRequest.getContratoSic());
 			}
 
-			if (obj.get("Cod_SIC_comprador").toString() != "") {
+			if (contratosRequest.getCod_SIC_comprador()!= "") {
 
 				AgentesComerciales agentesComerciales = new AgentesComerciales();
-				agentesComerciales = agenteComercialRepository.findAllCod(obj.get("Cod_SIC_comprador").toString());
+				agentesComerciales = agenteComercialRepository.findAllCod(contratosRequest.getCod_SIC_comprador());
 				ContratosList.setIdAgenteComprador(agentesComerciales.getIdAgenteCcial());
 
 			}
 
-			if (obj.get("Cod_SIC_vendedor").toString() != "") {
+			if (contratosRequest.getCod_SIC_vendedor()!= "") {
 
 				AgentesComerciales agentesComerciales = new AgentesComerciales();
-				agentesComerciales = agenteComercialRepository.findAllCod(obj.get("Cod_SIC_vendedor").toString());
+				agentesComerciales = agenteComercialRepository.findAllCod(contratosRequest.getCod_SIC_vendedor());
 				ContratosList.setIdAgenteVendedor(agentesComerciales.getIdAgenteCcial());
 			}
 
-			if (obj.get("Fechadefirma").toString() != "") {
-				ContratosList.setFechaFirmaContrato(obj.get("Fechadefirma").toString());
+			if (contratosRequest.getFechadefirma() != "") {
+				ContratosList.setFechaFirmaContrato(contratosRequest.getFechadefirma());
 			}
-			if (obj.get("nombreCliente").toString() != "") {
-				ContratosList.setNombreContacto(obj.get("nombreCliente").toString());
+			if (contratosRequest.getNombreCliente() != "") {
+				ContratosList.setNombreContacto(contratosRequest.getNombreCliente());
 			}
-			if (obj.get("Emailcontacto").toString() != "") {
-				ContratosList.setEmailContacto(obj.get("Emailcontacto").toString());
+			if (contratosRequest.getEmailcontacto() != "") {
+				ContratosList.setEmailContacto(contratosRequest.getEmailcontacto());
 			}
-			if (obj.get("Telefonocontacto").toString() != "") {
-				ContratosList.setTelContacto(obj.get("Telefonocontacto").toString());
+			if (contratosRequest.getTipodeContrato() != "") {
+				ContratosList.setTelContacto(contratosRequest.getTipodeContrato());
 			}
 			
 	        String llave="";
@@ -203,16 +216,41 @@ public class ContratoServiceImpl implements ContratoService {
 	         
 	        ContratosList.setLlave(llave);			
 			ContratosRepository.save(ContratosList);		
-			Contratos contratos = new Contratos();
-			contratos = ContratosRepository.findAllMax(llave);	
+			Contratos contrato = new Contratos();
+			contrato = ContratosRepository.findAllMax(llave);				
+			Integer valor = ContratosRepository.findIdCod(contrato.getIdContrato());
 			
-			Integer valor = ContratosRepository.findIdCod(contratos.getIdContrato());	
+			List<GarantiasRequest> listaGarantiasContratos = new ArrayList<GarantiasRequest>();
+			GarantiasContratos garantiasContratosN = new GarantiasContratos();
+			
+			listaGarantiasContratos = contratosRequest.getGarantiasContratos();
+			
+			if (listaGarantiasContratos.size() > 0) {
+				for (GarantiasRequest LgarantiasContratos : listaGarantiasContratos) {
+					
+					if (LgarantiasContratos.getNum_valor_garantia() != null) {
+					garantiasContratosN.setNum_valor_garantia(LgarantiasContratos.getNum_valor_garantia());
+					}
+					if (LgarantiasContratos.getFechaEntregaInicioGarantia() != null) {
+					garantiasContratosN.setFechaEntregaInicioGarantia(LgarantiasContratos.getFechaEntregaInicioGarantia());
+					}
+					if (LgarantiasContratos.getFechaEntregaFinGarantia() != null) {
+					garantiasContratosN.setFechaEntregaFinGarantia(LgarantiasContratos.getFechaEntregaFinGarantia());
+					}
+					garantiasContratosN.setIdContrato(contrato.getIdContrato());
+					
+					garantiasContratosN.setIdTipoGarantia(Integer.parseInt(contratosRequest.getTipogarantia()));
+					garantiasContratosN.setFechaEntregaGarantia(contratosRequest.getFechaEntregaGarantia());
 
+					garantiasContratosN.setIdGarantiaContrato(1);
+					garantiaRepository.save(garantiasContratosN);
+				}
+			}
 
 			
 			if (valor != 0) {			
-			saveResponse.setCodigoContrato(contratos.getIdContrato());
-			saveResponse.setCodigoSicContrato(contratos.getCodSicContrato());			
+			saveResponse.setCodigoContrato(contrato.getIdContrato());
+			saveResponse.setCodigoSicContrato(contrato.getCodSicContrato());			
 			saveResponse.setMsg("Guardado Correctamente");
 			saveResponse.setEstado(true);
 			}else {
