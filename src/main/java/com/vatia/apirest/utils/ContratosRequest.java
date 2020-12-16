@@ -1,6 +1,5 @@
 package com.vatia.apirest.utils;
 
-import com.vatia.apirest.model.GarantiasContratos;
 import java.util.List;
 
 public class ContratosRequest {
@@ -20,11 +19,39 @@ public class ContratosRequest {
 	private String tipodeContrato;
 	private String telefonocontacto;
 	private String tipogarantia;
-	private String fechaEntregaGarantia;	
+	private String fechaEntregaGarantia;
+	private String cantidadContrato;	
+	private String tipoCantidad;
 	private List<GarantiasRequest>  garantiasContratos;
-	
+	private List<PreciosRequest>  preciosRequest;
+	private List<CantidadRequest>  cantidadRequest;
 	
 
+	
+	public String getTipoCantidad() {
+		return tipoCantidad;
+	}
+	public void setTipoCantidad(String tipoCantidad) {
+		this.tipoCantidad = tipoCantidad;
+	}
+	public String getCantidadContrato() {
+		return cantidadContrato;
+	}
+	public void setCantidadContrato(String cantidadContrato) {
+		this.cantidadContrato = cantidadContrato;
+	}
+	public List<CantidadRequest> getCantidadRequest() {
+		return cantidadRequest;
+	}
+	public void setCantidadRequest(List<CantidadRequest> cantidadRequest) {
+		this.cantidadRequest = cantidadRequest;
+	}
+	public List<PreciosRequest> getPreciosRequest() {
+		return preciosRequest;
+	}
+	public void setPreciosRequest(List<PreciosRequest> preciosRequest) {
+		this.preciosRequest = preciosRequest;
+	}
 	public String getFechaEntregaGarantia() {
 		return fechaEntregaGarantia;
 	}

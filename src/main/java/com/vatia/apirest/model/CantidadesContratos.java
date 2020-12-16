@@ -140,6 +140,26 @@ public class CantidadesContratos implements Serializable {
     private BigDecimal cantidadH24;
     
     
+	public Contratos getContratosCantidades() {
+		return contratosCantidades;
+	}
+
+
+	public void setContratosCantidades(Contratos contratosCantidades) {
+		this.contratosCantidades = contratosCantidades;
+	}
+
+
+	public TiposCantidad getTiposCantidades() {
+		return tiposCantidades;
+	}
+
+
+	public void setTiposCantidades(TiposCantidad tiposCantidades) {
+		this.tiposCantidades = tiposCantidades;
+	}
+
+
 	public Integer getIdCantidadContrato() {
 		return idCantidadContrato;
 	}
