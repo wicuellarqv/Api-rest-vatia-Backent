@@ -22,12 +22,40 @@ public class ContratosRequest {
 	private String fechaEntregaGarantia;
 	private String cantidadContrato;	
 	private String tipoCantidad;
+	private String tipoPrecio;
+	private String mesBase;
+	private String mes;
+	private String formulaPrecio;
 	private List<GarantiasRequest>  garantiasContratos;
 	private List<PreciosRequest>  preciosRequest;
-	private List<CantidadRequest>  cantidadRequest;
+	private List<CantidadRequest>  cantidadRequest;	
 	
 
 	
+	public String getFormulaPrecio() {
+		return formulaPrecio;
+	}
+	public void setFormulaPrecio(String formulaPrecio) {
+		this.formulaPrecio = formulaPrecio;
+	}
+	public String getMes() {
+		return mes;
+	}
+	public void setMes(String mes) {
+		this.mes = mes;
+	}
+	public String getMesBase() {
+		return mesBase;
+	}
+	public void setMesBase(String mesBase) {
+		this.mesBase = mesBase;
+	}
+	public String getTipoPrecio() {
+		return tipoPrecio;
+	}
+	public void setTipoPrecio(String tipoPrecio) {
+		this.tipoPrecio = tipoPrecio;
+	}
 	public String getTipoCantidad() {
 		return tipoCantidad;
 	}

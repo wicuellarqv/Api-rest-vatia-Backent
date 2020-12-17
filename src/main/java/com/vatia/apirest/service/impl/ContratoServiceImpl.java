@@ -37,6 +37,7 @@ import com.vatia.apirest.repository.FechaCorteRepository;
 import com.vatia.apirest.repository.FormulaPrecioRepository;
 import com.vatia.apirest.repository.GarantiaRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
+import com.vatia.apirest.repository.PrecioContratoRepository;
 import com.vatia.apirest.repository.TipoCantidadRepository;
 import com.vatia.apirest.repository.TipoContratoRepository;
 import com.vatia.apirest.repository.TipoGarantiasRepository;
@@ -90,6 +91,9 @@ public class ContratoServiceImpl implements ContratoService {
 	
 	@Autowired
 	private CantidadRepository cantidadRepository;
+	
+	@Autowired
+	private PrecioContratoRepository precioContratoRepository;	
 	
 
 	@Override
@@ -243,14 +247,14 @@ public class ContratoServiceImpl implements ContratoService {
 			if (listaGarantiasContratos.size() > 0) {
 				for (GarantiasRequest LgarantiasContratos : listaGarantiasContratos) {
 					
-					if (LgarantiasContratos.getNum_valor_garantia() != null) {
-					garantiasContratosN.setNum_valor_garantia(LgarantiasContratos.getNum_valor_garantia());
+					if (LgarantiasContratos.getValor() != null) {
+					garantiasContratosN.setNum_valor_garantia(LgarantiasContratos.getValor());
 					}
-					if (LgarantiasContratos.getFechaEntregaInicioGarantia() != null) {
-					garantiasContratosN.setFechaEntregaInicioGarantia(LgarantiasContratos.getFechaEntregaInicioGarantia());
+					if (LgarantiasContratos.getInicio() != null) {
+					garantiasContratosN.setFechaEntregaInicioGarantia(LgarantiasContratos.getInicio());
 					}
-					if (LgarantiasContratos.getFechaEntregaFinGarantia() != null) {
-					garantiasContratosN.setFechaEntregaFinGarantia(LgarantiasContratos.getFechaEntregaFinGarantia());
+					if (LgarantiasContratos.getFin() != null) {
+					garantiasContratosN.setFechaEntregaFinGarantia(LgarantiasContratos.getFin());
 					}
 					garantiasContratosN.setIdContrato(contrato.getIdContrato());
 					
@@ -263,18 +267,39 @@ public class ContratoServiceImpl implements ContratoService {
 			}
 			
 			//inset en la tabla de precios por cada mes			
-//			listaPreciosRequest = contratosRequest.getPreciosRequest();
-//			if (listaPreciosRequest.size() > 0) {
-//				for (PreciosRequest LPreciosRequest : listaPreciosRequest) {
-//					
-//					if (LPreciosRequest.getMes() != null) {
-//						preciosContratoN.setPeriodoNegociacion(LPreciosRequest.getMes());
-//					}				
-//					if (LPreciosRequest.getPrecioReferencia() != null) {
-//						preciosContratoN.setPrecioReferencia(new BigDecimal(LPreciosRequest.getMes()));
-//					}					
-//				}
-//			}
+			listaPreciosRequest = contratosRequest.getPreciosRequest();
+			if (listaPreciosRequest.size() > 0) {
+				for (PreciosRequest LPreciosRequest : listaPreciosRequest) {
+					
+					if (LPreciosRequest.getMes() != null) {
+						preciosContratoN.setPrecioPeriodo(new BigDecimal(LPreciosRequest.getMes().replaceAll(",", ".")));
+					}				
+					if (contratosRequest.getFormulaPrecio() != null) {
+						preciosContratoN.setFormulaPrecio(Integer.parseInt(contratosRequest.getFormulaPrecio()));
+					}	
+					if (contrato.getIdContrato() != null) {
+						preciosContratoN.setIdContrato(contrato.getIdContrato());
+					}
+					if (contratosRequest.getTipoPrecio() != null) {
+						preciosContratoN.setIdTipoPrecio(Integer.parseInt(contratosRequest.getTipoPrecio()));
+					}
+					if (contratosRequest.getMesBase() != null) {
+						preciosContratoN.setMesBase(contratosRequest.getMesBase());
+					}
+					//pendiente formula
+					int big = 1234;
+					preciosContratoN.setPrecioPeriodo(new BigDecimal(big));
+					
+					if (LPreciosRequest.getPrecioReferencia() != null) {
+						preciosContratoN.setPrecioReferencia(new BigDecimal(LPreciosRequest.getPrecioReferencia().replaceAll(",", ".")));
+					}
+					
+					 
+					
+					
+					precioContratoRepository.save(preciosContratoN);
+				}
+			}
 			
 			//inset en la tabla de Cantidad por cada mes			
 			listaCantidadRequest = contratosRequest.getCantidadRequest();

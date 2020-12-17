@@ -2,29 +2,28 @@ package com.vatia.apirest.utils;
 
 public class GarantiasRequest {
 	
-	private String num_valor_garantia;
-	private String fechaEntregaInicioGarantia;
-	private String fechaEntregaFinGarantia;
-	public String getNum_valor_garantia() {
-		
-		return num_valor_garantia;
-	}
-	public void setNum_valor_garantia(String num_valor_garantia) {
-		this.num_valor_garantia = num_valor_garantia;
-	}
-	public String getFechaEntregaInicioGarantia() {
-		return fechaEntregaInicioGarantia;
-	}
-	public void setFechaEntregaInicioGarantia(String fechaEntregaInicioGarantia) {
-		this.fechaEntregaInicioGarantia = fechaEntregaInicioGarantia;
-	}
-	public String getFechaEntregaFinGarantia() {
-		return fechaEntregaFinGarantia;
-	}
-	public void setFechaEntregaFinGarantia(String fechaEntregaFinGarantia) {
-		this.fechaEntregaFinGarantia = fechaEntregaFinGarantia;
-	}
-
+	private String valor;
+	private String inicio;
+	private String fin;
 	
+
+	public String getValor() {
+		return valor;
+	}
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	public String getInicio() {
+		return inicio;
+	}
+	public String getFin() {
+		return fin;
+	}
+	public void setFin(String fin) {
+		this.fin = fin;
+	}
+	public void setInicio(String inicio) {
+		this.inicio = inicio;
+	}
 	
 }
