@@ -59,8 +59,97 @@ public class PreciosContratos implements Serializable {
     private Integer formulaPrecio;
     
     
+	public Integer getIdPrecioContrato() {
+		return idPrecioContrato;
+	}
 
-	
+	public void setIdPrecioContrato(Integer idPrecioContrato) {
+		this.idPrecioContrato = idPrecioContrato;
+	}
+
+	public Integer getIdContrato() {
+		return idContrato;
+	}
+
+	public void setIdContrato(Integer idContrato) {
+		this.idContrato = idContrato;
+	}
+
+	public Integer getIdTipoPrecio() {
+		return idTipoPrecio;
+	}
+
+	public void setIdTipoPrecio(Integer idTipoPrecio) {
+		this.idTipoPrecio = idTipoPrecio;
+	}
+
+	public String getMesBase() {
+		return mesBase;
+	}
+
+	public void setMesBase(String mesBase) {
+		this.mesBase = mesBase;
+	}
+
+	public BigDecimal getPrecioReferencia() {
+		return precioReferencia;
+	}
+
+	public void setPrecioReferencia(BigDecimal precioReferencia) {
+		this.precioReferencia = precioReferencia;
+	}
+
+	public String getFecPeriodoPrecio() {
+		return fecPeriodoPrecio;
+	}
+
+	public void setFecPeriodoPrecio(String fecPeriodoPrecio) {
+		this.fecPeriodoPrecio = fecPeriodoPrecio;
+	}
+
+	public BigDecimal getPrecioPeriodo() {
+		return precioPeriodo;
+	}
+
+	public void setPrecioPeriodo(BigDecimal precioPeriodo) {
+		this.precioPeriodo = precioPeriodo;
+	}
+
+	public Integer getFormulaPrecio() {
+		return formulaPrecio;
+	}
+
+	public void setFormulaPrecio(Integer formulaPrecio) {
+		this.formulaPrecio = formulaPrecio;
+	}
+
+	public Contratos getContratosPrecios() {
+		return contratosPrecios;
+	}
+
+	public void setContratosPrecios(Contratos contratosPrecios) {
+		this.contratosPrecios = contratosPrecios;
+	}
+
+	public TiposPrecio getTiposPrecios() {
+		return tiposPrecios;
+	}
+
+	public void setTiposPrecios(TiposPrecio tiposPrecios) {
+		this.tiposPrecios = tiposPrecios;
+	}
+
+	public FormulasPrecios getFormulas_precio() {
+		return formulas_precio;
+	}
+
+	public void setFormulas_precio(FormulasPrecios formulas_precio) {
+		this.formulas_precio = formulas_precio;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	@ManyToOne
 	@JoinColumn(name="num_id_contrato", referencedColumnName = "num_id_contrato", insertable=false,updatable=false)
