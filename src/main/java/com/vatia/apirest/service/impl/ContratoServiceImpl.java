@@ -272,7 +272,7 @@ public class ContratoServiceImpl implements ContratoService {
 				for (PreciosRequest LPreciosRequest : listaPreciosRequest) {
 					
 					if (LPreciosRequest.getMes() != null) {
-						preciosContratoN.setPrecioPeriodo(new BigDecimal(LPreciosRequest.getMes().replaceAll(",", ".")));
+						preciosContratoN.setFecPeriodoPrecio(LPreciosRequest.getMes());
 					}				
 					if (contratosRequest.getFormulaPrecio() != null) {
 						preciosContratoN.setFormulaPrecio(Integer.parseInt(contratosRequest.getFormulaPrecio()));
