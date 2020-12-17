@@ -11,8 +11,8 @@ public class ContratosRequest {
 	private String fechadefinContrato;
 	private String contratoSic;
 	private String cod_SIC_comprador;
-	private String cod_SIC_vendedor;
-	private String fechaCorte;
+	private String cod_SIC_vendedor;	
+	private String formaPago;	
 	private String fechadefirma;
 	private String nombreCliente;
 	private String emailcontacto;
@@ -32,6 +32,12 @@ public class ContratosRequest {
 	
 
 	
+	public String getFormaPago() {
+		return formaPago;
+	}
+	public void setFormaPago(String formaPago) {
+		this.formaPago = formaPago;
+	}
 	public String getFormulaPrecio() {
 		return formulaPrecio;
 	}
@@ -145,12 +151,6 @@ public class ContratosRequest {
 	}
 	public void setCod_SIC_vendedor(String cod_SIC_vendedor) {
 		this.cod_SIC_vendedor = cod_SIC_vendedor;
-	}
-	public String getFechaCorte() {
-		return fechaCorte;
-	}
-	public void setFechaCorte(String fechaCorte) {
-		this.fechaCorte = fechaCorte;
 	}
 	public String getFechadefirma() {
 		return fechadefirma;

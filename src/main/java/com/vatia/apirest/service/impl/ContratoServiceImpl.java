@@ -184,9 +184,9 @@ public class ContratoServiceImpl implements ContratoService {
 			}
 			if (contratosRequest.getFechadefinContrato() != "") {
 				ContratosList.setFecPeriodoFin(contratosRequest.getFechadefinContrato());
-			}
-			if (contratosRequest.getFechaCorte() != "") {
-				ContratosList.setIdFechaCorte(Integer.parseInt(contratosRequest.getFechaCorte()));
+			}		
+			if (contratosRequest.getFormaPago() != "") {
+				ContratosList.setIdFechaCorte(Integer.parseInt(contratosRequest.getFormaPago()));
 			}
 			if (contratosRequest.getContratoSic() != "") {
 				ContratosList.setCodSicContrato(contratosRequest.getContratoSic());
