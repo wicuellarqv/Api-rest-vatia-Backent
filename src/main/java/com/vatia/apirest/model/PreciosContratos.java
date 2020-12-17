@@ -39,9 +39,8 @@ public class PreciosContratos implements Serializable {
     @Column(name = "num_id_tipo_precio")
     private Integer idTipoPrecio;
     
-    @Basic(optional = false)
-    @Column(name = "dtm_periodo_negociacion")
-    private String periodoNegociacion;
+    @Column(name = "dtm_mes_base")
+    private String mesBase;
     
     @Basic(optional = false)
     @Column(name = "num_precio_referencia")
@@ -61,69 +60,7 @@ public class PreciosContratos implements Serializable {
     
     
 
-	public Integer getIdPrecioContrato() {
-		return idPrecioContrato;
-	}
-
-	public void setIdPrecioContrato(Integer idPrecioContrato) {
-		this.idPrecioContrato = idPrecioContrato;
-	}
-
-	public Integer getIdContrato() {
-		return idContrato;
-	}
-
-	public void setIdContrato(Integer idContrato) {
-		this.idContrato = idContrato;
-	}
-
-	public Integer getIdTipoPrecio() {
-		return idTipoPrecio;
-	}
-
-	public void setIdTipoPrecio(Integer idTipoPrecio) {
-		this.idTipoPrecio = idTipoPrecio;
-	}
-
-	public String getPeriodoNegociacion() {
-		return periodoNegociacion;
-	}
-
-	public void setPeriodoNegociacion(String periodoNegociacion) {
-		this.periodoNegociacion = periodoNegociacion;
-	}
-
-	public BigDecimal getPrecioReferencia() {
-		return precioReferencia;
-	}
-
-	public void setPrecioReferencia(BigDecimal precioReferencia) {
-		this.precioReferencia = precioReferencia;
-	}
-
-	public String getFecPeriodoPrecio() {
-		return fecPeriodoPrecio;
-	}
-
-	public void setFecPeriodoPrecio(String fecPeriodoPrecio) {
-		this.fecPeriodoPrecio = fecPeriodoPrecio;
-	}
-
-	public BigDecimal getPrecioPeriodo() {
-		return precioPeriodo;
-	}
-
-	public void setPrecioPeriodo(BigDecimal precioPeriodo) {
-		this.precioPeriodo = precioPeriodo;
-	}
-
-	public Integer getFormulaPrecio() {
-		return formulaPrecio;
-	}
-
-	public void setFormulaPrecio(Integer formulaPrecio) {
-		this.formulaPrecio = formulaPrecio;
-	}
+	
 
 	@ManyToOne
 	@JoinColumn(name="num_id_contrato", referencedColumnName = "num_id_contrato", insertable=false,updatable=false)
