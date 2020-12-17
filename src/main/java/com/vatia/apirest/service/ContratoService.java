@@ -1,8 +1,6 @@
 package com.vatia.apirest.service;
 
 import java.util.List;
-import java.util.Map;
-
 
 import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.FechasCorteContratos;
@@ -12,6 +10,7 @@ import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposMercados;
 import com.vatia.apirest.model.TiposPrecio;
+import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
 
@@ -35,6 +34,6 @@ public interface ContratoService {
 		
 	public AgentesComerciales getAllSicAgenteComercial(String valor);
 	
-	public SaveResponse saveContrato (Map<String, Object> request);
+	public SaveResponse saveContrato (ContratosRequest contratosRequest);
 	
 }

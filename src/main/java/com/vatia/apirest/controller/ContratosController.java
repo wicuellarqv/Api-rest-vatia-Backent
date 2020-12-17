@@ -25,6 +25,7 @@ import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
 import com.vatia.apirest.service.ContratoService;
+import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.response.ResponseHTTP;
 import org.springframework.http.HttpStatus;
 
@@ -156,7 +157,7 @@ public class ContratosController {
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return 	agentesComerciales == null  ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
+		return 	agentesComerciales != null  ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), agentesComerciales), HttpStatus.NOT_FOUND);
 		
 	}
@@ -198,17 +199,18 @@ public class ContratosController {
 	}
 	
 	@PostMapping("/saveContrato")
-	public  ResponseEntity<ResponseHTTP>  updateContrato(@RequestBody Map<String, Object> request) {
+	public  ResponseEntity<ResponseHTTP>  updateContrato(@RequestBody ContratosRequest contratosRequest) {
 		SaveResponse saveResponse = new SaveResponse();
 		
 		try {
-			saveResponse = contratoService.saveContrato(request);
+			saveResponse = contratoService.saveContrato(contratosRequest);
 
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return 	saveResponse == null  ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
+		return 	saveResponse != null  
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
 		
 	}

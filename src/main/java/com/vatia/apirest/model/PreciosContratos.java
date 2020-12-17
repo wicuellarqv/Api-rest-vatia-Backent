@@ -39,9 +39,8 @@ public class PreciosContratos implements Serializable {
     @Column(name = "num_id_tipo_precio")
     private Integer idTipoPrecio;
     
-    @Basic(optional = false)
-    @Column(name = "dtm_periodo_negociacion")
-    private String periodoNegociacion;
+    @Column(name = "dtm_mes_base")
+    private String mesBase;
     
     @Basic(optional = false)
     @Column(name = "num_precio_referencia")
@@ -60,7 +59,6 @@ public class PreciosContratos implements Serializable {
     private Integer formulaPrecio;
     
     
-
 	public Integer getIdPrecioContrato() {
 		return idPrecioContrato;
 	}
@@ -85,12 +83,12 @@ public class PreciosContratos implements Serializable {
 		this.idTipoPrecio = idTipoPrecio;
 	}
 
-	public String getPeriodoNegociacion() {
-		return periodoNegociacion;
+	public String getMesBase() {
+		return mesBase;
 	}
 
-	public void setPeriodoNegociacion(String periodoNegociacion) {
-		this.periodoNegociacion = periodoNegociacion;
+	public void setMesBase(String mesBase) {
+		this.mesBase = mesBase;
 	}
 
 	public BigDecimal getPrecioReferencia() {
@@ -123,6 +121,34 @@ public class PreciosContratos implements Serializable {
 
 	public void setFormulaPrecio(Integer formulaPrecio) {
 		this.formulaPrecio = formulaPrecio;
+	}
+
+	public Contratos getContratosPrecios() {
+		return contratosPrecios;
+	}
+
+	public void setContratosPrecios(Contratos contratosPrecios) {
+		this.contratosPrecios = contratosPrecios;
+	}
+
+	public TiposPrecio getTiposPrecios() {
+		return tiposPrecios;
+	}
+
+	public void setTiposPrecios(TiposPrecio tiposPrecios) {
+		this.tiposPrecios = tiposPrecios;
+	}
+
+	public FormulasPrecios getFormulas_precio() {
+		return formulas_precio;
+	}
+
+	public void setFormulas_precio(FormulasPrecios formulas_precio) {
+		this.formulas_precio = formulas_precio;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@ManyToOne
