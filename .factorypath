@@ -89,4 +89,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/persistence/org.eclipse.persistence.jpa.jpql/2.5.2/org.eclipse.persistence.jpa.jpql-2.5.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/persistence/javax.persistence/2.1.0/javax.persistence-2.1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/persistence/org.eclipse.persistence.jpa.modelgen.processor/2.5.2/org.eclipse.persistence.jpa.modelgen.processor-2.5.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-configuration-processor/2.3.3.RELEASE/spring-boot-configuration-processor-2.3.3.RELEASE.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
