@@ -11,8 +11,8 @@ public class ContratosRequest {
 	private String fechadefinContrato;
 	private String contratoSic;
 	private String cod_SIC_comprador;
-	private String cod_SIC_vendedor;
-	private String fechaCorte;
+	private String cod_SIC_vendedor;	
+	private String formaPago;	
 	private String fechadefirma;
 	private String nombreCliente;
 	private String emailcontacto;
@@ -22,12 +22,46 @@ public class ContratosRequest {
 	private String fechaEntregaGarantia;
 	private String cantidadContrato;	
 	private String tipoCantidad;
+	private String tipoPrecio;
+	private String mesBase;
+	private String mes;
+	private String formulaPrecio;
 	private List<GarantiasRequest>  garantiasContratos;
 	private List<PreciosRequest>  preciosRequest;
-	private List<CantidadRequest>  cantidadRequest;
+	private List<CantidadRequest>  cantidadRequest;	
 	
 
 	
+	public String getFormaPago() {
+		return formaPago;
+	}
+	public void setFormaPago(String formaPago) {
+		this.formaPago = formaPago;
+	}
+	public String getFormulaPrecio() {
+		return formulaPrecio;
+	}
+	public void setFormulaPrecio(String formulaPrecio) {
+		this.formulaPrecio = formulaPrecio;
+	}
+	public String getMes() {
+		return mes;
+	}
+	public void setMes(String mes) {
+		this.mes = mes;
+	}
+	public String getMesBase() {
+		return mesBase;
+	}
+	public void setMesBase(String mesBase) {
+		this.mesBase = mesBase;
+	}
+	public String getTipoPrecio() {
+		return tipoPrecio;
+	}
+	public void setTipoPrecio(String tipoPrecio) {
+		this.tipoPrecio = tipoPrecio;
+	}
 	public String getTipoCantidad() {
 		return tipoCantidad;
 	}
@@ -117,12 +151,6 @@ public class ContratosRequest {
 	}
 	public void setCod_SIC_vendedor(String cod_SIC_vendedor) {
 		this.cod_SIC_vendedor = cod_SIC_vendedor;
-	}
-	public String getFechaCorte() {
-		return fechaCorte;
-	}
-	public void setFechaCorte(String fechaCorte) {
-		this.fechaCorte = fechaCorte;
 	}
 	public String getFechadefirma() {
 		return fechadefirma;
