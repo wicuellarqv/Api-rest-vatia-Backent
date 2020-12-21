@@ -199,7 +199,9 @@ public class ContratosController {
 	}
 	
 	@PostMapping("/saveContrato")
-	public  ResponseEntity<ResponseHTTP>  updateContrato(@RequestBody ContratosRequest contratosRequest) {
+	public  ResponseEntity<ResponseHTTP>  saveContrato(
+			@RequestBody ContratosRequest contratosRequest
+			) {
 		SaveResponse saveResponse = new SaveResponse();
 		
 		try {
