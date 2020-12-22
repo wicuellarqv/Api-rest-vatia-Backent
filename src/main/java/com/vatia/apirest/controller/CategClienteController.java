@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vatia.apirest.model.Categoria;
+import com.vatia.apirest.model.CategoriaCliente;
 import com.vatia.apirest.response.ResponseHTTP;
 import com.vatia.apirest.service.CategoriaService;
 
@@ -88,6 +89,53 @@ public class CategClienteController {
 		return !status
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(),
 						"Hay un error en la actualizacion de la categoria"), HttpStatus.INTERNAL_SERVER_ERROR)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK);
+	}
+	
+	@GetMapping("/categorias_clientes")
+	public ResponseEntity<ResponseHTTP> getAllCategoriasCli() {
+		List<CategoriaCliente> categoriasCli = new ArrayList<>();
+
+		try {
+			categoriasCli = categoriaService.getAllCategoriasClientes();
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return categoriasCli.size() > 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), categoriasCli), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), categoriasCli), HttpStatus.NOT_FOUND);
+
+	}
+	
+	@PostMapping("/categorias_clientes")
+	public ResponseEntity<ResponseHTTP> createCategoriaCli(@RequestBody CategoriaCliente categoriaCliente) {
+		CategoriaCliente ResponseCategoriaCli = new CategoriaCliente();
+		try {
+			ResponseCategoriaCli = categoriaService.saveCategoriaCliente(categoriaCliente);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return ResponseCategoriaCli.getId() == 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+						"Hay un error en la creacion de la categoria cliente"), HttpStatus.INTERNAL_SERVER_ERROR)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ResponseCategoriaCli), HttpStatus.OK);
+
+	}
+	
+	@DeleteMapping("/categorias_clientes")
+	public ResponseEntity<ResponseHTTP> deleteCategoriaCli(@RequestBody CategoriaCliente categoriaCliente) {
+		Boolean status = true;
+		try {
+			status = categoriaService.deleteCategoriaCliente(categoriaCliente);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return !status
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+						"Hay un error en la eliminacion de la categoria cliente"), HttpStatus.INTERNAL_SERVER_ERROR)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK);
 	}
 }

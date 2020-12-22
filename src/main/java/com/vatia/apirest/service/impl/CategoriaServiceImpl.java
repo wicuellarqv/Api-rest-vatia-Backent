@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vatia.apirest.model.Categoria;
+import com.vatia.apirest.model.CategoriaCliente;
+import com.vatia.apirest.repository.CategoriaClienteRepository;
 import com.vatia.apirest.repository.CategoriaRepository;
 import com.vatia.apirest.service.CategoriaService;
 
@@ -16,6 +18,9 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	
+	@Autowired
+	private CategoriaClienteRepository categoriaClienteRepository;
 	
 	@Override
 	public Categoria saveCategoria(Categoria categoria) {
@@ -72,10 +77,46 @@ public class CategoriaServiceImpl implements CategoriaService {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
+	@Override
+	public CategoriaCliente saveCategoriaCliente(CategoriaCliente categoriaCliente) {
+		CategoriaCliente newCategoriaCli = new CategoriaCliente();
+		try {
+			newCategoriaCli.setCategoria(categoriaCliente.getCategoria());
+			newCategoriaCli.setFechaPresupuesto(categoriaCliente.getFechaPresupuesto());
+			newCategoriaCli.setIdCliente(categoriaCliente.getIdCliente());
+			newCategoriaCli.setNombreCliente(categoriaCliente.getNombreCliente());
+			CategoriaCliente returnCategoriaCli = new CategoriaCliente();
+			returnCategoriaCli = categoriaClienteRepository.save(newCategoriaCli);
+			return returnCategoriaCli;
+		} catch (Exception e) {
+			newCategoriaCli.setId(0);
+			System.out.println(e.toString());
+			return newCategoriaCli;
+		}
+	}
+
+	@Override
+	public Boolean deleteCategoriaCliente(CategoriaCliente categoriaCliente) {
+		Boolean status = true;
+		try {
+			categoriaClienteRepository.deleteById(categoriaCliente.getId());
+			return status;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			status = false;
+			return status;
+		}
+	}
+
+	@Override
+	public List<CategoriaCliente> getAllCategoriasClientes() {
+		List<CategoriaCliente> categoriasCli = new ArrayList<CategoriaCliente>();
+		try {
+			categoriasCli = (List<CategoriaCliente>) categoriaClienteRepository.findAll();
+			return categoriasCli;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			return categoriasCli;
+		}
+	}
 }
