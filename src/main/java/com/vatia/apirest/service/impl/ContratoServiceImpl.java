@@ -184,9 +184,9 @@ public class ContratoServiceImpl implements ContratoService {
 			}
 			if (contratosRequest.getFechadefinContrato() != "") {
 				ContratosList.setFecPeriodoFin(contratosRequest.getFechadefinContrato());
-			}
-			if (contratosRequest.getFechaCorte() != "") {
-				ContratosList.setIdFechaCorte(Integer.parseInt(contratosRequest.getFechaCorte()));
+			}		
+			if (contratosRequest.getFormaPago() != "") {
+				ContratosList.setIdFechaCorte(Integer.parseInt(contratosRequest.getFormaPago()));
 			}
 			if (contratosRequest.getContratoSic() != "") {
 				ContratosList.setCodSicContrato(contratosRequest.getContratoSic());
@@ -272,7 +272,7 @@ public class ContratoServiceImpl implements ContratoService {
 				for (PreciosRequest LPreciosRequest : listaPreciosRequest) {
 					
 					if (LPreciosRequest.getMes() != null) {
-						preciosContratoN.setPrecioPeriodo(new BigDecimal(LPreciosRequest.getMes().replaceAll(",", ".")));
+						preciosContratoN.setFecPeriodoPrecio(LPreciosRequest.getMes());
 					}				
 					if (contratosRequest.getFormulaPrecio() != null) {
 						preciosContratoN.setFormulaPrecio(Integer.parseInt(contratosRequest.getFormulaPrecio()));
