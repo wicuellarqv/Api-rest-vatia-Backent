@@ -177,7 +177,7 @@ public class ContratoServiceImpl implements ContratoService {
 				ContratosList.setIdTipoContrato(Integer.parseInt(contratosRequest.getTipodeContrato()));
 			}
 			if (contratosRequest.getModalidaddelcontrato() != "") {
-				ContratosList.setIdModalidadContrato(Integer.parseInt(contratosRequest.getModalidaddelcontrato()));
+				ContratosList.setIdNegContrato(Integer.parseInt(contratosRequest.getModalidaddelcontrato()));
 			}
 			if (contratosRequest.getFechadeinicioContrato() != "") {
 				ContratosList.setFecPeriodoInicio(contratosRequest.getFechadeinicioContrato());
