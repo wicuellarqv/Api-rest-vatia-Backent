@@ -8,7 +8,6 @@ package com.vatia.apirest.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,10 +27,13 @@ public class Contratos implements Serializable {
     @Column(name = "num_id_contrato")
     private Integer idContrato;
     
+    @Column(name = "num_contrato")
+    private Integer numContrato;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @Column(name = "num_id_mod_contrato")
-    private Integer idModalidadContrato;
+    @Column(name = "num_id_negoc_contrato")
+    private Integer idNegContrato;
     
     @Basic(optional = false)
     @Column(name = "num_id_agnte_ccial_comp")
@@ -47,6 +49,9 @@ public class Contratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "num_id_tipo_contrato")
     private Integer idTipoContrato;
+    
+    @Column(name = "num_id_condicion_tipo_contrato")
+    private Integer idCondicionTipoContrato;
     
     @Basic(optional = false)
     @Column(name = "num_id_tipo_mercado")
@@ -97,13 +102,21 @@ public class Contratos implements Serializable {
 	public void setIdContrato(Integer idContrato) {
 		this.idContrato = idContrato;
 	}
-
-	public Integer getIdModalidadContrato() {
-		return idModalidadContrato;
+	
+	public Integer getNumContrato() {
+		return numContrato;
 	}
 
-	public void setIdModalidadContrato(Integer idModalidadContrato) {
-		this.idModalidadContrato = idModalidadContrato;
+	public void setNumContrato(Integer numContrato) {
+		this.numContrato = numContrato;
+	}
+
+	public Integer getIdNegContrato() {
+		return idNegContrato;
+	}
+
+	public void setIdNegContrato(Integer idNegContrato) {
+		this.idNegContrato = idNegContrato;
 	}
 
 	public Integer getIdAgenteComprador() {
@@ -136,6 +149,14 @@ public class Contratos implements Serializable {
 
 	public void setIdTipoContrato(Integer idTipoContrato) {
 		this.idTipoContrato = idTipoContrato;
+	}
+	
+	public Integer getIdCondicionTipoContrato() {
+		return idCondicionTipoContrato;
+	}
+
+	public void setIdCondicionTipoContrato(Integer idCondicionTipoContrato) {
+		this.idCondicionTipoContrato = idCondicionTipoContrato;
 	}
 
 	public Integer getIdTipoMercado() {
@@ -219,14 +240,6 @@ public class Contratos implements Serializable {
 		this.docContacto = docContacto;
 	}
 
-	public ModalidadesContratos getModalidadContrato() {
-		return modalidadContrato;
-	}
-
-	public void setModalidadContrato(ModalidadesContratos modalidadContrato) {
-		this.modalidadContrato = modalidadContrato;
-	}
-
 	public TiposContratos getTipoContrato() {
 		return tipoContrato;
 	}
@@ -282,12 +295,16 @@ public class Contratos implements Serializable {
 
 
 	@ManyToOne
-	@JoinColumn(name="num_id_mod_contrato", referencedColumnName = "num_id_mod_contrato", insertable=false,updatable=false)
-	ModalidadesContratos modalidadContrato;
+	@JoinColumn(name="num_id_negoc_contrato", referencedColumnName = "num_id_negoc_contrato", insertable=false,updatable=false)
+	NegociacionesContratos negociacionContrato;
 	
 	@ManyToOne
 	@JoinColumn(name="num_id_tipo_contrato", referencedColumnName = "num_id_tipo_contrato", insertable=false,updatable=false)
 	TiposContratos tipoContrato;
+	
+	@ManyToOne
+	@JoinColumn(name="num_id_condicion_tipo_contrato", referencedColumnName = "num_id_condicion_tipo_contrato", insertable=false,updatable=false)
+	CondicionTipoContrato condicionTipoContrato;
 	
 	@ManyToOne
 	@JoinColumn(name="num_id_tipo_mercado", referencedColumnName = "num_id_tipo_mercado", insertable=false,updatable=false)
