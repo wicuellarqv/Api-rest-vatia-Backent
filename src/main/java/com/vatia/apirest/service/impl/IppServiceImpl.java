@@ -47,7 +47,7 @@ public class IppServiceImpl implements IppService{
 	public Ipp findIppAnio(Integer anio) {
 		// TODO Auto-generated method stub
 		return this.ippRepository.getIppAnio(anio);
-	}
+	}	
 
 	@Override
 	public void updateIpp(Integer fuente, float ipp, int anio, int _int_mes) {

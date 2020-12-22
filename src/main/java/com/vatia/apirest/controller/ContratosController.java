@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vatia.apirest.model.TiposMercados;
 import com.vatia.apirest.model.TiposPrecio;
 import com.vatia.apirest.model.AgentesComerciales;
+import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
+import com.vatia.apirest.model.NegociacionesContratos;
 import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposContratos;
@@ -197,6 +199,44 @@ public class ContratosController {
 						HttpStatus.NOT_FOUND);	
 		
 	}
+	
+	
+	@GetMapping("/getAllCTipoContrato")
+	public ResponseEntity<ResponseHTTP>  getAllCTipoContrato() {
+		List<CondicionTipoContrato> condicionTipoContrato = new ArrayList<>();
+		
+		try {
+			condicionTipoContrato = contratoService.getAllCTipoContrato();
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return condicionTipoContrato.size() > 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), condicionTipoContrato), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), condicionTipoContrato),
+						HttpStatus.NOT_FOUND);	
+		
+	}
+	
+	@GetMapping("/getAllNegocioContrato")
+	public ResponseEntity<ResponseHTTP>  getAllNegocioContrato() {
+		List<NegociacionesContratos> negociacionesContratos = new ArrayList<>();
+		
+		try {
+			negociacionesContratos = contratoService.getAllNegocioContrato();
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return negociacionesContratos.size() > 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), negociacionesContratos), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), negociacionesContratos),
+						HttpStatus.NOT_FOUND);	
+		
+	}
+	
 	
 	@PostMapping("/saveContrato")
 	public  ResponseEntity<ResponseHTTP>  saveContrato(

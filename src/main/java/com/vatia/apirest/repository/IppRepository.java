@@ -17,7 +17,7 @@ public interface IppRepository extends JpaRepository<Ipp, Integer> {
 
 	@Query(value = "SELECT * FROM IPP I WHERE I.ANIO = ?1 ORDER BY ANIO ASC", nativeQuery = true)
 	Ipp getIppAnio(Integer anio);
-
+	
 	@Modifying
 	@Transactional
 	@Query(value = "UPDATE IPP SET FUENTE = :fuente,INDICE = :input_promedio,"

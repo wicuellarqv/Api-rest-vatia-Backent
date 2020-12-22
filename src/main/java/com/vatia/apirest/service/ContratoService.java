@@ -3,9 +3,11 @@ package com.vatia.apirest.service;
 import java.util.List;
 
 import com.vatia.apirest.model.AgentesComerciales;
+import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
+import com.vatia.apirest.model.NegociacionesContratos;
 import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposMercados;
@@ -31,6 +33,10 @@ public interface ContratoService {
 	public List<FechasCorteContratos> getAllFechaCorte();
 	
 	public List<FormulasPrecios> getAllFormulaPrecio();
+	
+	public List<CondicionTipoContrato> getAllCTipoContrato();
+	
+	public List<NegociacionesContratos> getAllNegocioContrato();
 		
 	public AgentesComerciales getAllSicAgenteComercial(String valor);
 	

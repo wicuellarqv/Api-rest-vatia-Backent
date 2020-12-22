@@ -44,7 +44,7 @@ public class IppController {
 	@GetMapping("/getIppAnio")
 	public Ipp getIppAnio(@RequestParam Integer anio) {
 		return this.ippService.findIppAnio(anio);
-	}
+	}	
 
 	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable("id") Integer id) {

@@ -11,7 +11,7 @@ public interface IppService {
 	public List<Ipp> findAllAnio(Integer desde, Integer hasta);
 	
 	public Ipp findIppAnio(Integer anio);
-
+	
 	public void save(Ipp ipp);
 
 	public void deleteById(Integer id);
