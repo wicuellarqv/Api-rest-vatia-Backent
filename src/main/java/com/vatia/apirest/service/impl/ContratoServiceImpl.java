@@ -268,9 +268,9 @@ public class ContratoServiceImpl implements ContratoService {
 			if (listaGarantiasContratos.size() > 0) {
 				for (GarantiasRequest LgarantiasContratos : listaGarantiasContratos) {
 					
-					if (LgarantiasContratos.getValor() != null) {
-					garantiasContratosN.setNum_valor_garantia(LgarantiasContratos.getValor());
-					}
+//					if (LgarantiasContratos.getValor() != null) {
+//					garantiasContratosN.setNum_valor_garantia(LgarantiasContratos.getValor());
+//					}
 					if (LgarantiasContratos.getInicio() != null) {
 					garantiasContratosN.setFechaEntregaInicioGarantia(LgarantiasContratos.getInicio());
 					}
@@ -279,8 +279,8 @@ public class ContratoServiceImpl implements ContratoService {
 					}
 					garantiasContratosN.setIdContrato(contrato.getIdContrato());
 					
-					garantiasContratosN.setIdTipoGarantia(Integer.parseInt(contratosRequest.getTipogarantia()));
-					garantiasContratosN.setFechaEntregaGarantia(contratosRequest.getFechaEntregaGarantia());
+//					garantiasContratosN.setIdTipoGarantia(Integer.parseInt(contratosRequest.getTipogarantia()));
+//					garantiasContratosN.setFechaEntregaGarantia(contratosRequest.getFechaEntregaGarantia());
 
 					garantiasContratosN.setIdGarantiaContrato(1);
 					garantiaRepository.save(garantiasContratosN);
