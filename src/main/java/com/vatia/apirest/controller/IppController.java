@@ -1,7 +1,6 @@
 package com.vatia.apirest.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,6 +43,11 @@ public class IppController {
 	@GetMapping("/getIppAnio")
 	public Ipp getIppAnio(@RequestParam Integer anio) {
 		return this.ippService.findIppAnio(anio);
+	}	
+	
+	@GetMapping("/getIppAnioMes")
+	public String  getIppAnioMes(@RequestParam Integer anio, String mes) {
+		return this.ippService.getIppAnioMes(anio, mes);
 	}	
 
 	@DeleteMapping("/delete/{id}")

@@ -1,7 +1,10 @@
 package com.vatia.apirest.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.List;
+
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.vatia.apirest.model.Ipp;
@@ -10,6 +13,7 @@ import com.vatia.apirest.repository.IppRepository;
 import com.vatia.apirest.repository.VarIppRepository;
 import com.vatia.apirest.service.IppService;
 import net.minidev.json.JSONObject;
+
 
 @Service
 public class IppServiceImpl implements IppService{
@@ -48,6 +52,61 @@ public class IppServiceImpl implements IppService{
 		// TODO Auto-generated method stub
 		return this.ippRepository.getIppAnio(anio);
 	}	
+	
+	@Override
+	public String getIppAnioMes(Integer anio, String mes) {
+		String mest = "";
+		String valorMes = "";
+		
+		switch (mes) 
+        {
+		case "01":
+			mest = "mes1";
+			break;
+		case "02":
+			mest = "mes2";
+			break;
+		case "03":
+			mest = "mes3";
+			break;
+		case "04":
+			mest = "mes4";
+			break;
+		case "05":
+			mest = "mes5";
+			break;
+		case "06":
+			mest = "mes6";
+			break;
+		case "07":
+			mest = "mes7";
+			break;
+		case "08":
+			mest = "mes8";
+			break;
+		case "09":
+			mest = "mes9";
+			break;
+		case "10":
+			mest = "mes10";
+			break;			
+		case "11":
+			mest = "mes11";
+			break;		
+		case "12":
+			mest = "mes12";
+			break;	
+		default:
+			break;
+		}
+
+			
+	JSONObject object	 = ippRepository.getIppAnioMes(anio);	
+	valorMes = object.get(mest).toString();	
+
+
+	return valorMes;
+}
 
 	@Override
 	public void updateIpp(Integer fuente, float ipp, int anio, int _int_mes) {
@@ -155,52 +214,52 @@ public class IppServiceImpl implements IppService{
 
     }
 	
-	private String getMesUpdate(int _mes) {
-
-		String mes = "";
-		switch (_mes) {
-		case 1:
-			 mes = "MES1"; 
-			break;
-		case 2:
-			 mes = "MES2"; 
-			break;
-		case 3:
-			 mes = "MES3"; 
-			break;
-		case 4:
-			 mes = "MES4"; 
-			break;
-		case 5:
-			 mes = "MES5"; 
-			break;
-		case 6:
-			 mes = "MES6"; 
-			break;
-		case 7:
-			 mes = "MES7"; 
-			break;
-		case 8:
-			 mes = "MES8"; 
-			break;
-		case 9:
-			 mes = "MES9"; 
-			break;
-		case 10:
-			 mes = "MES10"; 
-			break;
-		case 11:
-			 mes = "MES11"; 
-			break;
-		case 12:
-			 mes = "MES12"; 
-			break;
-		default:
-			break;
-		}
-		
-		return mes;
-	}
+//	private String getMesUpdate(int _mes) {
+//
+//		String mes = "";
+//		switch (_mes) {
+//		case 1:
+//			 mes = "MES1"; 
+//			break;
+//		case 2:
+//			 mes = "MES2"; 
+//			break;
+//		case 3:
+//			 mes = "MES3"; 
+//			break;
+//		case 4:
+//			 mes = "MES4"; 
+//			break;
+//		case 5:
+//			 mes = "MES5"; 
+//			break;
+//		case 6:
+//			 mes = "MES6"; 
+//			break;
+//		case 7:
+//			 mes = "MES7"; 
+//			break;
+//		case 8:
+//			 mes = "MES8"; 
+//			break;
+//		case 9:
+//			 mes = "MES9"; 
+//			break;
+//		case 10:
+//			 mes = "MES10"; 
+//			break;
+//		case 11:
+//			 mes = "MES11"; 
+//			break;
+//		case 12:
+//			 mes = "MES12"; 
+//			break;
+//		default:
+//			break;
+//		}
+//		
+//		return mes;
+//	}
 
     private  void setCurrentMonthValue(Ipp Ipp, int month, BigDecimal value) {
     	 System.out.println("------> setCurrentMonthValue: ".concat(value.toEngineeringString()).concat(" MES ").concat(String.valueOf(month)));	
