@@ -91,6 +91,7 @@ public class Contratos implements Serializable {
     @Column(name = "str_llave")
     private String llave;
     
+    
 	public Integer getIdContrato() {
 		return idContrato;
 	}
