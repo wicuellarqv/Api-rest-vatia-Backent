@@ -27,6 +27,7 @@ public class CantidadRequest {
 	private String H22;
 	private String H23;
 	private String H24;
+	
 	public String getFecha() {
 		return fecha;
 	}
