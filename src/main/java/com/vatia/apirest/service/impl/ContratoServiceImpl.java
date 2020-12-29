@@ -172,14 +172,18 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 
 	@Override
-	public SaveResponse saveContrato(ContratosRequest contratosRequest) {
-
+	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> cantReq) {
+		List<CantidadRequest> listaCantidadRequest = null;
 		// TODO Auto-generated method stub
+		if (cantReq.isEmpty()) {
+			listaCantidadRequest = new ArrayList<CantidadRequest>();
+		}else {
+			listaCantidadRequest = cantReq;
+		}
 		Contratos ContratosList = new Contratos();
 		SaveResponse saveResponse = new SaveResponse();		
 		List<GarantiasRequest> listaGarantiasContratos = new ArrayList<GarantiasRequest>();
 		List<PreciosRequest> listaPreciosRequest = new ArrayList<PreciosRequest>();
-		List<CantidadRequest> listaCantidadRequest = new ArrayList<CantidadRequest>();		
 		PreciosContratos preciosContratoN = new PreciosContratos();	
 		CantidadesContratos cantidadesContratosN = new CantidadesContratos();		
 		GarantiasContratos garantiasContratosN = new GarantiasContratos();		
