@@ -82,11 +82,11 @@ ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposContratos.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-tiposContratos), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposContratos),
-						HttpStatus.NOT_FOUND);
+
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposContratos), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposContratos),
+						HttpStatus.NOT_FOUND);		
+
 	}
 
 	@GetMapping("/getAllModalidadContrato")
@@ -163,14 +163,14 @@ ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposCantidad.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-tiposCantidad), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposCantidad),
-						HttpStatus.NOT_FOUND);
 
-	}
-
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposCantidad), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposCantidad),
+						HttpStatus.NOT_FOUND);		
+		
+	}	
+	
+	
 
 	@GetMapping("/getAllSicAgenteComercial")
 	public ResponseEntity<ResponseHTTP>
@@ -260,7 +260,6 @@ ResponseHTTP(HttpStatus.NOT_FOUND.value(), negociacionesContratos),
 
 	}
 
-
 	/**
 	@PostMapping("/saveContrato")
 	public  ResponseEntity<ResponseHTTP>  saveContrato(
@@ -308,13 +307,12 @@ ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 							HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			}
-
-		return 	cr != null
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-file), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), file), HttpStatus.NOT_FOUND);
+		
+		return 	cr != null  
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), file), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), file), HttpStatus.NOT_FOUND);
 	}
+		
 
 }
 
