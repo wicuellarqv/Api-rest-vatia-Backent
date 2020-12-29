@@ -64,7 +64,6 @@ public class ContratosController {
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposMercados), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposMercados),
 						HttpStatus.NOT_FOUND);
-
 	}
 	
 	@GetMapping("/getAllTipoContrato")
@@ -82,7 +81,6 @@ public class ContratosController {
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposContratos), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposContratos),
 						HttpStatus.NOT_FOUND);		
-		
 	}
 	
 	@GetMapping("/getAllModalidadContrato")
@@ -156,7 +154,6 @@ public class ContratosController {
 	}	
 	
 	
-	
 	@GetMapping("/getAllSicAgenteComercial")
 	public ResponseEntity<ResponseHTTP> getAllSicAgenteComercial(@RequestParam String valor) {
 		AgentesComerciales agentesComerciales = new AgentesComerciales();
@@ -208,7 +205,6 @@ public class ContratosController {
 						HttpStatus.NOT_FOUND);	
 		
 	}
-<<<<<<< Updated upstream
 	
 	
 	@GetMapping("/getAllCTipoContrato")
@@ -248,9 +244,7 @@ public class ContratosController {
 	}
 	
 	
-=======
 	/**
->>>>>>> Stashed changes
 	@PostMapping("/saveContrato")
 	public  ResponseEntity<ResponseHTTP>  saveContrato(
 			@RequestBody ContratosRequest contratosRequest
@@ -294,14 +288,9 @@ public class ContratosController {
 				}
 			}
 		
-		
-		
 		return 	cr != null  
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), file), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), file), HttpStatus.NOT_FOUND);
 	}
 		
-		
-	
-	
 }
