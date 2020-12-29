@@ -26,7 +26,6 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.CondicionTipoContrato;
-import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.ModalidadesContratos;
 import com.vatia.apirest.model.NegociacionesContratos;
@@ -173,23 +172,6 @@ public class ContratosController {
 		
 	}
 	
-	@GetMapping("/getAllFechaCorte")
-	public ResponseEntity<ResponseHTTP> getAllFechaCorte() {	
-		List<FechasCorteContratos> fechasCorteContratos = new ArrayList<>();
-		
-		try {
-			fechasCorteContratos = contratoService.getAllFechaCorte();
-
-		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
-					HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return fechasCorteContratos.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), fechasCorteContratos), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), fechasCorteContratos),
-						HttpStatus.NOT_FOUND);		
-		
-	}	
 	
 	@GetMapping("/getAllFormulaPrecio")
 	public ResponseEntity<ResponseHTTP>  getAllFormulaPrecio() {
@@ -208,8 +190,10 @@ public class ContratosController {
 						HttpStatus.NOT_FOUND);	
 		
 	}
-<<<<<<< Updated upstream
 	
+	
+	
+
 	
 	@GetMapping("/getAllCTipoContrato")
 	public ResponseEntity<ResponseHTTP>  getAllCTipoContrato() {
@@ -248,9 +232,8 @@ public class ContratosController {
 	}
 	
 	
-=======
 	/**
->>>>>>> Stashed changes
+
 	@PostMapping("/saveContrato")
 	public  ResponseEntity<ResponseHTTP>  saveContrato(
 			@RequestBody ContratosRequest contratosRequest
