@@ -1,5 +1,6 @@
 package com.vatia.apirest.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ public interface IppService {
 	public List<Ipp> findAllAnio(Integer desde, Integer hasta);
 	
 	public Ipp findIppAnio(Integer anio);
+	
+	public String getIppAnioMes(Integer anio, String mes);
 	
 	public void save(Ipp ipp);
 

@@ -38,10 +38,6 @@ public class GarantiasContratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "num_id_tipo_garantia")
     private Integer idTipoGarantia;
-    
-    @Basic(optional = false)
-    @Column(name = "dtm_fecha_entrega_garantia")
-    private String fechaEntregaGarantia;
       
     @Basic(optional = false)
     @Column(name = "dtm_fecha_inicio_garantia")
@@ -51,13 +47,35 @@ public class GarantiasContratos implements Serializable {
     @Column(name = "dtm_fecha_fin_garantia")
     private String fechaEntregaFinGarantia;
     
+    @Basic(optional = false)
+    @Column(name = "num_cantidad_garantia")
+    private Integer cantidadGarantia;
+            
+    @Basic(optional = false)
+    @Column(name = "str_ipp_actualizacion_garantia")
+    private String ippActGarantia;
     
     @Basic(optional = false)
     @Column(name = "num_valor_garantia")
-    private String num_valor_garantia;
-            
+    private Integer valorGarantia;
     
-	
+    @Basic(optional = false)
+    @Column(name = "num_tasa_garantia")
+    private Integer tasaGarantia;
+    
+    @Basic(optional = false)
+    @Column(name = "num_iva_garantia")
+    private Integer ivaGarantia;
+    
+    @Basic(optional = false)
+    @Column(name = "num_prima_garantia")
+    private Integer primaGarantia;
+    
+    @Basic(optional = false)
+    @Column(name = "num_costo_garantia")
+    private Integer costoGarantia;
+    
+
 	public Integer getIdGarantiaContrato() {
 		return idGarantiaContrato;
 	}
@@ -88,16 +106,6 @@ public class GarantiasContratos implements Serializable {
 	}
 
 
-	public String getFechaEntregaGarantia() {
-		return fechaEntregaGarantia;
-	}
-
-
-	public void setFechaEntregaGarantia(String fechaEntregaGarantia) {
-		this.fechaEntregaGarantia = fechaEntregaGarantia;
-	}
-
-
 	public String getFechaEntregaInicioGarantia() {
 		return fechaEntregaInicioGarantia;
 	}
@@ -118,13 +126,73 @@ public class GarantiasContratos implements Serializable {
 	}
 
 
-	public String getNum_valor_garantia() {
-		return num_valor_garantia;
+	public Integer getCantidadGarantia() {
+		return cantidadGarantia;
 	}
 
 
-	public void setNum_valor_garantia(String num_valor_garantia) {
-		this.num_valor_garantia = num_valor_garantia;
+	public void setCantidadGarantia(Integer cantidadGarantia) {
+		this.cantidadGarantia = cantidadGarantia;
+	}
+
+
+	public String getIppActGarantia() {
+		return ippActGarantia;
+	}
+
+
+	public void setIppActGarantia(String ippActGarantia) {
+		this.ippActGarantia = ippActGarantia;
+	}
+
+
+	public Integer getValorGarantia() {
+		return valorGarantia;
+	}
+
+
+	public void setValorGarantia(Integer valorGarantia) {
+		this.valorGarantia = valorGarantia;
+	}
+
+
+	public Integer getTasaGarantia() {
+		return tasaGarantia;
+	}
+
+
+	public void setTasaGarantia(Integer tasaGarantia) {
+		this.tasaGarantia = tasaGarantia;
+	}
+
+
+	public Integer getIvaGarantia() {
+		return ivaGarantia;
+	}
+
+
+	public void setIvaGarantia(Integer ivaGarantia) {
+		this.ivaGarantia = ivaGarantia;
+	}
+
+
+	public Integer getPrimaGarantia() {
+		return primaGarantia;
+	}
+
+
+	public void setPrimaGarantia(Integer primaGarantia) {
+		this.primaGarantia = primaGarantia;
+	}
+
+
+	public Integer getCostoGarantia() {
+		return costoGarantia;
+	}
+
+
+	public void setCostoGarantia(Integer costoGarantia) {
+		this.costoGarantia = costoGarantia;
 	}
 
 

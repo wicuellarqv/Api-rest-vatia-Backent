@@ -10,6 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.vatia.apirest.model.Ipp;
 
+import net.minidev.json.JSONObject;
+
 public interface IppRepository extends JpaRepository<Ipp, Integer> {
 
 	@Query(value = "SELECT * FROM IPP I WHERE I.ANIO BETWEEN ?1 AND ?2", nativeQuery = true)
@@ -17,6 +19,9 @@ public interface IppRepository extends JpaRepository<Ipp, Integer> {
 
 	@Query(value = "SELECT * FROM IPP I WHERE I.ANIO = ?1 ORDER BY ANIO ASC", nativeQuery = true)
 	Ipp getIppAnio(Integer anio);
+	
+	@Query(value = "SELECT * FROM IPP I WHERE I.ANIO = ?1 ORDER BY ANIO ASC", nativeQuery = true)
+	JSONObject getIppAnioMes(Integer anio);
 	
 	@Modifying
 	@Transactional

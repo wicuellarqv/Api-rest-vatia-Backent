@@ -1,5 +1,8 @@
 package com.vatia.apirest.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.vatia.apirest.model.TiposMercados;
 import com.vatia.apirest.model.TiposPrecio;
+import com.google.gson.Gson;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.FechasCorteContratos;
@@ -27,6 +35,7 @@ import com.vatia.apirest.model.TiposCantidad;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
 import com.vatia.apirest.service.ContratoService;
+import com.vatia.apirest.utils.CantidadRequest;
 import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.response.ResponseHTTP;
 import org.springframework.http.HttpStatus;
@@ -160,7 +169,7 @@ public class ContratosController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return 	agentesComerciales != null  ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), agentesComerciales), HttpStatus.NOT_FOUND);
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ""), HttpStatus.OK);
 		
 	}
 	
@@ -199,6 +208,7 @@ public class ContratosController {
 						HttpStatus.NOT_FOUND);	
 		
 	}
+<<<<<<< Updated upstream
 	
 	
 	@GetMapping("/getAllCTipoContrato")
@@ -238,6 +248,9 @@ public class ContratosController {
 	}
 	
 	
+=======
+	/**
+>>>>>>> Stashed changes
 	@PostMapping("/saveContrato")
 	public  ResponseEntity<ResponseHTTP>  saveContrato(
 			@RequestBody ContratosRequest contratosRequest
@@ -255,6 +268,37 @@ public class ContratosController {
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
 		
+	}
+	**/
+	
+	@PostMapping("/saveContrato")
+	public ResponseEntity<ResponseHTTP> test(@RequestParam("files") MultipartFile file, @RequestParam String obj  ){
+		Gson g = new Gson();
+		ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
+		SaveResponse saveResponse = new SaveResponse();
+		// lectura del archivo a CantidadReuqest
+			if(file.isEmpty()) {
+				saveResponse.setMsg("Por favor escoja un archivo CSV valido");
+			}
+			else {
+				try {
+					Reader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
+					CsvToBean<CantidadRequest> cantReq = new CsvToBeanBuilder(lectura).withType(CantidadRequest.class).withIgnoreLeadingWhiteSpace(true).build();
+					List<CantidadRequest> cantRequest = cantReq.parse();
+					if (cantRequest.size() >0){
+						saveResponse = contratoService.saveContrato(cr,cantRequest);
+					}
+				} catch (Exception e) {
+					return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+							HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+			}
+		
+		
+		
+		return 	cr != null  
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), file), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), file), HttpStatus.NOT_FOUND);
 	}
 		
 		
