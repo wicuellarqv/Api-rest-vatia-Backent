@@ -259,13 +259,6 @@ public class Contratos implements Serializable {
 		this.agentesCcialesVend = agentesCcialesVend;
 	}
 
-	public FechasCorteContratos getFechasCorteCont() {
-		return fechasCorteCont;
-	}
-
-	public void setFechasCorteCont(FechasCorteContratos fechasCorteCont) {
-		this.fechasCorteCont = fechasCorteCont;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

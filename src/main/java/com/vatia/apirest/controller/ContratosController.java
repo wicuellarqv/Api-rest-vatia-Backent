@@ -1,3 +1,4 @@
+
 package com.vatia.apirest.controller;
 
 import java.io.BufferedReader;
@@ -56,34 +57,38 @@ public class ContratosController {
 			tiposMercados = contratoService.getAllTipoMercado();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposMercados.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposMercados), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposMercados),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+tiposMercados), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposMercados),
 						HttpStatus.NOT_FOUND);
-
 	}
-	
+
 	@GetMapping("/getAllTipoContrato")
-	public ResponseEntity<ResponseHTTP>  getAllTipoContrato() {		
+	public ResponseEntity<ResponseHTTP>  getAllTipoContrato() {
 		List<TiposContratos> tiposContratos = new ArrayList<>();
 
 		try {
 			tiposContratos = contratoService.getAllTipoContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposContratos.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposContratos), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposContratos),
-						HttpStatus.NOT_FOUND);		
-		
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+tiposContratos), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposContratos),
+						HttpStatus.NOT_FOUND);
 	}
-	
+
 	@GetMapping("/getAllModalidadContrato")
 	public ResponseEntity<ResponseHTTP> getAllModalidadContrato() {
 		List<ModalidadesContratos> modalidadesContratos = new ArrayList<>();
@@ -92,168 +97,194 @@ public class ContratosController {
 			modalidadesContratos = contratoService.getAllModalidadContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return modalidadesContratos.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), modalidadesContratos), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), modalidadesContratos),
-						HttpStatus.NOT_FOUND);	
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+modalidadesContratos), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), modalidadesContratos),
+						HttpStatus.NOT_FOUND);
 	}
-		
+
 	@GetMapping("/getAllTipoGarantia")
 	public ResponseEntity<ResponseHTTP> getAllTipoGarantia() {
 		List<TiposGarantias> tiposGarantias = new ArrayList<>();
-		
+
 		try {
 			tiposGarantias = contratoService.getAllTipoGarantia();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposGarantias.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposGarantias), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposGarantias),
-						HttpStatus.NOT_FOUND);			
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+tiposGarantias), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposGarantias),
+						HttpStatus.NOT_FOUND);
 	}
 
-	
+
 	@GetMapping("/getAllTipoPrecio")
 	public ResponseEntity<ResponseHTTP> getAllTipoPrecio() {
 		List<TiposPrecio> tiposPrecio = new ArrayList<>();
-		
+
 		try {
 			tiposPrecio = contratoService.getAllTipoPrecio();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposPrecio.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposPrecio), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposPrecio),
-						HttpStatus.NOT_FOUND);	
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+tiposPrecio), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposPrecio),
+						HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping("/getAllTipoCantidad")
 	public ResponseEntity<ResponseHTTP> getAllTipoCantidad() {
 		List<TiposCantidad> tiposCantidad = new ArrayList<>();
-		
+
 		try {
 			tiposCantidad = contratoService.getAllTipoCantidad();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposCantidad.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposCantidad), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposCantidad),
-						HttpStatus.NOT_FOUND);		
-		
-	}	
-	
-	
-	
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+tiposCantidad), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposCantidad),
+						HttpStatus.NOT_FOUND);
+
+	}
+
+
 	@GetMapping("/getAllSicAgenteComercial")
-	public ResponseEntity<ResponseHTTP> getAllSicAgenteComercial(@RequestParam String valor) {
+	public ResponseEntity<ResponseHTTP>
+getAllSicAgenteComercial(@RequestParam String valor) {
 		AgentesComerciales agentesComerciales = new AgentesComerciales();
-		
+
 		try {
 			agentesComerciales = contratoService.getAllSicAgenteComercial(valor);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return 	agentesComerciales != null  ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ""), HttpStatus.OK);
-		
+		return 	agentesComerciales != null  ? new ResponseEntity<>(new  
+ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+""), HttpStatus.OK);
+
 	}
-	
-	
+
+
 	@GetMapping("/getAllFormulaPrecio")
 	public ResponseEntity<ResponseHTTP>  getAllFormulaPrecio() {
 		List<FormulasPrecios> formulasPrecios = new ArrayList<>();
-		
+
 		try {
 			formulasPrecios = contratoService.getAllFormulaPrecio();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return formulasPrecios.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), formulasPrecios), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), formulasPrecios),
-						HttpStatus.NOT_FOUND);	
-		
-	}
-	
-	
-	
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+formulasPrecios), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), formulasPrecios),
+						HttpStatus.NOT_FOUND);
 
-	
+	}
+
+
+
+
+
 	@GetMapping("/getAllCTipoContrato")
 	public ResponseEntity<ResponseHTTP>  getAllCTipoContrato() {
 		List<CondicionTipoContrato> condicionTipoContrato = new ArrayList<>();
-		
+
 		try {
 			condicionTipoContrato = contratoService.getAllCTipoContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return condicionTipoContrato.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), condicionTipoContrato), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), condicionTipoContrato),
-						HttpStatus.NOT_FOUND);	
-		
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+condicionTipoContrato), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), condicionTipoContrato),
+						HttpStatus.NOT_FOUND);
+
 	}
-	
+
 	@GetMapping("/getAllNegocioContrato")
 	public ResponseEntity<ResponseHTTP>  getAllNegocioContrato() {
 		List<NegociacionesContratos> negociacionesContratos = new ArrayList<>();
-		
+
 		try {
 			negociacionesContratos = contratoService.getAllNegocioContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return negociacionesContratos.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), negociacionesContratos), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), negociacionesContratos),
-						HttpStatus.NOT_FOUND);	
-		
-	}
-	
-	
-	/**
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+negociacionesContratos), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), negociacionesContratos),
+						HttpStatus.NOT_FOUND);
 
+	}
+
+
+	/**
 	@PostMapping("/saveContrato")
 	public  ResponseEntity<ResponseHTTP>  saveContrato(
 			@RequestBody ContratosRequest contratosRequest
 			) {
 		SaveResponse saveResponse = new SaveResponse();
-		
+
 		try {
 			saveResponse = contratoService.saveContrato(contratosRequest);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return 	saveResponse != null  
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
-		
+		return 	saveResponse != null
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+saveResponse), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
+
 	}
 	**/
-	
+
 	@PostMapping("/saveContrato")
 	public ResponseEntity<ResponseHTTP> test(@RequestParam("files") MultipartFile file, @RequestParam String obj  ){
 		Gson g = new Gson();
@@ -272,19 +303,18 @@ public class ContratosController {
 						saveResponse = contratoService.saveContrato(cr,cantRequest);
 					}
 				} catch (Exception e) {
-					return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					return new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 							HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			}
-		
-		
-		
-		return 	cr != null  
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), file), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), file), HttpStatus.NOT_FOUND);
+
+		return 	cr != null
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+file), HttpStatus.OK)
+				: new ResponseEntity<>(new
+ResponseHTTP(HttpStatus.NOT_FOUND.value(), file), HttpStatus.NOT_FOUND);
 	}
-		
-		
-	
-	
+
 }
+
