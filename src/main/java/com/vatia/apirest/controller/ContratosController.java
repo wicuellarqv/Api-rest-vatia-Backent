@@ -169,7 +169,7 @@ public class ContratosController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return 	agentesComerciales != null  ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), agentesComerciales), HttpStatus.NOT_FOUND);
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ""), HttpStatus.OK);
 		
 	}
 	

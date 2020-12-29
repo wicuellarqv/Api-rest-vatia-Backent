@@ -12,11 +12,10 @@ public class ContratosRequest {
 	private String contratoSic;
 	private String cod_SIC_comprador;
 	private String cod_SIC_vendedor;	
-	private String formaPago;	
 	private String fechadefirma;
 	private String nombreCliente;
 	private String emailcontacto;
-	private String tipodeContrato;
+	private String tipodeContrato; 
 	private String telefonocontacto;
 	private String tipogarantia;
 	private String fechaEntregaGarantia;
@@ -24,31 +23,24 @@ public class ContratosRequest {
 	private String tipoCantidad;
 	private String tipoPrecio;
 	private String mesBase;
-	private String mes;
 	private String formulaPrecio;
+	private String contratoDocumento;
 	private List<GarantiasRequest>  garantiasContratos;
 	private List<PreciosRequest>  preciosRequest;
 	private List<CantidadRequest>  cantidadRequest;	
 	
 
-	
-	public String getFormaPago() {
-		return formaPago;
+	public String getContratoDocumento() {
+		return contratoDocumento;
 	}
-	public void setFormaPago(String formaPago) {
-		this.formaPago = formaPago;
+	public void setContratoDocumento(String contratoDocumento) {
+		this.contratoDocumento = contratoDocumento;
 	}
 	public String getFormulaPrecio() {
 		return formulaPrecio;
 	}
 	public void setFormulaPrecio(String formulaPrecio) {
 		this.formulaPrecio = formulaPrecio;
-	}
-	public String getMes() {
-		return mes;
-	}
-	public void setMes(String mes) {
-		this.mes = mes;
 	}
 	public String getMesBase() {
 		return mesBase;
