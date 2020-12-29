@@ -9,6 +9,8 @@ import com.vatia.apirest.model.CategoriaCliente;
 public interface CategoriaService {
 	
 	public List<Categoria> getAllCategorias();
+	
+	public List<Categoria> getCategoriasByTipo(Categoria categoria);
 
 	public Categoria saveCategoria(Categoria categoria);
 	

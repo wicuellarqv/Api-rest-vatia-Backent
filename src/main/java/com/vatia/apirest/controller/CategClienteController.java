@@ -44,6 +44,22 @@ public class CategClienteController {
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), categorias), HttpStatus.NOT_FOUND);
 
 	}
+	
+	@PostMapping("/categoria_by_tipo")
+	public ResponseEntity<ResponseHTTP> getCategoriasByTipo(@RequestBody Categoria categoria) {
+		List<Categoria> categorias = new ArrayList<>();
+
+		try {
+			categorias = categoriaService.getCategoriasByTipo(categoria);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return categorias.size() > 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), categorias), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), categorias), HttpStatus.NOT_FOUND);
+
+	}
 
 	@PostMapping("/categoria")
 	public ResponseEntity<ResponseHTTP> createCategoria(@RequestBody Categoria categoria) {

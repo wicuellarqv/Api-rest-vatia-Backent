@@ -28,6 +28,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 		try {
 			newCategoria.setNombre(categoria.getNombre());
 			newCategoria.setCreateAt(new Date());
+			newCategoria.setTipo(categoria.getTipo());
 			Categoria returnCategoria = new Categoria();
 			returnCategoria = categoriaRepository.save(newCategoria);
 			return returnCategoria;
@@ -70,6 +71,19 @@ public class CategoriaServiceImpl implements CategoriaService {
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		try {
 			categorias = (List<Categoria>) categoriaRepository.findAll();
+			return categorias;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			return categorias;
+		}
+	}
+	
+
+	@Override
+	public List<Categoria> getCategoriasByTipo(Categoria categoria) {
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		try {
+			categorias = (List<Categoria>) categoriaRepository.findByTipo(categoria.getTipo());
 			return categorias;
 		} catch (Exception e) {
 			System.out.println(e.toString());
