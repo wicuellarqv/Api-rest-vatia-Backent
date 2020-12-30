@@ -138,8 +138,50 @@ public class CantidadesContratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "num_h24")
     private BigDecimal cantidadH24;
-    
-    
+  
+	public CantidadesContratos() {
+	}
+
+	public CantidadesContratos(Integer idCantidadContrato, Integer idContrato, Integer idTipoCantidad,
+			String fechaCantidad, BigDecimal cantidadH1, BigDecimal cantidadH2, BigDecimal cantidadH3,
+			BigDecimal cantidadH4, BigDecimal cantidadH5, BigDecimal cantidadH6, BigDecimal cantidadH7,
+			BigDecimal cantidadH8, BigDecimal cantidadH9, BigDecimal cantidadH10, BigDecimal cantidadH11,
+			BigDecimal cantidadH12, BigDecimal cantidadH13, BigDecimal cantidadH14, BigDecimal cantidadH15,
+			BigDecimal cantidadH16, BigDecimal cantidadH17, BigDecimal cantidadH18, BigDecimal cantidadH19,
+			BigDecimal cantidadH20, BigDecimal cantidadH21, BigDecimal cantidadH22, BigDecimal cantidadH23,
+			BigDecimal cantidadH24) {
+		super();
+		this.idCantidadContrato = idCantidadContrato;
+		this.idContrato = idContrato;
+		this.idTipoCantidad = idTipoCantidad;
+		this.fechaCantidad = fechaCantidad;
+		this.cantidadH1 = cantidadH1;
+		this.cantidadH2 = cantidadH2;
+		this.cantidadH3 = cantidadH3;
+		this.cantidadH4 = cantidadH4;
+		this.cantidadH5 = cantidadH5;
+		this.cantidadH6 = cantidadH6;
+		this.cantidadH7 = cantidadH7;
+		this.cantidadH8 = cantidadH8;
+		this.cantidadH9 = cantidadH9;
+		this.cantidadH10 = cantidadH10;
+		this.cantidadH11 = cantidadH11;
+		this.cantidadH12 = cantidadH12;
+		this.cantidadH13 = cantidadH13;
+		this.cantidadH14 = cantidadH14;
+		this.cantidadH15 = cantidadH15;
+		this.cantidadH16 = cantidadH16;
+		this.cantidadH17 = cantidadH17;
+		this.cantidadH18 = cantidadH18;
+		this.cantidadH19 = cantidadH19;
+		this.cantidadH20 = cantidadH20;
+		this.cantidadH21 = cantidadH21;
+		this.cantidadH22 = cantidadH22;
+		this.cantidadH23 = cantidadH23;
+		this.cantidadH24 = cantidadH24;
+	}
+
+
 	public Contratos getContratosCantidades() {
 		return contratosCantidades;
 	}

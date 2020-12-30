@@ -35,6 +35,17 @@ public class TiposGarantias implements Serializable {
     @Basic(optional = false)
     @Column(name = "str_desc_tipo_garantia")
     private String descTipoGarantia;
+    
+    
+ 
+	public TiposGarantias() {
+	 }
+
+	public TiposGarantias(Integer idTipoGarantia, String descTipoGarantia) {
+		super();
+		this.idTipoGarantia = idTipoGarantia;
+		this.descTipoGarantia = descTipoGarantia;
+	}
 
 	public Integer getIdTipoGarantia() {
 		return idTipoGarantia;

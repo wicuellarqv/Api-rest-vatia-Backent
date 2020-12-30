@@ -38,6 +38,17 @@ public class NegociacionesContratos implements Serializable {
     @Column(name = "str_sigla_negoc_contrato")
     private String siglaNegContrato;
     
+    
+    
+ public NegociacionesContratos() {
+	}
+
+NegociacionesContratos(Integer idNegContrato, String descNegContrato, String siglaNegContrato) {
+		super();
+		this.idNegContrato = idNegContrato;
+		this.descNegContrato = descNegContrato;
+		this.siglaNegContrato = siglaNegContrato;
+	}
 
 	public Integer getIdNegContrato() {
 		return idNegContrato;

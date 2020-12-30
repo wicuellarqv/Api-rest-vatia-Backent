@@ -40,10 +40,20 @@ public class CondicionTipoContrato implements Serializable {
     @Basic(optional = false)
     @Column(name = "str_formula_condicion_tipo_contrato")
     private String formulaCondicionTipoContrato;
-
-
     
-    public Integer getIdCondicionTipoContrato() {
+    public CondicionTipoContrato() {
+
+	}
+
+	public CondicionTipoContrato(Integer idCondicionTipoContrato, String descCondicionTipoContrato,
+			String formulaCondicionTipoContrato) {
+		super();
+		this.idCondicionTipoContrato = idCondicionTipoContrato;
+		this.descCondicionTipoContrato = descCondicionTipoContrato;
+		this.formulaCondicionTipoContrato = formulaCondicionTipoContrato;
+	}
+
+	public Integer getIdCondicionTipoContrato() {
 		return idCondicionTipoContrato;
 	}
 

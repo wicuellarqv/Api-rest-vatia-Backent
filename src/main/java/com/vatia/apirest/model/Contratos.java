@@ -92,6 +92,38 @@ public class Contratos implements Serializable {
     private String llave;
     
     
+    
+	public Contratos() {
+	}
+	
+	public Contratos(Integer idContrato, Integer numContrato, Integer idNegContrato, Integer idAgenteComprador,
+			Integer idAgenteVendedor, String codSicContrato, Integer idTipoContrato, Integer idCondicionTipoContrato,
+			Integer idTipoMercado, String fecPeriodoInicio, String fecPeriodoFin, String estadoContrato,
+			String nombreContacto, String telContacto, String emailContacto, String fechaFirmaContrato,
+			String docContacto, String llave) {
+		super();
+		this.idContrato = idContrato;
+		this.numContrato = numContrato;
+		this.idNegContrato = idNegContrato;
+		this.idAgenteComprador = idAgenteComprador;
+		this.idAgenteVendedor = idAgenteVendedor;
+		this.codSicContrato = codSicContrato;
+		this.idTipoContrato = idTipoContrato;
+		this.idCondicionTipoContrato = idCondicionTipoContrato;
+		this.idTipoMercado = idTipoMercado;
+		this.fecPeriodoInicio = fecPeriodoInicio;
+		this.fecPeriodoFin = fecPeriodoFin;
+		this.estadoContrato = estadoContrato;
+		this.nombreContacto = nombreContacto;
+		this.telContacto = telContacto;
+		this.emailContacto = emailContacto;
+		this.fechaFirmaContrato = fechaFirmaContrato;
+		this.docContacto = docContacto;
+		this.llave = llave;
+	}
+
+
+
 	public Integer getIdContrato() {
 		return idContrato;
 	}
