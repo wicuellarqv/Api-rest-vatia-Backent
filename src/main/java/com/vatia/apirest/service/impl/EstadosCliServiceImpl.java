@@ -7,7 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vatia.apirest.model.CategoriaCliente;
+import com.vatia.apirest.model.CategoriaEstado;
 import com.vatia.apirest.model.EstadosCliente;
+import com.vatia.apirest.repository.CategoriaEstadosRepository;
 import com.vatia.apirest.repository.EstadosCliRepository;
 import com.vatia.apirest.service.EstadosCliService;
 
@@ -16,6 +19,9 @@ public class EstadosCliServiceImpl implements EstadosCliService {
 	
 	@Autowired
 	EstadosCliRepository estadosCliRepository;
+	
+	@Autowired
+	CategoriaEstadosRepository categoriaEstadosRepository;
 
 	@Override
 	public List<EstadosCliente> getAllEstadosCli() {
@@ -62,6 +68,46 @@ public class EstadosCliServiceImpl implements EstadosCliService {
 		Boolean status = true;
 		try {
 			estadosCliRepository.deleteById(estadosCliente.getId());
+			return status;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			status = false;
+			return status;
+		}
+	}
+
+	@Override
+	public List<CategoriaEstado> getAllCategoriasEstados() {
+		List<CategoriaEstado> categoriaEstados = new ArrayList<CategoriaEstado>();
+		try {
+			categoriaEstados = (List<CategoriaEstado>) categoriaEstadosRepository.findAll();
+			return categoriaEstados;
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			return categoriaEstados;
+		}
+	}
+
+	@Override
+	public CategoriaEstado saveCategoriaEstado(CategoriaEstado categoriaEstado) {
+		CategoriaEstado response = new CategoriaEstado();
+		try {
+			CategoriaEstado newCategoriaEstado = new CategoriaEstado();
+			newCategoriaEstado.setCategoria(categoriaEstado.getCategoria());
+			newCategoriaEstado.setEstado(categoriaEstado.getEstado());
+			response = categoriaEstadosRepository.save(newCategoriaEstado);
+			return response;
+		} catch (Exception e) {
+			response.setId(0);
+			return response;
+		}
+	}
+
+	@Override
+	public Boolean deleteCategoriaEstado(CategoriaEstado categoriaEstado) {
+		Boolean status = true;
+		try {
+			categoriaEstadosRepository.deleteById(categoriaEstado.getId());
 			return status;
 		} catch (Exception e) {
 			System.out.println(e.toString());
