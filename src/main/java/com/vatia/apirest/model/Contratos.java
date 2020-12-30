@@ -68,10 +68,6 @@ public class Contratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "str_estado")
     private String estadoContrato;
-    
-    @Basic(optional = false)
-    @Column(name = "num_id_fecha_corte")
-    private Integer idFechaCorte;
         
     @Basic(optional = false)
     @Column(name = "str_nombre_contacto")
@@ -94,6 +90,7 @@ public class Contratos implements Serializable {
     
     @Column(name = "str_llave")
     private String llave;
+    
     
 	public Integer getIdContrato() {
 		return idContrato;
@@ -191,15 +188,6 @@ public class Contratos implements Serializable {
 		this.estadoContrato = estadoContrato;
 	}
     
-	
-	public Integer getIdFechaCorte() {
-		return idFechaCorte;
-	}
-
-	public void setIdFechaCorte(Integer idFechaCorte) {
-		this.idFechaCorte = idFechaCorte;
-	}
-
 	public String getNombreContacto() {
 		return nombreContacto;
 	}
@@ -272,13 +260,6 @@ public class Contratos implements Serializable {
 		this.agentesCcialesVend = agentesCcialesVend;
 	}
 
-	public FechasCorteContratos getFechasCorteCont() {
-		return fechasCorteCont;
-	}
-
-	public void setFechasCorteCont(FechasCorteContratos fechasCorteCont) {
-		this.fechasCorteCont = fechasCorteCont;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -318,9 +299,6 @@ public class Contratos implements Serializable {
 	@JoinColumn(name="num_id_agnte_ccial_vend", referencedColumnName = "num_id_agente_ccial", insertable=false,updatable=false)
 	AgentesComerciales agentesCcialesVend;
 	
-	@ManyToOne
-	@JoinColumn(name="num_id_fecha_corte", referencedColumnName = "num_id_fecha_corte", insertable=false,updatable=false)
-	FechasCorteContratos fechasCorteCont;
 	
 }
 
