@@ -4,32 +4,101 @@ import java.util.List;
 
 public class ContratosRequest {
 	
-	private String tipodeMercado;
+	private String tipoMercado;
 	private String estadoContrato;
-	private String modalidaddelcontrato;
-	private String fechadeinicioContrato;
-	private String fechadefinContrato;
+	private String negociacionContrato;
+	private String fechaInicioContrato;
+	private String fechaFinContrato;
 	private String contratoSic;
 	private String cod_SIC_comprador;
 	private String cod_SIC_vendedor;	
-	private String fechadefirma;
+	private String fechaFirma;
 	private String nombreCliente;
-	private String emailcontacto;
-	private String tipodeContrato; 
-	private String telefonocontacto;
-	private String tipogarantia;
+	private String emailContacto;
+	private String tipoContrato; 
+	private String telefonoContacto;
+	private String tipoGarantia;
 	private String fechaEntregaGarantia;
 	private String cantidadContrato;	
 	private String tipoCantidad;
 	private String tipoPrecio;
 	private String mesBase;
+	private String condicionTipoContrato;
 	private String formulaPrecio;
 	private String contratoDocumento;
+	private String numContrato;	
 	private List<GarantiasRequest>  garantiasContratos;
 	private List<PreciosRequest>  preciosRequest;
 	private List<CantidadRequest>  cantidadRequest;	
 	
 
+	
+	public String getNumContrato() {
+		return numContrato;
+	}
+	public void setNumContrato(String numContrato) {
+		this.numContrato = numContrato;
+	}
+	public String getCondicionTipoContrato() {
+		return condicionTipoContrato;
+	}
+	public void setCondicionTipoContrato(String condicionTipoContrato) {
+		this.condicionTipoContrato = condicionTipoContrato;
+	}
+	public String getTipoMercado() {
+		return tipoMercado;
+	}
+	public void setTipoMercado(String tipoMercado) {
+		this.tipoMercado = tipoMercado;
+	}
+	public String getFechaInicioContrato() {
+		return fechaInicioContrato;
+	}
+	public void setFechaInicioContrato(String fechaInicioContrato) {
+		this.fechaInicioContrato = fechaInicioContrato;
+	}
+	public String getFechaFinContrato() {
+		return fechaFinContrato;
+	}
+	public void setFechaFinContrato(String fechaFinContrato) {
+		this.fechaFinContrato = fechaFinContrato;
+	}
+	public String getTipoContrato() {
+		return tipoContrato;
+	}
+	public void setTipoContrato(String tipoContrato) {
+		this.tipoContrato = tipoContrato;
+	}
+	public String getTelefonoContacto() {
+		return telefonoContacto;
+	}
+	public void setTelefonoContacto(String telefonoContacto) {
+		this.telefonoContacto = telefonoContacto;
+	}
+	public String getTipoGarantia() {
+		return tipoGarantia;
+	}
+	public void setTipoGarantia(String tipoGarantia) {
+		this.tipoGarantia = tipoGarantia;
+	}
+	public String getEmailContacto() {
+		return emailContacto;
+	}
+	public void setEmailContacto(String emailContacto) {
+		this.emailContacto = emailContacto;
+	}
+	public String getFechaFirma() {
+		return fechaFirma;
+	}
+	public void setFechaFirma(String fechaFirma) {
+		this.fechaFirma = fechaFirma;
+	}
+	public String getNegociacionContrato() {
+		return negociacionContrato;
+	}
+	public void setNegociacionContrato(String negociacionContrato) {
+		this.negociacionContrato = negociacionContrato;
+	}
 	public String getContratoDocumento() {
 		return contratoDocumento;
 	}
@@ -84,47 +153,17 @@ public class ContratosRequest {
 	public void setFechaEntregaGarantia(String fechaEntregaGarantia) {
 		this.fechaEntregaGarantia = fechaEntregaGarantia;
 	}
-	public String getTipogarantia() {
-		return tipogarantia;
-	}
-	public void setTipogarantia(String tipogarantia) {
-		this.tipogarantia = tipogarantia;
-	}
 	public List<GarantiasRequest> getGarantiasContratos() {
 		return garantiasContratos;
 	}
 	public void setGarantiasContratos(List<GarantiasRequest> garantiasContratos) {
 		this.garantiasContratos = garantiasContratos;
 	}
-	public String getTipodeMercado() {
-		return tipodeMercado;
-	}
-	public void setTipodeMercado(String tipodeMercado) {
-		this.tipodeMercado = tipodeMercado;
-	}
 	public String getEstadoContrato() {
 		return estadoContrato;
 	}
 	public void setEstadoContrato(String estadoContrato) {
 		this.estadoContrato = estadoContrato;
-	}
-	public String getModalidaddelcontrato() {
-		return modalidaddelcontrato;
-	}
-	public void setModalidaddelcontrato(String modalidaddelcontrato) {
-		this.modalidaddelcontrato = modalidaddelcontrato;
-	}
-	public String getFechadeinicioContrato() {
-		return fechadeinicioContrato;
-	}
-	public void setFechadeinicioContrato(String fechadeinicioContrato) {
-		this.fechadeinicioContrato = fechadeinicioContrato;
-	}
-	public String getFechadefinContrato() {
-		return fechadefinContrato;
-	}
-	public void setFechadefinContrato(String fechadefinContrato) {
-		this.fechadefinContrato = fechadefinContrato;
 	}
 	public String getContratoSic() {
 		return contratoSic;
@@ -144,35 +183,10 @@ public class ContratosRequest {
 	public void setCod_SIC_vendedor(String cod_SIC_vendedor) {
 		this.cod_SIC_vendedor = cod_SIC_vendedor;
 	}
-	public String getFechadefirma() {
-		return fechadefirma;
-	}
-	public void setFechadefirma(String fechadefirma) {
-		this.fechadefirma = fechadefirma;
-	}
 	public String getNombreCliente() {
 		return nombreCliente;
 	}
 	public void setNombreCliente(String nombreCliente) {
 		this.nombreCliente = nombreCliente;
-	}
-	public String getEmailcontacto() {
-		return emailcontacto;
-	}
-	public void setEmailcontacto(String emailcontacto) {
-		this.emailcontacto = emailcontacto;
-	}
-	public String getTipodeContrato() {
-		return tipodeContrato;
-	}
-	public void setTipodeContrato(String tipodeContrato) {
-		this.tipodeContrato = tipodeContrato;
-	}
-	public String getTelefonocontacto() {
-		return telefonocontacto;
-	}
-	public void setTelefonocontacto(String telefonocontacto) {
-		this.telefonocontacto = telefonocontacto;
-	}
-	
+	}	
 }

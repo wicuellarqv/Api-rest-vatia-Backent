@@ -35,7 +35,7 @@ public class DataSourceWeb {
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         final HashMap<String, Object> properties = new HashMap<String, Object>();
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", "none");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");
