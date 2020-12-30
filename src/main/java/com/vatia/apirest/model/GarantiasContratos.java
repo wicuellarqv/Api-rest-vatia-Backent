@@ -53,7 +53,7 @@ public class GarantiasContratos implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "num_cantidad_garantia")
-    private Integer cantidadGarantia;
+    private String cantidadGarantia;
             
     @Basic(optional = false)
     @Column(name = "str_ipp_actualizacion_garantia")
@@ -61,23 +61,23 @@ public class GarantiasContratos implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "num_valor_garantia")
-    private Integer valorGarantia;
+    private String valorGarantia;
     
     @Basic(optional = false)
     @Column(name = "num_tasa_garantia")
-    private Integer tasaGarantia;
+    private String tasaGarantia;
     
     @Basic(optional = false)
     @Column(name = "num_iva_garantia")
-    private Integer ivaGarantia;
+    private String ivaGarantia;
     
     @Basic(optional = false)
     @Column(name = "num_prima_garantia")
-    private Integer primaGarantia;
+    private String primaGarantia;
     
     @Basic(optional = false)
     @Column(name = "num_costo_garantia")
-    private Integer costoGarantia;
+    private String costoGarantia;
     
 
 	public Integer getIdGarantiaContrato() {
@@ -110,6 +110,16 @@ public class GarantiasContratos implements Serializable {
 	}
 
 
+	public String getFechaEntregaGarantia() {
+		return fechaEntregaGarantia;
+	}
+
+
+	public void setFechaEntregaGarantia(String fechaEntregaGarantia) {
+		this.fechaEntregaGarantia = fechaEntregaGarantia;
+	}
+
+
 	public String getFechaEntregaInicioGarantia() {
 		return fechaEntregaInicioGarantia;
 	}
@@ -130,12 +140,12 @@ public class GarantiasContratos implements Serializable {
 	}
 
 
-	public Integer getCantidadGarantia() {
+	public String getCantidadGarantia() {
 		return cantidadGarantia;
 	}
 
 
-	public void setCantidadGarantia(Integer cantidadGarantia) {
+	public void setCantidadGarantia(String cantidadGarantia) {
 		this.cantidadGarantia = cantidadGarantia;
 	}
 
@@ -150,67 +160,54 @@ public class GarantiasContratos implements Serializable {
 	}
 
 
-	public Integer getValorGarantia() {
+	public String getValorGarantia() {
 		return valorGarantia;
 	}
 
 
-	public void setValorGarantia(Integer valorGarantia) {
+	public void setValorGarantia(String valorGarantia) {
 		this.valorGarantia = valorGarantia;
 	}
 
 
-	public Integer getTasaGarantia() {
+	public String getTasaGarantia() {
 		return tasaGarantia;
 	}
 
 
-	public void setTasaGarantia(Integer tasaGarantia) {
+	public void setTasaGarantia(String tasaGarantia) {
 		this.tasaGarantia = tasaGarantia;
 	}
 
 
-	public Integer getIvaGarantia() {
+	public String getIvaGarantia() {
 		return ivaGarantia;
 	}
 
 
-	public void setIvaGarantia(Integer ivaGarantia) {
+	public void setIvaGarantia(String ivaGarantia) {
 		this.ivaGarantia = ivaGarantia;
 	}
 
 
-	public Integer getPrimaGarantia() {
+	public String getPrimaGarantia() {
 		return primaGarantia;
 	}
 
 
-	public void setPrimaGarantia(Integer primaGarantia) {
+	public void setPrimaGarantia(String primaGarantia) {
 		this.primaGarantia = primaGarantia;
 	}
 
 
-	public Integer getCostoGarantia() {
+	public String getCostoGarantia() {
 		return costoGarantia;
 	}
 
 
-	public void setCostoGarantia(Integer costoGarantia) {
+	public void setCostoGarantia(String costoGarantia) {
 		this.costoGarantia = costoGarantia;
 	}
-
-
-	
-	public String getFechaEntregaGarantia() {
-		return fechaEntregaGarantia;
-	}
-
-
-	public void setFechaEntregaGarantia(String fechaEntregaGarantia) {
-		this.fechaEntregaGarantia = fechaEntregaGarantia;
-	}
-
-
 
 
 	@ManyToOne
