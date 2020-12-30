@@ -38,6 +38,10 @@ public class GarantiasContratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "num_id_tipo_garantia")
     private Integer idTipoGarantia;
+    
+    @Basic(optional = false)
+    @Column(name = "dtm_fecha_entrega_garantia")
+    private String fechaEntregaGarantia;
       
     @Basic(optional = false)
     @Column(name = "dtm_fecha_inicio_garantia")
@@ -194,6 +198,19 @@ public class GarantiasContratos implements Serializable {
 	public void setCostoGarantia(Integer costoGarantia) {
 		this.costoGarantia = costoGarantia;
 	}
+
+
+	
+	public String getFechaEntregaGarantia() {
+		return fechaEntregaGarantia;
+	}
+
+
+	public void setFechaEntregaGarantia(String fechaEntregaGarantia) {
+		this.fechaEntregaGarantia = fechaEntregaGarantia;
+	}
+
+
 
 
 	@ManyToOne
