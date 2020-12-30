@@ -46,17 +46,23 @@ public class Categoria implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
 	private List<CategoriaCliente> categorias_clientes;
 	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
+	private List<CategoriaEstado> categorias_estados;
+	
 	public Categoria() {
 		
 	}
 
-	public Categoria(long id, String nombre, Integer tipo, Date createAt, List<CategoriaCliente> categorias_clientes) {
+	public Categoria(long id, String nombre, Integer tipo, Date createAt, List<CategoriaCliente> categorias_clientes,
+			List<CategoriaEstado> categorias_estados) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.createAt = createAt;
 		this.categorias_clientes = categorias_clientes;
+		this.categorias_estados = categorias_estados;
 	}
 
 	public long getId() {
@@ -74,7 +80,7 @@ public class Categoria implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public Integer getTipo() {
 		return tipo;
 	}
@@ -98,5 +104,12 @@ public class Categoria implements Serializable {
 	public void setCategorias_clientes(List<CategoriaCliente> categorias_clientes) {
 		this.categorias_clientes = categorias_clientes;
 	}
-	
+
+	public List<CategoriaEstado> getCategorias_estados() {
+		return categorias_estados;
+	}
+
+	public void setCategorias_estados(List<CategoriaEstado> categorias_estados) {
+		this.categorias_estados = categorias_estados;
+	}
 }
