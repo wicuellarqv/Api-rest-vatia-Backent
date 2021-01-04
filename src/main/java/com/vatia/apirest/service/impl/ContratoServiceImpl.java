@@ -20,7 +20,6 @@ import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.CantidadesContratos;
 import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.Contratos;
-import com.vatia.apirest.model.FechasCorteContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.GarantiasContratos;
 import com.vatia.apirest.model.ModalidadesContratos;
@@ -36,7 +35,6 @@ import com.vatia.apirest.repository.AgenteComercialRepository;
 import com.vatia.apirest.repository.CTContratoRepository;
 import com.vatia.apirest.repository.CantidadRepository;
 import com.vatia.apirest.repository.ContratosRepository;
-import com.vatia.apirest.repository.FechaCorteRepository;
 import com.vatia.apirest.repository.FormulaPrecioRepository;
 import com.vatia.apirest.repository.GarantiaRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
@@ -52,10 +50,6 @@ import com.vatia.apirest.utils.CantidadRequest;
 import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.utils.GarantiasRequest;
 import com.vatia.apirest.utils.PreciosRequest;
-
-import io.jsonwebtoken.lang.Arrays;
-import net.minidev.json.JSONObject;
-
 
 @Service
 public class ContratoServiceImpl implements ContratoService {
@@ -83,9 +77,6 @@ public class ContratoServiceImpl implements ContratoService {
 
 	@Autowired
 	private AgenteComercialRepository agenteComercialRepository;
-
-	@Autowired
-	private FechaCorteRepository fechaCorteRepository;
 
 	@Autowired
 	private FormulaPrecioRepository formulaPrecioRepository;
@@ -142,12 +133,6 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 
 	@Override
-	public List<FechasCorteContratos> getAllFechaCorte() {
-		// TODO Auto-generated method stub
-		return this.fechaCorteRepository.findAll();
-	}
-
-	@Override
 	public List<FormulasPrecios> getAllFormulaPrecio() {
 		// TODO Auto-generated method stub
 		return this.formulaPrecioRepository.findAll();
@@ -172,14 +157,14 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 
 	@Override
-	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> cantReq) {
+	public SaveResponse saveContrato(ContratosRequest contratosRequest) {
 		List<CantidadRequest> listaCantidadRequest = null;
 		// TODO Auto-generated method stub
-		if (cantReq.isEmpty()) {
-			listaCantidadRequest = new ArrayList<CantidadRequest>();
-		}else {
-			listaCantidadRequest = cantReq;
-		}
+//		if (cantReq.isEmpty()) {
+//			listaCantidadRequest = new ArrayList<CantidadRequest>();
+//		}else {
+//			listaCantidadRequest = cantReq;
+//		}
 		Contratos ContratosList = new Contratos();
 		SaveResponse saveResponse = new SaveResponse();		
 		List<GarantiasRequest> listaGarantiasContratos = new ArrayList<GarantiasRequest>();
@@ -192,33 +177,35 @@ public class ContratoServiceImpl implements ContratoService {
 		try {
 
 			// Set de campos basicos en la tabla de contratos
-			if (contratosRequest.getTipodeMercado() != "") {
-				ContratosList.setIdTipoMercado(Integer.parseInt(contratosRequest.getTipodeMercado()));
+			
+			
+			if (contratosRequest.getTipoMercado() != "") {
+				ContratosList.setIdTipoMercado(Integer.parseInt(contratosRequest.getTipoMercado()));
 			}
 			if (contratosRequest.getEstadoContrato() != "") {
 				ContratosList.setEstadoContrato(contratosRequest.getEstadoContrato());
 			}
-			if (contratosRequest.getTipodeContrato() != "") {
-				ContratosList.setIdTipoContrato(Integer.parseInt(contratosRequest.getTipodeContrato()));
+			if (contratosRequest.getTipoContrato() != "") {
+				ContratosList.setIdTipoContrato(Integer.parseInt(contratosRequest.getTipoContrato()));
 			}
-			if (contratosRequest.getModalidaddelcontrato() != "") {
-				ContratosList.setIdNegContrato(Integer.parseInt(contratosRequest.getModalidaddelcontrato()));
+			if (contratosRequest.getNegociacionContrato() != "") {
+				ContratosList.setIdNegContrato(Integer.parseInt(contratosRequest.getNegociacionContrato()));
 			}
-			if (contratosRequest.getFechadeinicioContrato() != "") {
-				ContratosList.setFecPeriodoInicio(contratosRequest.getFechadeinicioContrato());
+			if (contratosRequest.getFechaInicioContrato() != "") {
+				ContratosList.setFecPeriodoInicio(contratosRequest.getFechaInicioContrato());
 			}
-			if (contratosRequest.getFechadefinContrato() != "") {
-				ContratosList.setFecPeriodoFin(contratosRequest.getFechadefinContrato());
+			if (contratosRequest.getFechaFinContrato() != "") {
+				ContratosList.setFecPeriodoFin(contratosRequest.getFechaFinContrato());
 			}		
 			if (contratosRequest.getContratoSic() != "") {
 				ContratosList.setCodSicContrato(contratosRequest.getContratoSic());
-			}
-			
-			
-			
-			
-			
-
+			}			
+			if (contratosRequest.getContratoDocumento() != "") {
+				ContratosList.setDocContacto(contratosRequest.getContratoDocumento());
+			}	
+			if (contratosRequest.getNumContrato() != "") {
+				ContratosList.setNumContrato(Integer.parseInt(contratosRequest.getNumContrato()));
+			}				
 			if (contratosRequest.getCod_SIC_comprador()!= "") {
 
 				AgentesComerciales agentesComerciales = new AgentesComerciales();
@@ -226,25 +213,27 @@ public class ContratoServiceImpl implements ContratoService {
 				ContratosList.setIdAgenteComprador(agentesComerciales.getIdAgenteCcial());
 
 			}
-
 			if (contratosRequest.getCod_SIC_vendedor()!= "") {
 
 				AgentesComerciales agentesComerciales = new AgentesComerciales();
 				agentesComerciales = agenteComercialRepository.findAllCod(contratosRequest.getCod_SIC_vendedor());
 				ContratosList.setIdAgenteVendedor(agentesComerciales.getIdAgenteCcial());
 			}
-
-			if (contratosRequest.getFechadefirma() != "") {
-				ContratosList.setFechaFirmaContrato(contratosRequest.getFechadefirma());
+			
+			if (contratosRequest.getCondicionTipoContrato() != "") {
+				ContratosList.setIdCondicionTipoContrato(Integer.parseInt(contratosRequest.getCondicionTipoContrato()));
+			}
+			if (contratosRequest.getFechaFirma() != "") {
+				ContratosList.setFechaFirmaContrato(contratosRequest.getFechaFirma());
 			}
 			if (contratosRequest.getNombreCliente() != "") {
 				ContratosList.setNombreContacto(contratosRequest.getNombreCliente());
 			}
-			if (contratosRequest.getEmailcontacto() != "") {
-				ContratosList.setEmailContacto(contratosRequest.getEmailcontacto());
+			if (contratosRequest.getEmailContacto() != "") {
+				ContratosList.setEmailContacto(contratosRequest.getEmailContacto());
 			}
-			if (contratosRequest.getTipodeContrato() != "") {
-				ContratosList.setTelContacto(contratosRequest.getTipodeContrato());
+			if (contratosRequest.getTipoContrato() != "") {
+				ContratosList.setTelContacto(contratosRequest.getTipoContrato());
 			}
 			
 	        String llave="";
@@ -273,23 +262,45 @@ public class ContratoServiceImpl implements ContratoService {
 			listaGarantiasContratos = contratosRequest.getGarantiasContratos();
 			if (listaGarantiasContratos.size() > 0) {
 				for (GarantiasRequest LgarantiasContratos : listaGarantiasContratos) {
-					
-//					if (LgarantiasContratos.getValor() != null) {
-//					garantiasContratosN.setNum_valor_garantia(LgarantiasContratos.getValor());
-//					}
+					garantiasContratosN.setIdGarantiaContrato(0);
+					if (LgarantiasContratos.getCantidad() != null) {
+					garantiasContratosN.setCantidadGarantia(LgarantiasContratos.getCantidad());
+					}
 					if (LgarantiasContratos.getInicio() != null) {
 					garantiasContratosN.setFechaEntregaInicioGarantia(LgarantiasContratos.getInicio());
 					}
 					if (LgarantiasContratos.getFin() != null) {
 					garantiasContratosN.setFechaEntregaFinGarantia(LgarantiasContratos.getFin());
+					}					
+					if (LgarantiasContratos.getIpp() != null) {
+					garantiasContratosN.setIppActGarantia(LgarantiasContratos.getIpp());
+					}					
+					if (LgarantiasContratos.getTasa() != null) {
+					garantiasContratosN.setTasaGarantia(LgarantiasContratos.getTasa());
+					}					
+					if (LgarantiasContratos.getIva() != null) {
+					garantiasContratosN.setIvaGarantia(LgarantiasContratos.getIva());
+					}					
+					if (LgarantiasContratos.getValor() != null) {
+					garantiasContratosN.setValorGarantia(LgarantiasContratos.getValor());
 					}
+					if (LgarantiasContratos.getPrima() != null) {
+					garantiasContratosN.setPrimaGarantia(LgarantiasContratos.getPrima());
+					}
+					if (LgarantiasContratos.getCosto() != null) {
+					garantiasContratosN.setCostoGarantia(LgarantiasContratos.getCosto());
+					}
+					if (contrato.getIdContrato() != null) {
 					garantiasContratosN.setIdContrato(contrato.getIdContrato());
-					
-//					garantiasContratosN.setIdTipoGarantia(Integer.parseInt(contratosRequest.getTipogarantia()));
-//					garantiasContratosN.setFechaEntregaGarantia(contratosRequest.getFechaEntregaGarantia());
-
-					garantiasContratosN.setIdGarantiaContrato(1);
+					}
+					if (contratosRequest.getTipoGarantia() != null) {
+					garantiasContratosN.setIdTipoGarantia(Integer.parseInt(contratosRequest.getTipoGarantia()));
+					}
+					if (contratosRequest.getFechaEntregaGarantia() != null) {
+					garantiasContratosN.setFechaEntregaGarantia(contratosRequest.getFechaEntregaGarantia());
+					}		
 					garantiaRepository.save(garantiasContratosN);
+					
 				}
 			}
 			
@@ -297,7 +308,7 @@ public class ContratoServiceImpl implements ContratoService {
 			listaPreciosRequest = contratosRequest.getPreciosRequest();
 			if (listaPreciosRequest.size() > 0) {
 				for (PreciosRequest LPreciosRequest : listaPreciosRequest) {
-					
+					preciosContratoN.setIdPrecioContrato(0);
 					if (LPreciosRequest.getMes() != null) {
 						preciosContratoN.setFecPeriodoPrecio(LPreciosRequest.getMes());
 					}				
@@ -313,17 +324,14 @@ public class ContratoServiceImpl implements ContratoService {
 					if (contratosRequest.getMesBase() != null) {
 						preciosContratoN.setMesBase(contratosRequest.getMesBase());
 					}
+					
 					//pendiente formula
 					int big = 1234;
 					preciosContratoN.setPrecioPeriodo(new BigDecimal(big));
 					
 					if (LPreciosRequest.getPrecioReferencia() != null) {
 						preciosContratoN.setPrecioReferencia(new BigDecimal(LPreciosRequest.getPrecioReferencia().replaceAll(",", ".")));
-					}
-					
-					 
-					
-					
+					}					
 					precioContratoRepository.save(preciosContratoN);
 				}
 			}
@@ -332,19 +340,16 @@ public class ContratoServiceImpl implements ContratoService {
 			listaCantidadRequest = contratosRequest.getCantidadRequest();
 			if (listaCantidadRequest.size() > 0) {
 				for (CantidadRequest LCantidadRequest : listaCantidadRequest) {
-					
+					cantidadesContratosN.setIdCantidadContrato(0);
 					if (LCantidadRequest.getFecha() != null) {
 						cantidadesContratosN.setFechaCantidad(LCantidadRequest.getFecha());
 					}
-					if (contrato.getIdContrato() != null) {
-						cantidadesContratosN.setIdContrato(contrato.getIdContrato());
-					}		
-					if (contratosRequest.getCantidadContrato() != null) {
-						cantidadesContratosN.setIdCantidadContrato(Integer.parseInt(contratosRequest.getCantidadContrato()));
-					}
 					if (contratosRequest.getTipoCantidad() != null) {
 						cantidadesContratosN.setIdTipoCantidad(Integer.parseInt(contratosRequest.getTipoCantidad()));
-					}
+					}		
+					if (contrato.getIdContrato() != null) {
+						cantidadesContratosN.setIdContrato(contrato.getIdContrato());
+					}	
 					if (LCantidadRequest.getH1() != null) {
 						cantidadesContratosN.setCantidadH1(new BigDecimal(LCantidadRequest.getH1().replaceAll(",", ".")));
 					}			
@@ -420,9 +425,6 @@ public class ContratoServiceImpl implements ContratoService {
 					cantidadRepository.save(cantidadesContratosN);
 				}
 			}
-	
-
-
 			
 			if (valor != 0) {			
 			saveResponse.setCodigoContrato(contrato.getIdContrato());

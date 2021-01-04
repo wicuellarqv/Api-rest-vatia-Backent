@@ -41,6 +41,19 @@ public class FormulasPrecios implements Serializable {
     @Basic(optional = false)
     @Column(name = "str_formula_precio")
     private String formulaPrecio;
+    
+    
+
+	public FormulasPrecios() {
+	}
+
+
+	public FormulasPrecios(Integer id_formula_precio, String descFormulaPrecio, String formulaPrecio) {
+		super();
+		this.id_formula_precio = id_formula_precio;
+		this.descFormulaPrecio = descFormulaPrecio;
+		this.formulaPrecio = formulaPrecio;
+	}
 
 
 	public Integer getId_formula_precio() {

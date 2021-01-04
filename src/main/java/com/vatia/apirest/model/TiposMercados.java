@@ -44,6 +44,17 @@ public class TiposMercados implements Serializable {
     @Column(name = "str_desc_tipo_mercado")
     private String descTipoMercado;
 
+    
+
+	public TiposMercados() {
+	}
+
+	public TiposMercados(Integer idTipoMercado, String descTipoMercado) {
+		super();
+		this.idTipoMercado = idTipoMercado;
+		this.descTipoMercado = descTipoMercado;
+	}
+
 	public Integer getIdTipoMercado() {
 		return idTipoMercado;
 	}

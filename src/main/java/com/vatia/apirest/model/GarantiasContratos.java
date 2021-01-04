@@ -77,8 +77,34 @@ public class GarantiasContratos implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "num_costo_garantia")
-    private String costoGarantia;
+    private String costoGarantia;  
     
+    
+
+	public GarantiasContratos() {
+		}
+
+
+	public GarantiasContratos(Integer idGarantiaContrato, Integer idContrato, Integer idTipoGarantia,
+			String fechaEntregaGarantia, String fechaEntregaInicioGarantia, String fechaEntregaFinGarantia,
+			String cantidadGarantia, String ippActGarantia, String valorGarantia, String tasaGarantia,
+			String ivaGarantia, String primaGarantia, String costoGarantia) {
+		super();
+		this.idGarantiaContrato = idGarantiaContrato;
+		this.idContrato = idContrato;
+		this.idTipoGarantia = idTipoGarantia;
+		this.fechaEntregaGarantia = fechaEntregaGarantia;
+		this.fechaEntregaInicioGarantia = fechaEntregaInicioGarantia;
+		this.fechaEntregaFinGarantia = fechaEntregaFinGarantia;
+		this.cantidadGarantia = cantidadGarantia;
+		this.ippActGarantia = ippActGarantia;
+		this.valorGarantia = valorGarantia;
+		this.tasaGarantia = tasaGarantia;
+		this.ivaGarantia = ivaGarantia;
+		this.primaGarantia = primaGarantia;
+		this.costoGarantia = costoGarantia;
+	}
+
 
 	public Integer getIdGarantiaContrato() {
 		return idGarantiaContrato;

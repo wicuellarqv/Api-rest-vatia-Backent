@@ -47,6 +47,18 @@ public class TiposContratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "str_sigla_tipo_contrato")
     private String siglaTipoContrato;
+    
+    
+
+	public TiposContratos() {
+	 }
+
+	public TiposContratos(Integer idTipoContrato, String descTipoContrato, String siglaTipoContrato) {
+		super();
+		this.idTipoContrato = idTipoContrato;
+		this.descTipoContrato = descTipoContrato;
+		this.siglaTipoContrato = siglaTipoContrato;
+	}
 
 	public Integer getIdTipoContrato() {
 		return idTipoContrato;

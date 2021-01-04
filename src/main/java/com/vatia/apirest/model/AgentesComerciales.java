@@ -80,9 +80,21 @@ public class AgentesComerciales implements Serializable {
 	public void setNombreCortoAgenteCcial(String nombreCortoAgenteCcial) {
 		this.nombreCortoAgenteCcial = nombreCortoAgenteCcial;
 	}
-    
+
 	
-	   
+	
+	public AgentesComerciales() {
+	}
+
+	public AgentesComerciales(Integer idAgenteCcial, String nombreAgenteCcial, String codSicAgenteCcial,
+			String nombreCortoAgenteCcial) {
+		super();
+		this.idAgenteCcial = idAgenteCcial;
+		this.nombreAgenteCcial = nombreAgenteCcial;
+		this.codSicAgenteCcial = codSicAgenteCcial;
+		this.nombreCortoAgenteCcial = nombreCortoAgenteCcial;
+	}
+    	  
     
 }
 

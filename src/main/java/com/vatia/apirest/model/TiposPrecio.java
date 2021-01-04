@@ -36,6 +36,13 @@ public class TiposPrecio implements Serializable {
     @Column(name = "str_desc_tipo_precio")
     private String descTipoPrecio;
 
+
+	public TiposPrecio(Integer idTipoPrecio, String descTipoPrecio) {
+		super();
+		this.idTipoPrecio = idTipoPrecio;
+		this.descTipoPrecio = descTipoPrecio;
+	}
+
 	public Integer getIdTipoPrecio() {
 		return idTipoPrecio;
 	}

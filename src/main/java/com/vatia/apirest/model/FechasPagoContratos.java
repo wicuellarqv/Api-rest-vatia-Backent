@@ -38,10 +38,22 @@ public class FechasPagoContratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "dtm_fecha_pago_periodo")
     private String fechaPagoPeriodo;
-        
-      
+    
+    
+    
    
-        public Integer getIdFechaPago() {
+        public FechasPagoContratos() {
+        }
+
+		public FechasPagoContratos(Integer idFechaPago, Integer idContrato, String periodoPago, String fechaPagoPeriodo) {
+		super();
+		this.idFechaPago = idFechaPago;
+		this.idContrato = idContrato;
+		this.periodoPago = periodoPago;
+		this.fechaPagoPeriodo = fechaPagoPeriodo;
+	}
+
+		public Integer getIdFechaPago() {
                 return idFechaPago;
         }
 

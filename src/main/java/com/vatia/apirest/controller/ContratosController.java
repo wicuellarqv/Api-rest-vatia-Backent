@@ -290,27 +290,27 @@ ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
 		ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
 		SaveResponse saveResponse = new SaveResponse();
 		// lectura del archivo a CantidadReuqest
-			if(file.isEmpty()) {
-				saveResponse.setMsg("Por favor escoja un archivo CSV valido");
-			}
-			else {
+//			if(file.isEmpty()) {
+//				saveResponse.setMsg("Por favor escoja un archivo CSV valido");
+//			}
+//			else {
 				try {
-					Reader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
-					CsvToBean<CantidadRequest> cantReq = new CsvToBeanBuilder(lectura).withType(CantidadRequest.class).withIgnoreLeadingWhiteSpace(true).build();
-					List<CantidadRequest> cantRequest = cantReq.parse();
-					if (cantRequest.size() >0){
-						saveResponse = contratoService.saveContrato(cr,cantRequest);
-					}
+//					Reader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
+//					CsvToBean<CantidadRequest> cantReq = new CsvToBeanBuilder(lectura).withType(CantidadRequest.class).withIgnoreLeadingWhiteSpace(true).build();
+//					List<CantidadRequest> cantRequest = cantReq.parse();
+//					if (cantRequest.size() >0){
+//						saveResponse = contratoService.saveContrato(cr,cantRequest);
+						saveResponse = contratoService.saveContrato(cr);
+//					}
 				} catch (Exception e) {
-					return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 							HttpStatus.INTERNAL_SERVER_ERROR);
 				}
-			}
+//			}
 		
-		return 	cr != null  
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), file), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), file), HttpStatus.NOT_FOUND);
+		return 	saveResponse != null  
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
 	}
 		
 

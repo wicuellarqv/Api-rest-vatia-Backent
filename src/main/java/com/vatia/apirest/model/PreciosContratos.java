@@ -59,6 +59,24 @@ public class PreciosContratos implements Serializable {
     private Integer formulaPrecio;
     
     
+     
+
+	public PreciosContratos() {
+	 }
+
+	public PreciosContratos(Integer idPrecioContrato, Integer idContrato, Integer idTipoPrecio, String mesBase,
+			BigDecimal precioReferencia, String fecPeriodoPrecio, BigDecimal precioPeriodo, Integer formulaPrecio) {
+		super();
+		this.idPrecioContrato = idPrecioContrato;
+		this.idContrato = idContrato;
+		this.idTipoPrecio = idTipoPrecio;
+		this.mesBase = mesBase;
+		this.precioReferencia = precioReferencia;
+		this.fecPeriodoPrecio = fecPeriodoPrecio;
+		this.precioPeriodo = precioPeriodo;
+		this.formulaPrecio = formulaPrecio;
+	}
+
 	public Integer getIdPrecioContrato() {
 		return idPrecioContrato;
 	}
