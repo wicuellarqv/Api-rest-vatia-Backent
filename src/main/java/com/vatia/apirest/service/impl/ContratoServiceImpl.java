@@ -157,14 +157,13 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 
 	@Override
-	public SaveResponse saveContrato(ContratosRequest contratosRequest) {
+	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequest) {
 		List<CantidadRequest> listaCantidadRequest = null;
-		// TODO Auto-generated method stub
-//		if (cantReq.isEmpty()) {
-//			listaCantidadRequest = new ArrayList<CantidadRequest>();
-//		}else {
-//			listaCantidadRequest = cantReq;
-//		}
+		
+		if(listCantidadRequest.size() > 0) {
+			//TODO: HACER LOGICA PARA AGREGAR LOS OBJETOS DE LISTA QUE VIENEN DEL ARCHIVO PLANO
+		}
+		
 		Contratos ContratosList = new Contratos();
 		SaveResponse saveResponse = new SaveResponse();		
 		List<GarantiasRequest> listaGarantiasContratos = new ArrayList<GarantiasRequest>();

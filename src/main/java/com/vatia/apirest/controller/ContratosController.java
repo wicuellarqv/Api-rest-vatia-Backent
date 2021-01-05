@@ -2,9 +2,13 @@
 package com.vatia.apirest.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -40,9 +44,8 @@ import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.response.ResponseHTTP;
 import org.springframework.http.HttpStatus;
 
-
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RequestMapping("v1/Contrato")
 public class ContratosController {
 
@@ -57,35 +60,31 @@ public class ContratosController {
 			tiposMercados = contratoService.getAllTipoMercado();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposMercados.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-tiposMercados), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposMercados),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposMercados), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposMercados),
 						HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping("/getAllTipoContrato")
-	public ResponseEntity<ResponseHTTP>  getAllTipoContrato() {
+	public ResponseEntity<ResponseHTTP> getAllTipoContrato() {
 		List<TiposContratos> tiposContratos = new ArrayList<>();
 
 		try {
 			tiposContratos = contratoService.getAllTipoContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposContratos.size() > 0
 
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposContratos), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposContratos),
-						HttpStatus.NOT_FOUND);		
+						HttpStatus.NOT_FOUND);
 
 	}
 
@@ -97,15 +96,12 @@ ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 			modalidadesContratos = contratoService.getAllModalidadContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return modalidadesContratos.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-modalidadesContratos), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), modalidadesContratos),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), modalidadesContratos), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), modalidadesContratos),
 						HttpStatus.NOT_FOUND);
 	}
 
@@ -117,18 +113,14 @@ ResponseHTTP(HttpStatus.NOT_FOUND.value(), modalidadesContratos),
 			tiposGarantias = contratoService.getAllTipoGarantia();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposGarantias.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-tiposGarantias), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposGarantias),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposGarantias), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposGarantias),
 						HttpStatus.NOT_FOUND);
 	}
-
 
 	@GetMapping("/getAllTipoPrecio")
 	public ResponseEntity<ResponseHTTP> getAllTipoPrecio() {
@@ -138,15 +130,12 @@ ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposGarantias),
 			tiposPrecio = contratoService.getAllTipoPrecio();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposPrecio.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-tiposPrecio), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposPrecio),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposPrecio), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposPrecio),
 						HttpStatus.NOT_FOUND);
 	}
 
@@ -158,161 +147,201 @@ ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposPrecio),
 			tiposCantidad = contratoService.getAllTipoCantidad();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return tiposCantidad.size() > 0
 
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), tiposCantidad), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), tiposCantidad),
-						HttpStatus.NOT_FOUND);		
-		
-	}	
-	
-	
+						HttpStatus.NOT_FOUND);
+
+	}
 
 	@GetMapping("/getAllSicAgenteComercial")
-	public ResponseEntity<ResponseHTTP>
-getAllSicAgenteComercial(@RequestParam String valor) {
+	public ResponseEntity<ResponseHTTP> getAllSicAgenteComercial(@RequestParam String valor) {
 		AgentesComerciales agentesComerciales = new AgentesComerciales();
 
 		try {
 			agentesComerciales = contratoService.getAllSicAgenteComercial(valor);
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return 	agentesComerciales != null  ? new ResponseEntity<>(new  
-ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-""), HttpStatus.OK);
+		return agentesComerciales != null
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), agentesComerciales), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ""), HttpStatus.OK);
 
 	}
 
-
 	@GetMapping("/getAllFormulaPrecio")
-	public ResponseEntity<ResponseHTTP>  getAllFormulaPrecio() {
+	public ResponseEntity<ResponseHTTP> getAllFormulaPrecio() {
 		List<FormulasPrecios> formulasPrecios = new ArrayList<>();
 
 		try {
 			formulasPrecios = contratoService.getAllFormulaPrecio();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return formulasPrecios.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-formulasPrecios), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), formulasPrecios),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), formulasPrecios), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), formulasPrecios),
 						HttpStatus.NOT_FOUND);
 
 	}
 
-
-
-
-
 	@GetMapping("/getAllCTipoContrato")
-	public ResponseEntity<ResponseHTTP>  getAllCTipoContrato() {
+	public ResponseEntity<ResponseHTTP> getAllCTipoContrato() {
 		List<CondicionTipoContrato> condicionTipoContrato = new ArrayList<>();
 
 		try {
 			condicionTipoContrato = contratoService.getAllCTipoContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return condicionTipoContrato.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-condicionTipoContrato), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), condicionTipoContrato),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), condicionTipoContrato), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), condicionTipoContrato),
 						HttpStatus.NOT_FOUND);
 
 	}
 
 	@GetMapping("/getAllNegocioContrato")
-	public ResponseEntity<ResponseHTTP>  getAllNegocioContrato() {
+	public ResponseEntity<ResponseHTTP> getAllNegocioContrato() {
 		List<NegociacionesContratos> negociacionesContratos = new ArrayList<>();
 
 		try {
 			negociacionesContratos = contratoService.getAllNegocioContrato();
 
 		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return negociacionesContratos.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-negociacionesContratos), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), negociacionesContratos),
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), negociacionesContratos), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), negociacionesContratos),
 						HttpStatus.NOT_FOUND);
 
 	}
 
 	/**
+	 * @PostMapping("/saveContrato") public ResponseEntity<ResponseHTTP>
+	 * saveContrato(
+	 * 
+	 * @RequestBody ContratosRequest contratosRequest ) { SaveResponse saveResponse
+	 *              = new SaveResponse();
+	 * 
+	 *              try { saveResponse =
+	 *              contratoService.saveContrato(contratosRequest);
+	 * 
+	 *              } catch (Exception e) { return new ResponseEntity<>(new
+	 *              ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+	 *              HttpStatus.INTERNAL_SERVER_ERROR); } return saveResponse != null
+	 *              ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
+	 *              saveResponse), HttpStatus.OK) : new ResponseEntity<>(new
+	 *              ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse),
+	 *              HttpStatus.NOT_FOUND);
+	 * 
+	 *              }
+	 **/
+
 	@PostMapping("/saveContrato")
-	public  ResponseEntity<ResponseHTTP>  saveContrato(
-			@RequestBody ContratosRequest contratosRequest
-			) {
+	public ResponseEntity<ResponseHTTP> testFile(@RequestParam("files") MultipartFile[] files,
+			@RequestParam String obj) {
 		SaveResponse saveResponse = new SaveResponse();
-
 		try {
-			saveResponse = contratoService.saveContrato(contratosRequest);
+			Gson g = new Gson();
+			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
+			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
+			Arrays.asList(files).stream().forEach(file -> {
+				if (!file.isEmpty()) {
+					try {
+						String strCurrentLine;
+						BufferedReader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
+						if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
+							int i = 0;
+							while ((strCurrentLine = lectura.readLine()) != null) {
+								String[] data = strCurrentLine.split(";");
+								if (i > 0) {
+									CantidadRequest newItem = createObjectCantidad(data);
+									listCantidad.add(newItem);
+								}
+								i++;
+							}
+						}
+						if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("OTROARCHIVO")) {
+							int i = 0;
+							while ((strCurrentLine = lectura.readLine()) != null) {
+								String[] data = strCurrentLine.split(";");
+								if (i > 0) {
+									// TODO: AQUI SE HACE LA LOGICA PARA LEER LAS LINEAS DEL OTRO ARCHIVO Y
+									// AGREGARLO A UNA LISTA DE OBJETOS
+								}
+								i++;
+							}
+						}
 
-		} catch (Exception e) {
-			return new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			// TODO: FALTA ENVIAR AL SERVICIO LA OTRA LISTA CON LOS OBJETOS DEL OTRO ARCHIVO
+			saveResponse = contratoService.saveContrato(cr, listCantidad);
+		} catch (Exception e2) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return 	saveResponse != null
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-saveResponse), HttpStatus.OK)
-				: new ResponseEntity<>(new
-ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
 
-	}
-	**/
-
-	@PostMapping("/saveContrato")
-	public ResponseEntity<ResponseHTTP> test(@RequestParam("files") MultipartFile file, @RequestParam String obj  ){
-		Gson g = new Gson();
-		ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
-		SaveResponse saveResponse = new SaveResponse();
-		// lectura del archivo a CantidadReuqest
-//			if(file.isEmpty()) {
-//				saveResponse.setMsg("Por favor escoja un archivo CSV valido");
-//			}
-//			else {
-				try {
-//					Reader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
-//					CsvToBean<CantidadRequest> cantReq = new CsvToBeanBuilder(lectura).withType(CantidadRequest.class).withIgnoreLeadingWhiteSpace(true).build();
-//					List<CantidadRequest> cantRequest = cantReq.parse();
-//					if (cantRequest.size() >0){
-//						saveResponse = contratoService.saveContrato(cr,cantRequest);
-						saveResponse = contratoService.saveContrato(cr);
-//					}
-				} catch (Exception e) {
-					return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
-							HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-//			}
-		
-		return 	saveResponse != null  
+		return saveResponse != null
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse), HttpStatus.NOT_FOUND);
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse),
+						HttpStatus.NOT_FOUND);
+
 	}
-		
 
+	public CantidadRequest createObjectCantidad(String[] data) {
+		return new CantidadRequest(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8],
+				data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[17], data[18],
+				data[19], data[20], data[21], data[22], data[23], data[24]);
+	}
+
+	// TODO:AQUI DEBAJO METER EL OTRO METODO PARA LLENAR EL OBJETO DEL OTRO ARCHIVO
+
+	static class testClass {
+		private String campo1;
+		private String campo2;
+
+		public testClass(String campo1, String campo2) {
+			super();
+			this.campo1 = campo1;
+			this.campo2 = campo2;
+		}
+
+		public String getCampo1() {
+			return campo1;
+		}
+
+		public void setCampo1(String campo1) {
+			this.campo1 = campo1;
+		}
+
+		public String getCampo2() {
+			return campo2;
+		}
+
+		public void setCampo2(String campo2) {
+			this.campo2 = campo2;
+		}
+
+		@Override
+		public String toString() {
+			return "testClass [campo1=" + campo1 + ", campo2=" + campo2 + "]";
+		}
+	}
 }
-

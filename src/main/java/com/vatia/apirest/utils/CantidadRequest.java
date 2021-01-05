@@ -28,6 +28,40 @@ public class CantidadRequest {
 	private String h23;
 	private String h24;
 	
+	public CantidadRequest() {
+		
+	};
+	
+	public CantidadRequest(String fecha, String h1, String h2, String h3, String h4, String h5, String h6, String h7,
+			String h8, String h9, String h10, String h11, String h12, String h13, String h14, String h15, String h16,
+			String h17, String h18, String h19, String h20, String h21, String h22, String h23, String h24) {
+		super();
+		this.fecha = fecha;
+		this.h1 = h1;
+		this.h2 = h2;
+		this.h3 = h3;
+		this.h4 = h4;
+		this.h5 = h5;
+		this.h6 = h6;
+		this.h7 = h7;
+		this.h8 = h8;
+		this.h9 = h9;
+		this.h10 = h10;
+		this.h11 = h11;
+		this.h12 = h12;
+		this.h13 = h13;
+		this.h14 = h14;
+		this.h15 = h15;
+		this.h16 = h16;
+		this.h17 = h17;
+		this.h18 = h18;
+		this.h19 = h19;
+		this.h20 = h20;
+		this.h21 = h21;
+		this.h22 = h22;
+		this.h23 = h23;
+		this.h24 = h24;
+	}
 	public String getFecha() {
 		return fecha;
 	}
@@ -177,6 +211,15 @@ public class CantidadRequest {
 	}
 	public void setH24(String h24) {
 		this.h24 = h24;
+	}
+
+	@Override
+	public String toString() {
+		return "CantidadRequest [fecha=" + fecha + ", h1=" + h1 + ", h2=" + h2 + ", h3=" + h3 + ", h4=" + h4 + ", h5="
+				+ h5 + ", h6=" + h6 + ", h7=" + h7 + ", h8=" + h8 + ", h9=" + h9 + ", h10=" + h10 + ", h11=" + h11
+				+ ", h12=" + h12 + ", h13=" + h13 + ", h14=" + h14 + ", h15=" + h15 + ", h16=" + h16 + ", h17=" + h17
+				+ ", h18=" + h18 + ", h19=" + h19 + ", h20=" + h20 + ", h21=" + h21 + ", h22=" + h22 + ", h23=" + h23
+				+ ", h24=" + h24 + "]";
 	}
 	
 }

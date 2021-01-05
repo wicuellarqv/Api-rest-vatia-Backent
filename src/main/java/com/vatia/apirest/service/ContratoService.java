@@ -38,6 +38,6 @@ public interface ContratoService {
 		
 	public AgentesComerciales getAllSicAgenteComercial(String valor);
 	
-	public SaveResponse saveContrato (ContratosRequest contratosRequest);
+	public SaveResponse saveContrato (ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequest);
 	
 }
