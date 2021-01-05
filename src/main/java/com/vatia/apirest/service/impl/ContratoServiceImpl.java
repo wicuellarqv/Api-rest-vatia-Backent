@@ -157,12 +157,8 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 
 	@Override
-	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequest) {
+	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequestFile) {
 		List<CantidadRequest> listaCantidadRequest = null;
-		
-		if(listCantidadRequest.size() > 0) {
-			//TODO: HACER LOGICA PARA AGREGAR LOS OBJETOS DE LISTA QUE VIENEN DEL ARCHIVO PLANO
-		}
 		
 		Contratos ContratosList = new Contratos();
 		SaveResponse saveResponse = new SaveResponse();		
@@ -339,6 +335,94 @@ public class ContratoServiceImpl implements ContratoService {
 			listaCantidadRequest = contratosRequest.getCantidadRequest();
 			if (listaCantidadRequest.size() > 0) {
 				for (CantidadRequest LCantidadRequest : listaCantidadRequest) {
+					cantidadesContratosN.setIdCantidadContrato(0);
+					if (LCantidadRequest.getFecha() != null) {
+						cantidadesContratosN.setFechaCantidad(LCantidadRequest.getFecha());
+					}
+					if (contratosRequest.getTipoCantidad() != null) {
+						cantidadesContratosN.setIdTipoCantidad(Integer.parseInt(contratosRequest.getTipoCantidad()));
+					}		
+					if (contrato.getIdContrato() != null) {
+						cantidadesContratosN.setIdContrato(contrato.getIdContrato());
+					}	
+					if (LCantidadRequest.getH1() != null) {
+						cantidadesContratosN.setCantidadH1(new BigDecimal(LCantidadRequest.getH1().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH2() != null) {
+						cantidadesContratosN.setCantidadH2(new BigDecimal(LCantidadRequest.getH2().replaceAll(",", ".")));
+					}	
+					if (LCantidadRequest.getH3() != null) {
+						cantidadesContratosN.setCantidadH3(new BigDecimal(LCantidadRequest.getH3().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH4() != null) {
+						cantidadesContratosN.setCantidadH4(new BigDecimal(LCantidadRequest.getH4().replaceAll(",", ".")));
+					}	
+					if (LCantidadRequest.getH5() != null) {
+						cantidadesContratosN.setCantidadH5(new BigDecimal(LCantidadRequest.getH5().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH6() != null) {
+						cantidadesContratosN.setCantidadH6(new BigDecimal(LCantidadRequest.getH6().replaceAll(",", ".")));
+					}	
+					if (LCantidadRequest.getH7() != null) {
+						cantidadesContratosN.setCantidadH7(new BigDecimal(LCantidadRequest.getH7().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH8() != null) {
+						cantidadesContratosN.setCantidadH8(new BigDecimal(LCantidadRequest.getH8().replaceAll(",", ".")));
+					}	
+					if (LCantidadRequest.getH9() != null) {
+						cantidadesContratosN.setCantidadH9(new BigDecimal(LCantidadRequest.getH9().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH10() != null) {
+						cantidadesContratosN.setCantidadH10(new BigDecimal(LCantidadRequest.getH10().replaceAll(",", ".")));
+					}	
+					if (LCantidadRequest.getH11() != null) {
+						cantidadesContratosN.setCantidadH11(new BigDecimal(LCantidadRequest.getH11().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH12() != null) {
+						cantidadesContratosN.setCantidadH12(new BigDecimal(LCantidadRequest.getH12().replaceAll(",", ".")));
+					}	
+					if (LCantidadRequest.getH13() != null) {
+						cantidadesContratosN.setCantidadH13(new BigDecimal(LCantidadRequest.getH13().replaceAll(",", ".")));
+					}	
+					if (LCantidadRequest.getH14() != null) {
+						cantidadesContratosN.setCantidadH14(new BigDecimal(LCantidadRequest.getH14().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH15() != null) {
+						cantidadesContratosN.setCantidadH15(new BigDecimal(LCantidadRequest.getH15().replaceAll(",", ".")));					
+					}
+					if (LCantidadRequest.getH16() != null) {
+						cantidadesContratosN.setCantidadH16(new BigDecimal(LCantidadRequest.getH16().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH17() != null) {
+						cantidadesContratosN.setCantidadH17(new BigDecimal(LCantidadRequest.getH17().replaceAll(",", ".")));					
+					}
+					if (LCantidadRequest.getH18() != null) {
+						cantidadesContratosN.setCantidadH18(new BigDecimal(LCantidadRequest.getH18().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH19() != null) {
+						cantidadesContratosN.setCantidadH19(new BigDecimal(LCantidadRequest.getH19().replaceAll(",", ".")));					
+					}
+					if (LCantidadRequest.getH20() != null) {
+						cantidadesContratosN.setCantidadH20(new BigDecimal(LCantidadRequest.getH20().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH21() != null) {
+						cantidadesContratosN.setCantidadH21(new BigDecimal(LCantidadRequest.getH21().replaceAll(",", ".")));					
+					}					
+					if (LCantidadRequest.getH22() != null) {
+						cantidadesContratosN.setCantidadH22(new BigDecimal(LCantidadRequest.getH22().replaceAll(",", ".")));
+					}			
+					if (LCantidadRequest.getH23() != null) {
+						cantidadesContratosN.setCantidadH23(new BigDecimal(LCantidadRequest.getH23().replaceAll(",", ".")));					
+					}
+					if (LCantidadRequest.getH24() != null) {
+						cantidadesContratosN.setCantidadH24(new BigDecimal(LCantidadRequest.getH24().replaceAll(",", ".")));					
+					}
+					cantidadRepository.save(cantidadesContratosN);
+				}
+			}
+			
+			if(listCantidadRequestFile.size() > 0) {
+				for (CantidadRequest LCantidadRequest : listCantidadRequestFile) {
 					cantidadesContratosN.setIdCantidadContrato(0);
 					if (LCantidadRequest.getFecha() != null) {
 						cantidadesContratosN.setFechaCantidad(LCantidadRequest.getFecha());
