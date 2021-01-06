@@ -48,6 +48,7 @@ import com.vatia.apirest.repository.TiposMercadosRepository;
 import com.vatia.apirest.service.ContratoService;
 import com.vatia.apirest.utils.CantidadRequest;
 import com.vatia.apirest.utils.ContratosRequest;
+import com.vatia.apirest.utils.FechasPagosRequest;
 import com.vatia.apirest.utils.GarantiasRequest;
 import com.vatia.apirest.utils.PreciosRequest;
 
@@ -157,7 +158,8 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 
 	@Override
-	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequestFile) {
+	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequestFile,
+			List<FechasPagosRequest> listFechaPagosRequestFile) {
 		List<CantidadRequest> listaCantidadRequest = null;
 		
 		Contratos ContratosList = new Contratos();

@@ -41,6 +41,7 @@ import com.vatia.apirest.model.TiposGarantias;
 import com.vatia.apirest.service.ContratoService;
 import com.vatia.apirest.utils.CantidadRequest;
 import com.vatia.apirest.utils.ContratosRequest;
+import com.vatia.apirest.utils.FechasPagosRequest;
 import com.vatia.apirest.response.ResponseHTTP;
 import org.springframework.http.HttpStatus;
 
@@ -258,42 +259,20 @@ public class ContratosController {
 			Gson g = new Gson();
 			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
 			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
+			List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
 			Arrays.asList(files).stream().forEach(file -> {
 				if (!file.isEmpty()) {
-					try {
-						String strCurrentLine;
-						BufferedReader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
-						if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
-							int i = 0;
-							while ((strCurrentLine = lectura.readLine()) != null) {
-								String[] data = strCurrentLine.split(";");
-								if (i > 0) {
-									CantidadRequest newItem = createObjectCantidad(data);
-									listCantidad.add(newItem);
-								}
-								i++;
-							}
-						}
-						if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("OTROARCHIVO")) {
-							int i = 0;
-							while ((strCurrentLine = lectura.readLine()) != null) {
-								String[] data = strCurrentLine.split(";");
-								if (i > 0) {
-									// TODO: AQUI SE HACE LA LOGICA PARA LEER LAS LINEAS DEL OTRO ARCHIVO Y
-									// AGREGARLO A UNA LISTA DE OBJETOS
-								}
-								i++;
-							}
-						}
-
-					} catch (Exception e) {
-						e.printStackTrace();
+					if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
+						listCantidad.addAll(createListCantidad(file));
+					}
+					if ((file.getOriginalFilename().toLowerCase()).substring(0, 10).equals("fechaspago")) {
+						listFechaPagos.addAll(createListFechaPagos(file));
 					}
 				}
 			});
-			// TODO: FALTA ENVIAR AL SERVICIO LA OTRA LISTA CON LOS OBJETOS DEL OTRO ARCHIVO
-			saveResponse = contratoService.saveContrato(cr, listCantidad);
+			saveResponse = contratoService.saveContrato(cr, listCantidad, listFechaPagos);
 		} catch (Exception e2) {
+			e2.printStackTrace();
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -305,13 +284,103 @@ public class ContratosController {
 
 	}
 
-	public CantidadRequest createObjectCantidad(String[] data) {
-		return new CantidadRequest(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8],
-				data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[17], data[18],
-				data[19], data[20], data[21], data[22], data[23], data[24]);
+	@PostMapping("/validate_file")
+	public ResponseEntity<ResponseHTTP> validateFile(@RequestParam("files") MultipartFile[] files,
+			@RequestParam String obj) {
+		Boolean status = false;
+		try {
+			Gson g = new Gson();
+			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
+			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
+			List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
+
+			Arrays.asList(files).stream().forEach(file -> {
+				if (!file.isEmpty()) {
+					if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
+						listCantidad.addAll(createListCantidad(file));
+						// TODO: VALIDAR ARCHIVO
+
+					}
+					if ((file.getOriginalFilename().toLowerCase()).substring(0, 10).equals("fechaspago")) {
+						listFechaPagos.addAll(createListFechaPagos(file));
+						// TODO: VALIDAR ARCHIVO
+					}
+				}
+			});
+			if (listCantidad.size() > 0) {
+				status = validateCantidades("", "", listCantidad);
+			}
+			if (listFechaPagos.size() > 0) {
+				status = validateFechaPagos(listFechaPagos);
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return status ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+						HttpStatus.INTERNAL_SERVER_ERROR);
+
 	}
 
-	// TODO:AQUI DEBAJO METER EL OTRO METODO PARA LLENAR EL OBJETO DEL OTRO ARCHIVO
+	public Boolean validateCantidades(String fechaInicio, String fechaFinal, List<CantidadRequest> listCantidad) {
+
+		// TODO: TODAS LAS VALIDACIONES
+		return false;
+	}
+
+	public Boolean validateFechaPagos(List<FechasPagosRequest> listFechaPagos) {
+
+		// TODO: TODAS LAS VALIDACIONES
+		return false;
+	}
+
+	public List<CantidadRequest> createListCantidad(MultipartFile file) {
+		List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
+		try {
+			BufferedReader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
+			String strCurrentLine;
+			int i = 0;
+			while ((strCurrentLine = lectura.readLine()) != null) {
+				String[] data = strCurrentLine.split(";");
+				if (i > 0) {
+					CantidadRequest newItem = new CantidadRequest(data[0], data[1], data[2], data[3], data[4], data[5],
+							data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14],
+							data[15], data[16], data[17], data[18], data[19], data[20], data[21], data[22], data[23],
+							data[24]);
+					listCantidad.add(newItem);
+				}
+				i++;
+			}
+			return listCantidad;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return listCantidad;
+		}
+	}
+
+	public List<FechasPagosRequest> createListFechaPagos(MultipartFile file) {
+		List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
+		try {
+			BufferedReader lectura = new BufferedReader(new InputStreamReader(file.getInputStream()));
+			String strCurrentLine;
+			int i = 0;
+			while ((strCurrentLine = lectura.readLine()) != null) {
+				String[] data = strCurrentLine.split(";");
+				if (i > 0) {
+					FechasPagosRequest newItem = new FechasPagosRequest(data[0], data[1]);
+					listFechaPagos.add(newItem);
+				}
+				i++;
+			}
+			return listFechaPagos;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return listFechaPagos;
+		}
+	}
 
 	static class testClass {
 		private String campo1;
