@@ -7,13 +7,22 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -287,11 +296,14 @@ public class ContratosController {
 
 	}
 
+
 	@PostMapping("/validate_file")
 	public ResponseEntity<ResponseHTTP> validateFile(@RequestParam("files") MultipartFile[] files,
 			@RequestParam String obj) {
-		Boolean status = false;
+		String status = null;
 		try {
+			Gson g = new Gson();
+			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
 			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
 			List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
 
@@ -299,65 +311,102 @@ public class ContratosController {
 				if (!file.isEmpty()) {
 					if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
 						listCantidad.addAll(createListCantidad(file));
-						// TODO: VALIDAR ARCHIVO
-
 					}
 					if ((file.getOriginalFilename().toLowerCase()).substring(0, 10).equals("fechaspago")) {
 						listFechaPagos.addAll(createListFechaPagos(file));
-						// TODO: VALIDAR ARCHIVO
 					}
 				}
 			});
 			if (listCantidad.size() > 0) {
-				status = validateCantidades("", "", listCantidad);
+				status = validateCantidades(cr.getFechaInicioContrato(), cr.getFechaFinContrato(), listCantidad);
 			}
+
 			if (listFechaPagos.size() > 0) {
-				status = validateFechaPagos(listFechaPagos);
+				status = validateFechaPagos(cr.getFechaInicioContrato(), cr.getFechaFinContrato(), listFechaPagos);
 			}
+			
 		} catch (Exception e2) {
 			e2.printStackTrace();
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Existen campos vacios o estructura invalida del archivo!"),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		return status ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), status), HttpStatus.OK)
+		return status == null ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), status),
 						HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 
-	public Boolean validateCantidades(String fechaInicio, String fechaFinal, List<CantidadRequest> listCantidad) {
-
-		// TODO: TODAS LAS VALIDACIONES
-		return false;
+	public String validateCantidades(String fechaInicio, String fechaFinal, List<CantidadRequest> listCantidad) {
+		
+		//TODO: VALIDAR CANTIDADES
+		return null;
 	}
 
-	public Boolean validateFechaPagos(List<FechasPagosRequest> listFechaPagos) {
-
+	public String validateFechaPagos(String fechaInicio, String fechaFinal, List<FechasPagosRequest> listFechaPagos) {
 		Boolean valida = true;
+		String msg1 = "";
+		String msg2 = "";
+		String msg3 = "";
+		String msg4 = "";
+		String msg5 = "";
+		String msgError = null;
+		int contadorPeriodo = 0;
+		boolean res=true;
 		ArrayList<String> Listado = new ArrayList<String>();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+		
+        try {
+			Calendar inicio = new GregorianCalendar();
+			Calendar fin = new GregorianCalendar();
+            inicio.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicio));
+            fin.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(fechaFinal));
+            int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
+            int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH)+1;
+            System.out.println(difM);
 
-		for (FechasPagosRequest fechasPagos : listFechaPagos) {
-			if (fechasPagos.getFechaPago() == "") {
-				valida = false;
-			}
-			if (fechasPagos.getPeriodo() == "") {
-				valida = false;
-			}
-			Listado.add(fechasPagos.getPeriodo());
-		}
 
-		if (valida) {
-			Set<String> miSet = new HashSet<String>(Listado);
-			for (String s : miSet) {
 
-				int duplicado = Collections.frequency(Listado, s);
-				if (duplicado > 1) {
+			for (FechasPagosRequest fechasPagos : listFechaPagos) {
+				contadorPeriodo++;
+				if (fechasPagos.getFechaPago() == "") {
 					valida = false;
+					msg1 = " Fecha de pago vacia !";
+				}
+				if (fechasPagos.getPeriodo() == "") {
+					valida = false;
+					msg4 = " Periodo de pago vacio !";
+				}
+				Listado.add(fechasPagos.getPeriodo());
+
+				if (valida) {
+					if (difM != contadorPeriodo) {
+						valida = false;
+						msg3 = " La cantidad de meses de periodos de pagos, no son iguales a los meses de fecha inicio y fin del contrato !";
+					}
+
+					Set<String> miSet = new HashSet<String>(Listado);
+					for (String s : miSet) {
+
+						int duplicado = Collections.frequency(Listado, s);
+						System.out.print(duplicado);
+						if (duplicado > 1) {
+							valida = false;
+							msg2 = " Existen periodos repetidos !";
+						}
+					}
 				}
 			}
+		} catch (ParseException ex) {
+			System.out.println(ex);
 		}
-		return valida;
+
+		if (!valida) {
+			msgError = "El archivo contiene los siguientes errores: " + msg3 + " " + msg2 + " " + msg1 + "" + msg4 + ""
+					+ msg5;
+		}
+
+		return msgError;
 	}
 
 	public List<CantidadRequest> createListCantidad(MultipartFile file) {
@@ -373,6 +422,7 @@ public class ContratosController {
 							data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14],
 							data[15], data[16], data[17], data[18], data[19], data[20], data[21], data[22], data[23],
 							data[24]);
+					System.out.println(newItem.toString());
 					listCantidad.add(newItem);
 				}
 				i++;
@@ -383,6 +433,7 @@ public class ContratosController {
 			return listCantidad;
 		}
 	}
+
 
 	public List<FechasPagosRequest> createListFechaPagos(MultipartFile file) {
 		List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
@@ -401,7 +452,7 @@ public class ContratosController {
 			return listFechaPagos;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return listFechaPagos;
+			return null;
 		}
 	}
 
