@@ -22,6 +22,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -338,8 +339,81 @@ public class ContratosController {
 	}
 
 	public String validateCantidades(String fechaInicio, String fechaFinal, List<CantidadRequest> listCantidad) {
-		
-		//TODO: VALIDAR CANTIDADES
+		try {
+			Date dateFechaInicio = new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio);
+			Date dateFechaFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFinal);
+			long diff = dateFechaFin.getTime() - dateFechaInicio.getTime();
+			long dias = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+			// LE SUMAMOS UNO YA QUE EL CALCULO NO CUENTA LA PRIMERA FECHA SI NO LOS DIAS
+			// QUE HAY ENTRE LAS FECHAS
+			dias = (dias + 1);
+			// validamos que la cantidad de dias sea igual a la cantidad de registros
+			if (dias != listCantidad.size()) {
+				System.out.println("dias: " + dias + " lista size: " + listCantidad.size());
+				return "La cantidad de dias es diferente a la cantidad de registros del archivo";
+			} else {
+				// validamos que no haya un elemento repetido
+				for (int i = 0; i < listCantidad.size(); i++) {
+					// VALIDAMOS QUE NO HAYA NINGUNA FECHA VACIA O NULA
+					if (listCantidad.get(i).getFecha().equals("") || listCantidad.get(i).getFecha() == null) {
+						return "Hay una fecha vacia o nula";
+					}
+					// VALIDAMOS QUE LA FECHA TENGA EL FORMATO ESPERADO
+					if (!(Pattern.matches("^(?:3[01]|[12][0-9]|0?[1-9])([/])(0?[1-9]|1[1-2])\\1\\d{4}$",
+							listCantidad.get(i).getFecha()))) {
+						return "En la columna fecha hay un valor " + listCantidad.get(i).getFecha()
+								+ " que no tiene el formato de fecha esperado dd/MM/yyyy";
+					}
+					// BUSCAMOS LA DUPLICIDAD
+					for (int j = i + 1; j < listCantidad.size(); j++) {
+						if (listCantidad.get(i).getFecha().equals(listCantidad.get(j).getFecha())) {
+							return "Hay una fecha duplicada en el archivo";
+						}
+					}
+				}
+				// validamos si las fechas estan dentro del rango de fecha incio a fin
+				for (CantidadRequest cantidadRequest : listCantidad) {
+					Date dateFechaItem = new SimpleDateFormat("dd/MM/yyyy").parse(cantidadRequest.getFecha());
+					if (!(dateFechaItem.after(dateFechaInicio) && dateFechaItem.before(dateFechaFin))
+							&& dateFechaItem.compareTo(dateFechaInicio) != 0
+							&& dateFechaItem.compareTo(dateFechaFin) != 0) {
+						return "Hay una fecha que no pertenece al rango de las fechas de inicio y fin";
+					} else {
+						// VALIDAMOS QUE LAS HORAS NO ESTEN VACIAS O SEAN NULAS
+						if ((cantidadRequest.getH1() == null || (cantidadRequest.getH1().equals("")))
+								|| (cantidadRequest.getH2() == null || (cantidadRequest.getH2().equals("")))
+								|| (cantidadRequest.getH3() == null || (cantidadRequest.getH3().equals("")))
+								|| (cantidadRequest.getH4() == null || (cantidadRequest.getH4().equals("")))
+								|| (cantidadRequest.getH5() == null || (cantidadRequest.getH5().equals("")))
+								|| (cantidadRequest.getH6() == null || (cantidadRequest.getH6().equals("")))
+								|| (cantidadRequest.getH7() == null || (cantidadRequest.getH7().equals("")))
+								|| (cantidadRequest.getH8() == null || (cantidadRequest.getH8().equals("")))
+								|| (cantidadRequest.getH9() == null || (cantidadRequest.getH9().equals("")))
+								|| (cantidadRequest.getH10() == null || (cantidadRequest.getH10().equals("")))
+								|| (cantidadRequest.getH11() == null || (cantidadRequest.getH11().equals("")))
+								|| (cantidadRequest.getH12() == null || (cantidadRequest.getH12().equals("")))
+								|| (cantidadRequest.getH13() == null || (cantidadRequest.getH13().equals("")))
+								|| (cantidadRequest.getH14() == null || (cantidadRequest.getH14().equals("")))
+								|| (cantidadRequest.getH15() == null || (cantidadRequest.getH15().equals("")))
+								|| (cantidadRequest.getH16() == null || (cantidadRequest.getH16().equals("")))
+								|| (cantidadRequest.getH17() == null || (cantidadRequest.getH17().equals("")))
+								|| (cantidadRequest.getH18() == null || (cantidadRequest.getH18().equals("")))
+								|| (cantidadRequest.getH19() == null || (cantidadRequest.getH19().equals("")))
+								|| (cantidadRequest.getH20() == null || (cantidadRequest.getH20().equals("")))
+								|| (cantidadRequest.getH21() == null || (cantidadRequest.getH21().equals("")))
+								|| (cantidadRequest.getH22() == null || (cantidadRequest.getH22().equals("")))
+								|| (cantidadRequest.getH23() == null || (cantidadRequest.getH23().equals("")))
+								|| (cantidadRequest.getH24() == null || (cantidadRequest.getH24().equals("")))) {
+							return "La fecha " + dateFechaItem.toString() + " tiene horas vacias";
+						}
+
+					}
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "Hay un error al procesar el archivo " + e.toString();
+		}
 		return null;
 	}
 
@@ -422,7 +496,6 @@ public class ContratosController {
 							data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14],
 							data[15], data[16], data[17], data[18], data[19], data[20], data[21], data[22], data[23],
 							data[24]);
-					System.out.println(newItem.toString());
 					listCantidad.add(newItem);
 				}
 				i++;
