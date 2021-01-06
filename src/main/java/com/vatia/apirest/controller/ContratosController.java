@@ -7,10 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -287,7 +291,7 @@ public class ContratosController {
 	@PostMapping("/validate_file")
 	public ResponseEntity<ResponseHTTP> validateFile(@RequestParam("files") MultipartFile[] files,
 			@RequestParam String obj) {
-		Boolean status = false;
+		String status = null;
 		try {
 			Gson g = new Gson();
 			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
@@ -298,17 +302,14 @@ public class ContratosController {
 				if (!file.isEmpty()) {
 					if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
 						listCantidad.addAll(createListCantidad(file));
-						// TODO: VALIDAR ARCHIVO
-
 					}
 					if ((file.getOriginalFilename().toLowerCase()).substring(0, 10).equals("fechaspago")) {
 						listFechaPagos.addAll(createListFechaPagos(file));
-						// TODO: VALIDAR ARCHIVO
 					}
 				}
 			});
 			if (listCantidad.size() > 0) {
-				status = validateCantidades("", "", listCantidad);
+				status = validateCantidades(cr.getFechaInicioContrato(), cr.getFechaFinContrato(), listCantidad);
 			}
 			if (listFechaPagos.size() > 0) {
 				status = validateFechaPagos(listFechaPagos);
@@ -319,22 +320,22 @@ public class ContratosController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		return status ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+		return status == null ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), status),
 						HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 
-	public Boolean validateCantidades(String fechaInicio, String fechaFinal, List<CantidadRequest> listCantidad) {
-
-		// TODO: TODAS LAS VALIDACIONES
-		return false;
+	public String validateCantidades(String fechaInicio, String fechaFinal, List<CantidadRequest> listCantidad) {
+		
+		//TODO: VALIDAR CANTIDADES
+		return null;
 	}
 
-	public Boolean validateFechaPagos(List<FechasPagosRequest> listFechaPagos) {
+	public String validateFechaPagos(List<FechasPagosRequest> listFechaPagos) {
 
 		// TODO: TODAS LAS VALIDACIONES
-		return false;
+		return null;
 	}
 
 	public List<CantidadRequest> createListCantidad(MultipartFile file) {
@@ -350,6 +351,7 @@ public class ContratosController {
 							data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14],
 							data[15], data[16], data[17], data[18], data[19], data[20], data[21], data[22], data[23],
 							data[24]);
+					System.out.println(newItem.toString());
 					listCantidad.add(newItem);
 				}
 				i++;
