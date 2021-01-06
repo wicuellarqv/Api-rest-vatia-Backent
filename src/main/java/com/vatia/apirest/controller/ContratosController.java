@@ -419,16 +419,9 @@ public class ContratosController {
 
 	public String validateFechaPagos(String fechaInicio, String fechaFinal, List<FechasPagosRequest> listFechaPagos) {
 		Boolean valida = true;
-		String msg1 = "";
-		String msg2 = "";
-		String msg3 = "";
-		String msg4 = "";
-		String msg5 = "";
 		String msgError = null;
 		int contadorPeriodo = 0;
-		boolean res=true;
 		ArrayList<String> Listado = new ArrayList<String>();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		
         try {
 			Calendar inicio = new GregorianCalendar();
@@ -438,46 +431,53 @@ public class ContratosController {
             int difA = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
             int difM = difA * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH)+1;
             System.out.println(difM);
+            
+			for (int i = 0; i < listFechaPagos.size(); i++) {
+				// VALIDAMOS QUE NO HAYA NINGUNA FECHA VACIA O NULA
+				if (listFechaPagos.get(i).getFechaPago().equals("") || listFechaPagos.get(i).getFechaPago() == null) {
+					return "Hay una fecha vacia o nula";
+				}
+				// VALIDAMOS QUE LA FECHA TENGA EL FORMATO ESPERADO
+				if (!(Pattern.matches("^(?:3[01]|[12][0-9]|0?[1-9])([/])(0?[1-9]|1[1-2])\\1\\d{4}$",
+						listFechaPagos.get(i).getFechaPago()))) {
+					return "En la columna fecha Pago hay un valor " + listFechaPagos.get(i).getFechaPago()
+							+ " que no tiene el formato de fecha esperado dd/MM/yyyy";
+				}
+			}
 
-
-
+			// VALIDAMOS QUE FECHA Y PERIODO NO ESTE VACIO
 			for (FechasPagosRequest fechasPagos : listFechaPagos) {
 				contadorPeriodo++;
-				if (fechasPagos.getFechaPago() == "") {
-					valida = false;
-					msg1 = " Fecha de pago vacia !";
-				}
 				if (fechasPagos.getPeriodo() == "") {
 					valida = false;
-					msg4 = " Periodo de pago vacio !";
+					return " Periodo de pago vacio !";
 				}
 				Listado.add(fechasPagos.getPeriodo());
+			}
 
-				if (valida) {
-					if (difM != contadorPeriodo) {
+			// La cantidad de meses de periodos de pagos, no son iguales a los meses de
+			// fecha inicio y fin del contrato
+			if (valida) {
+				if (difM != contadorPeriodo) {
+					valida = false;
+					return " La cantidad de meses de periodos de pagos, no son iguales a los meses de fecha inicio y fin del contrato !";
+				}
+
+				// VALIDAMOS DUPLICADOS
+				Set<String> miSet = new HashSet<String>(Listado);
+				for (String s : miSet) {
+
+					int duplicado = Collections.frequency(Listado, s);
+					System.out.print(duplicado);
+					if (duplicado > 1) {
 						valida = false;
-						msg3 = " La cantidad de meses de periodos de pagos, no son iguales a los meses de fecha inicio y fin del contrato !";
-					}
-
-					Set<String> miSet = new HashSet<String>(Listado);
-					for (String s : miSet) {
-
-						int duplicado = Collections.frequency(Listado, s);
-						System.out.print(duplicado);
-						if (duplicado > 1) {
-							valida = false;
-							msg2 = " Existen periodos repetidos !";
-						}
+						return " Existen periodos repetidos !";
 					}
 				}
 			}
+
 		} catch (ParseException ex) {
 			System.out.println(ex);
-		}
-
-		if (!valida) {
-			msgError = "El archivo contiene los siguientes errores: " + msg3 + " " + msg2 + " " + msg1 + "" + msg4 + ""
-					+ msg5;
 		}
 
 		return msgError;
