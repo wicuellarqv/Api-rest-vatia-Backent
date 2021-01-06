@@ -9,8 +9,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -289,8 +292,6 @@ public class ContratosController {
 			@RequestParam String obj) {
 		Boolean status = false;
 		try {
-			Gson g = new Gson();
-			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
 			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
 			List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
 
@@ -319,8 +320,8 @@ public class ContratosController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		return status ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+		return status ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), status), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), status),
 						HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
@@ -333,8 +334,30 @@ public class ContratosController {
 
 	public Boolean validateFechaPagos(List<FechasPagosRequest> listFechaPagos) {
 
-		// TODO: TODAS LAS VALIDACIONES
-		return false;
+		Boolean valida = true;
+		ArrayList<String> Listado = new ArrayList<String>();
+
+		for (FechasPagosRequest fechasPagos : listFechaPagos) {
+			if (fechasPagos.getFechaPago() == "") {
+				valida = false;
+			}
+			if (fechasPagos.getPeriodo() == "") {
+				valida = false;
+			}
+			Listado.add(fechasPagos.getPeriodo());
+		}
+
+		if (valida) {
+			Set<String> miSet = new HashSet<String>(Listado);
+			for (String s : miSet) {
+
+				int duplicado = Collections.frequency(Listado, s);
+				if (duplicado > 1) {
+					valida = false;
+				}
+			}
+		}
+		return valida;
 	}
 
 	public List<CantidadRequest> createListCantidad(MultipartFile file) {
