@@ -266,21 +266,27 @@ public class ContratosController {
 	 **/
 
 	@PostMapping("/saveContrato")
-	public ResponseEntity<ResponseHTTP> testFile(@RequestParam("files") MultipartFile[] files,
-			@RequestParam String obj) {
+	public ResponseEntity<ResponseHTTP> validateFile(@RequestParam("filesFpago") MultipartFile[] filesFpago,
+			@RequestParam("filesCantidad") MultipartFile[] filesCantidad, @RequestParam String obj) {
 		SaveResponse saveResponse = new SaveResponse();
 		try {
 			Gson g = new Gson();
 			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
 			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
 			List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
-			Arrays.asList(files).stream().forEach(file -> {
+			
+			Arrays.asList(filesFpago).stream().forEach(file -> {
+				if (!file.isEmpty()) {
+					if ((file.getOriginalFilename().toLowerCase()).substring(0, 10).equals("fechaspago")) {
+						listFechaPagos.addAll(createListFechaPagos(file));
+					}
+				}
+			});
+			
+			Arrays.asList(filesCantidad).stream().forEach(file -> {
 				if (!file.isEmpty()) {
 					if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
 						listCantidad.addAll(createListCantidad(file));
-					}
-					if ((file.getOriginalFilename().toLowerCase()).substring(0, 10).equals("fechaspago")) {
-						listFechaPagos.addAll(createListFechaPagos(file));
 					}
 				}
 			});
@@ -318,7 +324,8 @@ public class ContratosController {
 						listFechaPagos.addAll(createListFechaPagos(file));
 					}
 				}
-			});
+			});			
+			
 			if (listCantidad.size() > 0) {
 				status = validateCantidades(cr.getFechaInicioContrato(), cr.getFechaFinContrato(), listCantidad);
 			}

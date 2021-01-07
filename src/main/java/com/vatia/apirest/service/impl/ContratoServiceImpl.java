@@ -182,31 +182,31 @@ public class ContratoServiceImpl implements ContratoService {
 			// Set de campos basicos en la tabla de contratos
 			
 			
-			if (contratosRequest.getTipoMercado() != "") {
+			if (contratosRequest.getTipoMercado() != null) {
 				ContratosList.setIdTipoMercado(Integer.parseInt(contratosRequest.getTipoMercado()));
 			}
-			if (contratosRequest.getEstadoContrato() != "") {
+			if (contratosRequest.getEstadoContrato() != null) {
 				ContratosList.setEstadoContrato(contratosRequest.getEstadoContrato());
 			}
-			if (contratosRequest.getTipoContrato() != "") {
+			if (contratosRequest.getTipoContrato() != null) {
 				ContratosList.setIdTipoContrato(Integer.parseInt(contratosRequest.getTipoContrato()));
 			}
-			if (contratosRequest.getNegociacionContrato() != "") {
+			if (contratosRequest.getNegociacionContrato() != null) {
 				ContratosList.setIdNegContrato(Integer.parseInt(contratosRequest.getNegociacionContrato()));
 			}
-			if (contratosRequest.getFechaInicioContrato() != "") {
+			if (contratosRequest.getFechaInicioContrato() != null) {
 				ContratosList.setFecPeriodoInicio(contratosRequest.getFechaInicioContrato());
 			}
-			if (contratosRequest.getFechaFinContrato() != "") {
+			if (contratosRequest.getFechaFinContrato() != null) {
 				ContratosList.setFecPeriodoFin(contratosRequest.getFechaFinContrato());
 			}		
-			if (contratosRequest.getContratoSic() != "") {
+			if (contratosRequest.getContratoSic() != null) {
 				ContratosList.setCodSicContrato(contratosRequest.getContratoSic());
 			}			
-			if (contratosRequest.getContratoDocumento() != "") {
+			if (contratosRequest.getContratoDocumento() != null) {
 				ContratosList.setDocContacto(contratosRequest.getContratoDocumento());
 			}	
-			if (contratosRequest.getNumContrato() != "") {
+			if (contratosRequest.getNumContrato() != null) {
 				ContratosList.setNumContrato(Integer.parseInt(contratosRequest.getNumContrato()));
 			}				
 			if (contratosRequest.getCod_SIC_comprador()!= "") {
@@ -223,19 +223,19 @@ public class ContratoServiceImpl implements ContratoService {
 				ContratosList.setIdAgenteVendedor(agentesComerciales.getIdAgenteCcial());
 			}
 			
-			if (contratosRequest.getCondicionTipoContrato() != "") {
+			if (contratosRequest.getCondicionTipoContrato() != null) {
 				ContratosList.setIdCondicionTipoContrato(Integer.parseInt(contratosRequest.getCondicionTipoContrato()));
 			}
-			if (contratosRequest.getFechaFirma() != "") {
+			if (contratosRequest.getFechaFirma() != null) {
 				ContratosList.setFechaFirmaContrato(contratosRequest.getFechaFirma());
 			}
-			if (contratosRequest.getNombreCliente() != "") {
+			if (contratosRequest.getNombreCliente() != null) {
 				ContratosList.setNombreContacto(contratosRequest.getNombreCliente());
 			}
-			if (contratosRequest.getEmailContacto() != "") {
+			if (contratosRequest.getEmailContacto() != null) {
 				ContratosList.setEmailContacto(contratosRequest.getEmailContacto());
 			}
-			if (contratosRequest.getTipoContrato() != "") {
+			if (contratosRequest.getTipoContrato() != null) {
 				ContratosList.setTelContacto(contratosRequest.getTipoContrato());
 			}
 			
