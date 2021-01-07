@@ -340,8 +340,8 @@ public class ContratosController {
 
 	public String validateCantidades(String fechaInicio, String fechaFinal, List<CantidadRequest> listCantidad) {
 		try {
-			Date dateFechaInicio = new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio);
-			Date dateFechaFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFinal);
+			Date dateFechaInicio = new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicio);
+			Date dateFechaFin = new SimpleDateFormat("yyyy-MM-dd").parse(fechaFinal);
 			long diff = dateFechaFin.getTime() - dateFechaInicio.getTime();
 			long dias = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 			// LE SUMAMOS UNO YA QUE EL CALCULO NO CUENTA LA PRIMERA FECHA SI NO LOS DIAS
