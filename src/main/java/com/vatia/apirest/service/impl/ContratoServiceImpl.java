@@ -20,6 +20,7 @@ import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.CantidadesContratos;
 import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.Contratos;
+import com.vatia.apirest.model.FechasPagoContratos;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.GarantiasContratos;
 import com.vatia.apirest.model.ModalidadesContratos;
@@ -35,6 +36,7 @@ import com.vatia.apirest.repository.AgenteComercialRepository;
 import com.vatia.apirest.repository.CTContratoRepository;
 import com.vatia.apirest.repository.CantidadRepository;
 import com.vatia.apirest.repository.ContratosRepository;
+import com.vatia.apirest.repository.FechaPagoContratoRepository;
 import com.vatia.apirest.repository.FormulaPrecioRepository;
 import com.vatia.apirest.repository.GarantiaRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
@@ -96,6 +98,9 @@ public class ContratoServiceImpl implements ContratoService {
 	
 	@Autowired
 	private NegocioContratoRepository negocioContratoRepository;	
+	
+	@Autowired
+	private FechaPagoContratoRepository fechaPagoContratoRepository;
 
 	@Override
 	public List<TiposMercados> getAllTipoMercado() {
@@ -167,7 +172,8 @@ public class ContratoServiceImpl implements ContratoService {
 		List<GarantiasRequest> listaGarantiasContratos = new ArrayList<GarantiasRequest>();
 		List<PreciosRequest> listaPreciosRequest = new ArrayList<PreciosRequest>();
 		PreciosContratos preciosContratoN = new PreciosContratos();	
-		CantidadesContratos cantidadesContratosN = new CantidadesContratos();		
+		CantidadesContratos cantidadesContratosN = new CantidadesContratos();
+		FechasPagoContratos fechasPagoContratosN = new FechasPagoContratos();
 		GarantiasContratos garantiasContratosN = new GarantiasContratos();		
 
 
@@ -420,6 +426,23 @@ public class ContratoServiceImpl implements ContratoService {
 						cantidadesContratosN.setCantidadH24(new BigDecimal(LCantidadRequest.getH24().replaceAll(",", ".")));					
 					}
 					cantidadRepository.save(cantidadesContratosN);
+				}
+			}
+			
+			// inset tabla fechas de pago
+			if (listFechaPagosRequestFile.size() > 0) {
+				for (FechasPagosRequest fechasPagosRequest : listFechaPagosRequestFile) {
+					fechasPagoContratosN.setIdFechaPago(0);
+					if (fechasPagosRequest.getFechaPago() != null) {
+						fechasPagoContratosN.setFechaPagoPeriodo(fechasPagosRequest.getFechaPago());
+					}
+					if (fechasPagosRequest.getPeriodo() != null) {
+						fechasPagoContratosN.setPeriodoPago(fechasPagosRequest.getPeriodo());
+					}
+					if (contrato.getIdContrato() != null) {
+						fechasPagoContratosN.setIdContrato(contrato.getIdContrato());
+					}
+					fechaPagoContratoRepository.save(fechasPagoContratosN);
 				}
 			}
 			
