@@ -68,20 +68,16 @@ public class Contratos implements Serializable {
     @Basic(optional = false)
     @Column(name = "str_estado")
     private String estadoContrato;
-        
-    @Basic(optional = false)
+
     @Column(name = "str_nombre_contacto")
     private String nombreContacto;
     
-    @Basic(optional = false)
     @Column(name = "str_tel_contacto")
     private String telContacto;
     
-    @Basic(optional = false)
     @Column(name = "str_email_contacto")
     private String emailContacto;
-    
-    @Basic(optional = false)
+
     @Column(name = "str_fecha_firma")
     private String fechaFirmaContrato;
     
