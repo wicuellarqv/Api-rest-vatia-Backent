@@ -55,6 +55,7 @@ import com.vatia.apirest.service.ContratoService;
 import com.vatia.apirest.utils.CantidadRequest;
 import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.utils.FechasPagosRequest;
+import com.vatia.apirest.utils.fechaContratoRequest;
 import com.vatia.apirest.response.ResponseHTTP;
 import org.springframework.http.HttpStatus;
 
@@ -304,7 +305,7 @@ public class ContratosController {
 		String status = null;
 		try {
 			Gson g = new Gson();
-			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
+			fechaContratoRequest cr = g.fromJson(obj, fechaContratoRequest.class);
 			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
 			List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
 
