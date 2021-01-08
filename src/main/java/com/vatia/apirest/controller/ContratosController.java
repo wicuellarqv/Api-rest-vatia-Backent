@@ -462,7 +462,25 @@ public class ContratosController {
 				}
 				Listado.add(fechasPagos.getPeriodo());
 			}
+			
+			Date dateFechaInicio = new SimpleDateFormat("yyyy-MM-dd").parse(fechaInicio);
+			Date dateFechaFin = new SimpleDateFormat("yyyy-MM-dd").parse(fechaFinal);
+			long diff = dateFechaFin.getTime() - dateFechaInicio.getTime();
+			long dias = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+			// LE SUMAMOS UNO YA QUE EL CALCULO NO CUENTA LA PRIMERA FECHA SI NO LOS DIAS
+			// QUE HAY ENTRE LAS FECHAS
+			dias = (dias + 1);
 
+			// validamos si las fechas estan dentro del rango de fecha incio a fin
+			for (FechasPagosRequest fechasPagosRequest : listFechaPagos) {
+				Date dateFechaItem = new SimpleDateFormat("dd/MM/yyyy").parse(fechasPagosRequest.getPeriodo());
+				if (!(dateFechaItem.after(dateFechaInicio) && dateFechaItem.before(dateFechaFin))
+						&& dateFechaItem.compareTo(dateFechaInicio) != 0
+						&& dateFechaItem.compareTo(dateFechaFin) != 0) {
+					return "Hay una fecha que no pertenece al rango de las fechas de inicio y fin";
+				}
+			}
+			
 			// La cantidad de meses de periodos de pagos, no son iguales a los meses de
 			// fecha inicio y fin del contrato
 			if (valida) {
