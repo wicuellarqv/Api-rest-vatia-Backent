@@ -235,8 +235,8 @@ public class ContratoServiceImpl implements ContratoService {
 			if (contratosRequest.getEmailContacto() != null) {
 				ContratosList.setEmailContacto(contratosRequest.getEmailContacto());
 			}
-			if (contratosRequest.getTipoContrato() != null) {
-				ContratosList.setTelContacto(contratosRequest.getTipoContrato());
+			if (contratosRequest.getTelefonoContacto() != null) {
+				ContratosList.setTelContacto(contratosRequest.getTelefonoContacto());
 			}
 			
 	        String llave="";
