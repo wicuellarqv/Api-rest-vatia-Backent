@@ -35,6 +35,7 @@ import com.vatia.apirest.model.TiposGarantias;
 import com.vatia.apirest.repository.AgenteComercialRepository;
 import com.vatia.apirest.repository.CTContratoRepository;
 import com.vatia.apirest.repository.CantidadRepository;
+import com.vatia.apirest.repository.ConsultaRepository;
 import com.vatia.apirest.repository.ContratosRepository;
 import com.vatia.apirest.repository.FechaPagoContratoRepository;
 import com.vatia.apirest.repository.FormulaPrecioRepository;
@@ -161,7 +162,7 @@ public class ContratoServiceImpl implements ContratoService {
 		// TODO Auto-generated method stub
 		return this.negocioContratoRepository.findAll();
 	}
-
+	
 	@Override
 	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequestFile,
 			List<FechasPagosRequest> listFechaPagosRequestFile) {

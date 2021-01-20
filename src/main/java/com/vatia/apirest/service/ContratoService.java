@@ -41,5 +41,4 @@ public interface ContratoService {
 
 	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequest,
 			List<FechasPagosRequest> listFechaPagosRequest);
-
 }
