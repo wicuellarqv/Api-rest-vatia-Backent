@@ -35,6 +35,7 @@ import com.vatia.apirest.model.TiposGarantias;
 import com.vatia.apirest.repository.AgenteComercialRepository;
 import com.vatia.apirest.repository.CTContratoRepository;
 import com.vatia.apirest.repository.CantidadRepository;
+import com.vatia.apirest.repository.ConsultaRepository;
 import com.vatia.apirest.repository.ContratosRepository;
 import com.vatia.apirest.repository.FechaPagoContratoRepository;
 import com.vatia.apirest.repository.FormulaPrecioRepository;
@@ -154,6 +155,23 @@ public class ContratoServiceImpl implements ContratoService {
 	public AgentesComerciales getAllSicAgenteComercial(String valor) {
 		// TODO Auto-generated method stub
 		return this.agenteComercialRepository.findAllCod(valor);
+	}	
+
+	@Override
+	public String deleteContrato(Integer id) {
+		// TODO Auto-generated method stub
+		try {
+			if (id != null) {
+				garantiaRepository.deleteId(id);
+				cantidadRepository.deleteId(id);
+				fechaPagoContratoRepository.deleteId(id);
+				precioContratoRepository.deleteId(id);
+				ContratosRepository.deleteId(id);
+			}
+		} catch (Exception e) {
+			return "Error al eliminar el contrato : "+id + " causa: " + e;
+		}
+		return null;
 	}
 	
 	@Override
@@ -161,7 +179,7 @@ public class ContratoServiceImpl implements ContratoService {
 		// TODO Auto-generated method stub
 		return this.negocioContratoRepository.findAll();
 	}
-
+	
 	@Override
 	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequestFile,
 			List<FechasPagosRequest> listFechaPagosRequestFile) {
