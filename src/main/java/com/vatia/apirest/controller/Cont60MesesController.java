@@ -79,15 +79,15 @@ public class Cont60MesesController {
 					// CREAR EL OBJETO CONTRATO
 					newContratos60Meses = contratos60MesesService.saveContrato60Meses(contratos60MesesRequest);
 					// CREAR LA LISTA DE PRECIOS
-					if(contratos60MesesRequest.getPrecios60Meses().size() > 0) {
+					if (contratos60MesesRequest.getPrecios60Meses().size() > 0) {
 						for (Precios60Meses itemPrecio : contratos60MesesRequest.getPrecios60Meses()) {
 							itemPrecio.setContratos60Meses(newContratos60Meses);
 							contratos60MesesService.savePrecios60Meses(itemPrecio);
 						}
 					}
-					
+
 					// CREAR LA LISTA DE CANTIDADES
-					if(contratos60MesesRequest.getCantidad60Meses().size() > 0) {
+					if (contratos60MesesRequest.getCantidad60Meses().size() > 0) {
 						for (Cantidad60Meses itemCantidad : contratos60MesesRequest.getCantidad60Meses()) {
 							itemCantidad.setContratos60Meses(newContratos60Meses);
 							contratos60MesesService.saveCantidad60Meses(itemCantidad);
@@ -97,7 +97,7 @@ public class Cont60MesesController {
 					Integer idContrato = findContratos60Meses.getId();
 					Contratos60Meses contrato = new Contratos60Meses();
 					contrato.setId(idContrato);
-					System.out.println("actualizar contrato "+idContrato);
+					System.out.println("actualizar contrato " + idContrato);
 					if (contratos60MesesRequest.getCantidad60Meses().size() > 0) {
 						for (Cantidad60Meses cantidad60MesesRequest : contratos60MesesRequest.getCantidad60Meses()) {
 							Cantidad60Meses cantidad60MesesFind = contratos60MesesService
@@ -108,12 +108,16 @@ public class Cont60MesesController {
 								newCantidad60Meses.setContratos60Meses(contrato);
 								contratos60MesesService.saveCantidad60Meses(newCantidad60Meses);
 							} else {
-								Cantidad60Meses updateCantidad60Meses = new Cantidad60Meses();
-								updateCantidad60Meses.setDtmPeriodo(cantidad60MesesFind.getDtmPeriodo());
-								updateCantidad60Meses.setId(cantidad60MesesFind.getId());
-								updateCantidad60Meses.setNumCantidadPeriodo(cantidad60MesesRequest.getNumCantidadPeriodo());
-								updateCantidad60Meses.setContratos60Meses(contrato);
-								contratos60MesesService.saveCantidad60Meses(updateCantidad60Meses);
+								if (!(cantidad60MesesFind.getNumCantidadPeriodo()
+										.equals(cantidad60MesesRequest.getNumCantidadPeriodo()))) {
+									Cantidad60Meses updateCantidad60Meses = new Cantidad60Meses();
+									updateCantidad60Meses.setDtmPeriodo(cantidad60MesesFind.getDtmPeriodo());
+									updateCantidad60Meses.setId(cantidad60MesesFind.getId());
+									updateCantidad60Meses
+											.setNumCantidadPeriodo(cantidad60MesesRequest.getNumCantidadPeriodo());
+									updateCantidad60Meses.setContratos60Meses(contrato);
+									contratos60MesesService.saveCantidad60Meses(updateCantidad60Meses);
+								}
 							}
 						}
 					}
@@ -127,12 +131,16 @@ public class Cont60MesesController {
 								newPrecios60Meses.setContratos60Meses(contrato);
 								contratos60MesesService.savePrecios60Meses(newPrecios60Meses);
 							} else {
-								Precios60Meses updatePrecios60Meses = new Precios60Meses();
-								updatePrecios60Meses.setDtmPeriodo(precio60MesesFind.getDtmPeriodo());
-								updatePrecios60Meses.setId(precio60MesesFind.getId());
-								updatePrecios60Meses.setNumPrecioPeriodo(precios60MesesRequest.getNumPrecioPeriodo());
-								updatePrecios60Meses.setContratos60Meses(contrato);
-								contratos60MesesService.savePrecios60Meses(updatePrecios60Meses);
+								if (!(precio60MesesFind.getNumPrecioPeriodo()
+										.equals(precios60MesesRequest.getNumPrecioPeriodo()))) {
+									Precios60Meses updatePrecios60Meses = new Precios60Meses();
+									updatePrecios60Meses.setDtmPeriodo(precio60MesesFind.getDtmPeriodo());
+									updatePrecios60Meses.setId(precio60MesesFind.getId());
+									updatePrecios60Meses
+											.setNumPrecioPeriodo(precios60MesesRequest.getNumPrecioPeriodo());
+									updatePrecios60Meses.setContratos60Meses(contrato);
+									contratos60MesesService.savePrecios60Meses(updatePrecios60Meses);
+								}
 							}
 						}
 					}
@@ -147,8 +155,10 @@ public class Cont60MesesController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return newContratos60Meses.getId() == 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-						"Hay un error en el procesamiento de la data de 60 meses"), HttpStatus.INTERNAL_SERVER_ERROR)
+				? new ResponseEntity<>(
+						new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+								"Hay un error en el procesamiento de la data de 60 meses"),
+						HttpStatus.INTERNAL_SERVER_ERROR)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), null), HttpStatus.OK);
 
 	}
