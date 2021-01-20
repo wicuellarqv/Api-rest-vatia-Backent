@@ -38,6 +38,8 @@ public interface ContratoService {
 	public List<NegociacionesContratos> getAllNegocioContrato();
 
 	public AgentesComerciales getAllSicAgenteComercial(String valor);
+	
+	public String deleteContrato(Integer valor);	
 
 	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequest,
 			List<FechasPagosRequest> listFechaPagosRequest);

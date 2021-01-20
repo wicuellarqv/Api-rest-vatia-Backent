@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -244,26 +245,23 @@ public class ContratosController {
 
 	}
 
-	/**
-	 * @PostMapping("/saveContrato") public ResponseEntity<ResponseHTTP>
-	 * saveContrato(
-	 * 
-	 * @RequestBody ContratosRequest contratosRequest ) { SaveResponse saveResponse
-	 *              = new SaveResponse();
-	 * 
-	 *              try { saveResponse =
-	 *              contratoService.saveContrato(contratosRequest);
-	 * 
-	 *              } catch (Exception e) { return new ResponseEntity<>(new
-	 *              ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
-	 *              HttpStatus.INTERNAL_SERVER_ERROR); } return saveResponse != null
-	 *              ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(),
-	 *              saveResponse), HttpStatus.OK) : new ResponseEntity<>(new
-	 *              ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse),
-	 *              HttpStatus.NOT_FOUND);
-	 * 
-	 *              }
-	 **/
+	@DeleteMapping ("/deleteContrato")
+	public ResponseEntity<ResponseHTTP> deleteContrato(@RequestParam Integer idContrato) {
+		String status = null;
+		try {
+			
+			status = contratoService.deleteContrato(idContrato);
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return status == null ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), status), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), status),
+						HttpStatus.INTERNAL_SERVER_ERROR);
+
+	}
 
 	@PostMapping("/saveContrato")
 	public ResponseEntity<ResponseHTTP> validateFile(@RequestParam("filesFpago") MultipartFile[] filesFpago,

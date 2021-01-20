@@ -154,6 +154,23 @@ public class ContratoServiceImpl implements ContratoService {
 	public AgentesComerciales getAllSicAgenteComercial(String valor) {
 		// TODO Auto-generated method stub
 		return this.agenteComercialRepository.findAllCod(valor);
+	}	
+
+	@Override
+	public String deleteContrato(Integer id) {
+		// TODO Auto-generated method stub
+		try {
+			if (id != null) {
+				garantiaRepository.deleteId(id);
+				cantidadRepository.deleteId(id);
+				fechaPagoContratoRepository.deleteId(id);
+				precioContratoRepository.deleteId(id);
+				ContratosRepository.deleteId(id);
+			}
+		} catch (Exception e) {
+			return "Error al eliminar el contrato : "+id + " causa: " + e;
+		}
+		return null;
 	}
 	
 	@Override
