@@ -30,7 +30,7 @@ public class Cliente implements Serializable {
 	@Column(name="CODIGO_SIC",updatable = false, insertable= false)
 	private String CODIGO_SIC;
 	@Column(name="NOMBRE_RAZON_SOCIAL",updatable = false, insertable= false)
-	private String NOMBRE_RAZON_SOCIAL;
+	private String nombreRazonSocial;
 	@Column(name="NOMBRE_FACTURACION",updatable = false, insertable= false)
 	private String nombreFacturacion;
 	@Column(name="FECHA_SISTEMA",updatable = false, insertable= false)
@@ -77,10 +77,10 @@ public class Cliente implements Serializable {
 	
 	public Cliente() {};
 	
-	public Cliente(String iD_CLIENTE, String iD_INTERNO, String nIT_CEDULA, String cODIGO_SIC,
-			String nOMBRE_RAZON_SOCIAL, String nOMBRE_FACTURACION, String fECHA_SISTEMA, String iD_ESTADO_CLI,
-			String fECHA_ESTADO_CLI, String iD_ESTADO_HIS_MER, String fECHA_ESTADO_HIS_MER, String nOM_ESTADO_HIS_MER,
-			String iD_GR_CLI, String nOM_GR_CLI, String iD_MUNICIPIO, String nOM_MUNICIPIO, String iD_DEPARTAMENTO,
+	public Cliente(String iD_CLIENTE, String iD_INTERNO, String nIT_CEDULA, String cODIGO_SIC, String nombreRazonSocial,
+			String nombreFacturacion, String fECHA_SISTEMA, String iD_ESTADO_CLI, String fECHA_ESTADO_CLI,
+			String iD_ESTADO_HIS_MER, String fECHA_ESTADO_HIS_MER, String nOM_ESTADO_HIS_MER, String iD_GR_CLI,
+			String nOM_GR_CLI, String iD_MUNICIPIO, String nOM_MUNICIPIO, String iD_DEPARTAMENTO,
 			String nOM_DEPARTAMENTO, String iD_AGE_MEN, String nOM_AGE_MEN, String eSTADO_AGE_MEN, String iD_OFERTA,
 			String aPLICA_BOLSA, String tIPO_CONTRATO, String nOMBRE_ESTADO_CLIENTE, String cATEGORIA_CLIENTE) {
 		super();
@@ -88,8 +88,8 @@ public class Cliente implements Serializable {
 		ID_INTERNO = iD_INTERNO;
 		NIT_CEDULA = nIT_CEDULA;
 		CODIGO_SIC = cODIGO_SIC;
-		NOMBRE_RAZON_SOCIAL = nOMBRE_RAZON_SOCIAL;
-		nombreFacturacion = nOMBRE_FACTURACION;
+		this.nombreRazonSocial = nombreRazonSocial;
+		this.nombreFacturacion = nombreFacturacion;
 		FECHA_SISTEMA = fECHA_SISTEMA;
 		ID_ESTADO_CLI = iD_ESTADO_CLI;
 		FECHA_ESTADO_CLI = fECHA_ESTADO_CLI;
@@ -144,12 +144,12 @@ public class Cliente implements Serializable {
 		CODIGO_SIC = cODIGO_SIC;
 	}
 
-	public String getNOMBRE_RAZON_SOCIAL() {
-		return NOMBRE_RAZON_SOCIAL;
+	public String getNombreRazonSocial() {
+		return nombreRazonSocial;
 	}
 
-	public void setNOMBRE_RAZON_SOCIAL(String nOMBRE_RAZON_SOCIAL) {
-		NOMBRE_RAZON_SOCIAL = nOMBRE_RAZON_SOCIAL;
+	public void setNombreRazonSocial(String nombreRazonSocial) {
+		this.nombreRazonSocial = nombreRazonSocial;
 	}
 
 	public String getNombreFacturacion() {

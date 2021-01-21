@@ -16,5 +16,11 @@ public interface ClienteRepository extends CrudRepository<Cliente,ClientePk> {
 			"  FROM STG_TRADEBALANCE.dbo.STG_DIM_CLIENTE " + 
 			"  where NOMBRE_FACTURACION like :nombre " + 
 			"  group by ID_CLIENTE,NOMBRE_FACTURACION,FECHA_ESTADO_HIS_MER order by NOMBRE_FACTURACION ASC", nativeQuery = true)
-	List<Object> nativeFindByLikeCliente(@Param("nombre") String nombreLike);
+	List<Object> nativeFindByLikeClienteNombreFacturacion(@Param("nombre") String nombreLike);
+	
+	@Query(value = "SELECT ID_CLIENTE,NOMBRE_FACTURACION,FECHA_ESTADO_HIS_MER  " + 
+			"			  FROM STG_TRADEBALANCE.dbo.STG_DIM_CLIENTE   " + 
+			"			  where NOMBRE_RAZON_SOCIAL like :razon   " + 
+			"			  group by ID_CLIENTE,NOMBRE_FACTURACION,FECHA_ESTADO_HIS_MER order by NOMBRE_FACTURACION ASC", nativeQuery = true)
+	List<Object> nativeFindByLikeClienteRazonSocial(@Param("razon") String razon);
 }
