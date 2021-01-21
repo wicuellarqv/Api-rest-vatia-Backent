@@ -125,18 +125,25 @@ public class CategClienteController {
 	}
 	
 	@PostMapping("/categorias_clientes")
-	public ResponseEntity<ResponseHTTP> createCategoriaCli(@RequestBody CategoriaCliente categoriaCliente) {
-		CategoriaCliente ResponseCategoriaCli = new CategoriaCliente();
+	public ResponseEntity<ResponseHTTP> createCategoriaCli(@RequestBody List<CategoriaCliente> ListCategoriaCliente) {
+		List<CategoriaCliente> responseCategoriaCliList =  new ArrayList<CategoriaCliente>();
 		try {
-			ResponseCategoriaCli = categoriaService.saveCategoriaCliente(categoriaCliente);
+			if(ListCategoriaCliente.size() > 0) {
+				for (CategoriaCliente categoriaCliRequest : ListCategoriaCliente) {
+					responseCategoriaCliList.add(categoriaService.saveCategoriaCliente(categoriaCliRequest));
+				}
+			}else {
+				return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+						"Esta enviado una lista vacia"), HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return ResponseCategoriaCli.getId() == 0
+		return responseCategoriaCliList.size() == 0
 				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(),
 						"Hay un error en la creacion de la categoria cliente"), HttpStatus.INTERNAL_SERVER_ERROR)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ResponseCategoriaCli), HttpStatus.OK);
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), responseCategoriaCliList), HttpStatus.OK);
 
 	}
 	

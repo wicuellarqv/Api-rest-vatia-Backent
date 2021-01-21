@@ -21,9 +21,9 @@ public class BIServiceImpl implements BIService {
 	}
 	
 	@Override
-	public List<Object> getLikeClientes(String nombreLike) {
+	public List<Object> getLikeClientesByRazonSocial(String razonSocial) {
 		
-		return (List<Object>) clienteRepository.nativeFindByLikeCliente(nombreLike);
+		return (List<Object>) clienteRepository.nativeFindByLikeClienteRazonSocial(razonSocial);
 	}
 
 	

@@ -7,6 +7,6 @@ public interface BIService {
 	
 	public List<Cliente> getAllClientes();
 	
-	public List<Object> getLikeClientes(String nombreLike);
+	public List<Object> getLikeClientesByRazonSocial(String razonSocial);
 
 }

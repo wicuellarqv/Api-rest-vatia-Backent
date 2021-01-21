@@ -41,12 +41,12 @@ public class BIController {
 
 	}
 
-	@PostMapping("/getLikeClientes")
+	@PostMapping("/get_clientes_by_razon_social")
 	public ResponseEntity<ResponseHTTP> getLikeClientes(@RequestBody Cliente cliente) {
 		List<Object> clientes = new ArrayList<>();
 
 		try {
-			clientes = biService.getLikeClientes(cliente.getNombreFacturacion());
+			clientes = biService.getLikeClientesByRazonSocial(cliente.getNombreRazonSocial());
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
