@@ -14,7 +14,7 @@ import com.vatia.apirest.utils.TipoCantidadResponse;
 
 public interface ConsultaService {
 	
-	public List<JsonObject> contratos(JSONObject obj);
+	public List<ConsultaContratosResponse> contratos(JSONObject obj);
 	public ContratoDetailResponse findById(String idContrato);
 	public List<PreciosResponse> preciosContrato(String idContrato);
 	public List<TipoCantidadResponse> tipoCantidad(String idContrato);

@@ -1,5 +1,10 @@
 package com.vatia.apirest.service.impl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,54 +31,136 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Autowired
 	private ConsultaRepository consultaRepository;
 	// @Autowired
-	/**
-	 * Query a obtener	
-	 * select 
-		c.num_id_contrato id_contrato, 
-		c.num_contrato num_contrato,
-		c.str_codigo_sic_contrato cod_sic_contrato,
-		nc.str_desc_negoc_contrato negociacion,
-		tc.str_desc_tipo_contrato tipo_contrato,
-		ctc.str_desc_condicion_tipo_contrato condicion,
-		tm.str_desc_tipo_mercado tipo_mercado,
-		--c.num_id_agnte_ccial_comp id_comprador,
-		a.str_nombre_agente_ccial comprador,
-		--c.num_id_agnte_ccial_vend id_vendedor,
-		ag.str_nombre_agente_ccial vendedor,
-		c.dtm_periodo_fin fecha_fin,
-		c.dtm_periodo_inicio fecha_inicio,
-		c.str_estado estado
-		from tbl_contratos c 
-		inner join tbl_condiciones_tipos_contratos ctc on c.num_id_condicion_tipo_contrato=ctc.num_id_condicion_tipo_contrato
-		inner join tbl_negoc_contratos nc on c.num_id_negoc_contrato=nc.num_id_negoc_contrato
-		inner join tbl_tipos_contratos tc on c.num_id_tipo_contrato=tc.num_id_tipo_contrato
-		inner join tbl_agentes_comerciales a on c.num_id_agnte_ccial_comp=a.num_id_agente_ccial
-		inner join tbl_agentes_comerciales ag on c.num_id_agnte_ccial_vend= ag.num_id_agente_ccial
-		inner join tbl_tipos_mercados tm on c.num_id_tipo_mercado=tm.num_id_tipo_mercado
-
-	 * @param obj
-	 * @return
-	 */
-	public String createQuery(JSONObject obj) {
-		String codcontrato = obj.get("codcontrato").toString();
-		String nombreCliente = obj.get("nombreCliente").toString();
-		String contratoSic = obj.get("contratoSic").toString();
-		String estado = obj.get("estado").toString();
-		String query = "Select * from tbl_contratos C";
-		if(!codcontrato.isEmpty()) {
-			query+="where C.num_id_contrato = " + codcontrato;
-		}
-		
-		return query;
-		
+	static String dbURL = "jdbc:sqlserver://10.112.201.35\\PROGENERAL;databaseName=webapp_tradebalance;user=webapp_tradebalance;password=W3b4pp.Tr4de$$";
+	public static void conected() {
+		Connection conn = null;
+		try {
+			
+			conn = DriverManager.getConnection(dbURL);
+			if (conn != null) {
+			    System.out.println("Connected");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+            try {
+                if (conn != null && !conn.isClosed()) {
+                    conn.close();
+                    System.out.println("Connection close");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
 	}
 	
-	@Override
-	public List<JsonObject> contratos(JSONObject obj) {
-		String tipoMercado = obj.get("contratoSic").toString();
 
-		return this.consultaRepository.filtro(tipoMercado);
+	public List<ConsultaContratosResponse> contratos (JSONObject obj) {	
+		
+		List<ConsultaContratosResponse> Contratos = new ArrayList<>();
+	
+		String query = "select \r\n"
+				+ "c.num_id_contrato id_contrato, \r\n"
+				+ "c.num_contrato num_contrato,\r\n"
+				+ "c.str_codigo_sic_contrato cod_sic_contrato,\r\n"
+				+ "nc.str_desc_negoc_contrato negociacion,\r\n"
+				+ "tc.str_desc_tipo_contrato tipo_contrato,\r\n"
+				+ "ctc.str_desc_condicion_tipo_contrato condicion,\r\n"
+				+ "tm.str_desc_tipo_mercado tipo_mercado,\r\n"
+				+ "c.num_id_agnte_ccial_comp id_comprador,\r\n"
+				+ "a.str_nombre_agente_ccial comprador,\r\n"
+				+ "c.num_id_agnte_ccial_vend id_vendedor,\r\n"
+				+ "ag.str_nombre_agente_ccial vendedor,\r\n"
+				+ "c.dtm_periodo_fin fecha_fin,\r\n"
+				+ "c.dtm_periodo_inicio fecha_inicio,\r\n"
+				+ "c.str_estado estado\r\n"
+				+ "from tbl_contratos c \r\n"
+				+ "inner join tbl_condiciones_tipos_contratos ctc on c.num_id_condicion_tipo_contrato=ctc.num_id_condicion_tipo_contrato\r\n"
+				+ "inner join tbl_negoc_contratos nc on c.num_id_negoc_contrato=nc.num_id_negoc_contrato\r\n"
+				+ "inner join tbl_tipos_contratos tc on c.num_id_tipo_contrato=tc.num_id_tipo_contrato\r\n"
+				+ "inner join tbl_agentes_comerciales a on c.num_id_agnte_ccial_comp=a.num_id_agente_ccial\r\n"
+				+ "inner join tbl_agentes_comerciales ag on c.num_id_agnte_ccial_vend= ag.num_id_agente_ccial\r\n"
+				+ "inner join tbl_tipos_mercados tm on c.num_id_tipo_mercado=tm.num_id_tipo_mercado\r\n"
+				+ "where 1=1";
+		
+		if(obj.get("numContrato") != null) {
+			query+=" and c.num_contrato = " + obj.get("numContrato").toString();
+		}
+		
+		if(obj.get("contratoSic") != null) {
+			query+=" and str_codigo_sic_contrato = " + obj.get("contratoSic").toString();
+		}
+		
+		if(obj.get("idContrato") != null) {
+			query+=" and c.num_id_contrato = " + obj.get("idContrato").toString();
+		}
+		
+		if(obj.get("estadoContrato") != null) {
+			String estadoContrato = obj.get("estadoContrato").toString();
+			query+=" and c.str_estado =  '"+estadoContrato+"'";
+		}
+		
+		if(obj.get("cod_SIC_vendedor") != null) {
+			query+=" and ag.str_codigo_sic_agente_ccial = " + obj.get("cod_SIC_vendedor").toString();
+		}
+		
+		if(obj.get("cod_SIC_comprador") != null) {
+			query+=" and a.str_codigo_sic_agente_ccial = " + obj.get("cod_SIC_comprador").toString();
+		}		
+		
+		Connection conn = null;
+		Statement stmt = null;
+		
+		try {
+
+			conn = DriverManager.getConnection(dbURL);
+			if (conn != null) {
+				System.out.println("Connected");
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
+				System.out.println(rs);
+
+				while (rs.next()) {
+					
+					ConsultaContratosResponse Contrato = new ConsultaContratosResponse(); 
+					Contrato.setIdContrato(rs.getString("id_contrato"));
+					Contrato.setNumContrato(rs.getString("num_contrato"));
+					Contrato.setCodSic(rs.getString("cod_sic_contrato"));					
+					Contrato.setNegociacionContrato(rs.getString("negociacion"));
+					Contrato.setTipoContrato(rs.getString("tipo_contrato"));
+					Contrato.setCondicion(rs.getString("condicion"));
+					Contrato.setTipoMercado(rs.getString("tipo_mercado"));
+					Contrato.setNombreComprador(rs.getString("comprador"));
+					Contrato.setNombreVendedor(rs.getString("vendedor"));
+					Contrato.setPeriodoInicio(rs.getString("fecha_inicio"));
+					Contrato.setPeriodoFinalizacion(rs.getString("fecha_fin"));
+					Contrato.setEstado(rs.getString("estado"));
+					Contratos.add(Contrato);
+				}
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (conn != null && !conn.isClosed()) {
+					conn.close();
+					stmt.close();
+					System.out.println("Connection close");
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		return Contratos;
+
 	}
+	
+
 
 	/**
 	 * 
