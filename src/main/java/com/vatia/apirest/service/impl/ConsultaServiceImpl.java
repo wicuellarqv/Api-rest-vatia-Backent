@@ -199,7 +199,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Override
 	public List<GarantiasResponse> garantias(String idContrato) {
 		List<GarantiasResponse> garantia = new ArrayList<>();
-		List<String> resulQuery = this.consultaRepository.cantidad(idContrato);
+		List<String> resulQuery = this.consultaRepository.garantia(idContrato);
 		for (String object : resulQuery) {
 			garantia.add(new GarantiasResponse(object.split(",")));
 		}

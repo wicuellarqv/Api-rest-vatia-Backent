@@ -54,11 +54,8 @@ public interface ConsultaRepository extends JpaRepository<Contratos, Integer>{
 			+ "	dtm_fecha_entrega_garantia as fecha_entrega "
 			+ "from tbl_garantias_contratos as GC "
 			+ "	inner join tbl_contratos as C ON GC.num_id_contrato = C.num_id_contrato "
-			+ "	inner join tbl_tipos_garantias as TG ON GC.num_id_tipo_garantia = TG.num_id_tipo_garantia"
+			+ "	inner join tbl_tipos_garantias as TG ON GC.num_id_tipo_garantia = TG.num_id_tipo_garantia "
 			+ "where C.num_id_contrato = :idContrato";
-	
-//	@Query(value = VALUEQUERY, nativeQuery = true)
-//	public List<JsonObject> filtro(String tipoMercado);
 	
 	@Query(value= QUERY_DETAIL_CONTRACT, nativeQuery = true)
 	public String detalle(String idContrato);
