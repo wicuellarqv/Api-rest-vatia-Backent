@@ -1,10 +1,16 @@
 package com.vatia.apirest.utils;
 
+import java.util.List;
+
 public class ContratoDetailResponse {
 
 	private String id_contrato, num_contrato, codigo_sic,
 	negocio_contrato, comprador, vendedor, estado, fecha_inicio,
-	fecha_fin, condicion, formula;
+	fecha_fin, condicion, formula, tel_contacto, nombre_contacto, fecha_firma,
+	documento, email_contacto;
+	private List<PreciosResponse> precios;
+	private List<TipoCantidadResponse> cantidad;
+	private List<GarantiasResponse> garantias;
 	
 	public ContratoDetailResponse(String[] args) {
 		super();
@@ -20,9 +26,33 @@ public class ContratoDetailResponse {
 		this.condicion = args[9].trim();
 		this.formula= args[10].trim();
 	}
+	
+	public List<GarantiasResponse> getGarantias() {
+		return garantias;
+	}
+
+	public void setGarantias(List<GarantiasResponse> garantias) {
+		this.garantias = garantias;
+	}
+	
+	public List<PreciosResponse> getPrecios() {
+		return precios;
+	}
+
+	public void setPrecios(List<PreciosResponse> precios) {
+		this.precios = precios;
+	}
 
 	public String getEstado() {
 		return estado;
+	}
+	
+	public List<TipoCantidadResponse> getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(List<TipoCantidadResponse> cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	@Override
@@ -30,7 +60,7 @@ public class ContratoDetailResponse {
 		return "{id_contrato=" + id_contrato + ", codigo_sic=" + codigo_sic + ", negocio_contrato=" + negocio_contrato
 				+ ", estado=" + estado + ", comprador=" + comprador + ", vendedor=" + vendedor + ", fecha_inicio="
 				+ fecha_inicio + ", fecha_fin=" + fecha_fin + ", condicion=" + condicion + ", formula=" + formula
-				+ ", num_contrato=" + num_contrato + "}";
+				+ ", num_contrato=" + num_contrato + ", precios= " +precios+"}";
 	}
 
 	public void setEstado(String estado) {
@@ -117,4 +147,46 @@ public class ContratoDetailResponse {
 		this.num_contrato = num_contrato;
 	}
 
+	public String getTel_contacto() {
+		return tel_contacto;
+	}
+
+	public void setTel_contacto(String tel_contacto) {
+		this.tel_contacto = tel_contacto;
+	}
+
+	public String getNombre_contacto() {
+		return nombre_contacto;
+	}
+
+	public void setNombre_contacto(String nombre_contacto) {
+		this.nombre_contacto = nombre_contacto;
+	}
+
+	public String getFecha_firma() {
+		return fecha_firma;
+	}
+
+	public void setFecha_firma(String fecha_firma) {
+		this.fecha_firma = fecha_firma;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
+	public String getEmail_contacto() {
+		return email_contacto;
+	}
+
+	public void setEmail_contacto(String email_contacto) {
+		this.email_contacto = email_contacto;
+	}
+
+	
+	
 }
