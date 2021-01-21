@@ -1,5 +1,7 @@
 package com.vatia.apirest.controller;
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vatia.apirest.service.ConsultaService;
 import com.vatia.apirest.utils.ContratoDetailResponse;
+import com.vatia.apirest.utils.GarantiasResponse;
+import com.vatia.apirest.utils.PreciosResponse;
 
 @RestController
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
@@ -28,5 +32,11 @@ public class ConsultaController {
 	public ContratoDetailResponse findAllById(@RequestBody JSONObject obj) {
 		String idContrato = obj.get("idContrato").toString();
 		return consultaService.findById(idContrato);
+	}
+	
+	@PostMapping("/garantias")
+	public List<GarantiasResponse> precios(@RequestBody JSONObject obj){
+		String idContrato = obj.get("idContrato").toString();
+		return consultaService.garantias(idContrato);
 	}
 }

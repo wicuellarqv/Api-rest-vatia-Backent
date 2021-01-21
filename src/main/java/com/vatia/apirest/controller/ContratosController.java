@@ -64,7 +64,7 @@ import com.vatia.apirest.response.ResponseHTTP;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST,  RequestMethod.DELETE })
 @RequestMapping("v1/Contrato")
 public class ContratosController {
 
