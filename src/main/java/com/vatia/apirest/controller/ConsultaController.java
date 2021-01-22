@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.response.ResponseHTTP;
 import com.vatia.apirest.service.ConsultaService;
 import com.vatia.apirest.utils.ConsultaContratosResponse;
@@ -48,9 +49,23 @@ public class ConsultaController {
 	
 	
 	@PostMapping("/detalle/contrato")
-	public ContratoDetailResponse findAllById(@RequestBody JSONObject obj) {
+	public ResponseEntity<ResponseHTTP> findAllById(@RequestBody JSONObject obj) {
 		String idContrato = obj.get("idContrato").toString();
-		return consultaService.findById(idContrato);
+
+		ContratoDetailResponse contratoDetailResponse = new ContratoDetailResponse(null);
+
+		try {
+			contratoDetailResponse = consultaService.findById(idContrato);
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return contratoDetailResponse != null
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), contratoDetailResponse), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ""), HttpStatus.OK);
+		
+		
 	}
 	
 	@PostMapping("/garantias")
