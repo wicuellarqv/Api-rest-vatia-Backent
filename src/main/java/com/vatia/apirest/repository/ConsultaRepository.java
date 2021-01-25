@@ -96,14 +96,30 @@ public interface ConsultaRepository extends JpaRepository<Contratos, Integer>{
 	 		+ "inner join tbl_cantidad_contratos as CC ON TC.num_id_tipo_cantidad = CC.num_id_tipo_cantidad  \r\n"
 	 		+ "where CC.num_id_contrato = :idContrato";
 	
-	final String TIPO_GARANTIA = "Select TG.str_desc_tipo_garantia, GC.num_cantidad_garantia as cantidad, GC.num_tasa_garantia as tasa, "
-			+ "	GC.num_iva_garantia as iva, GC.num_prima_garantia as prima, GC.num_costo_garantia as costo, "
-			+ "	GC.num_valor_garantia as valor, dtm_fecha_inicio_garantia as fecha_inicio, dtm_fecha_fin_garantia as fecha_fin, "
-			+ "	dtm_fecha_entrega_garantia as fecha_entrega "
-			+ "from tbl_garantias_contratos as GC "
-			+ "	inner join tbl_contratos as C ON GC.num_id_contrato = C.num_id_contrato "
-			+ "	inner join tbl_tipos_garantias as TG ON GC.num_id_tipo_garantia = TG.num_id_tipo_garantia "
+	final String TIPO_GARANTIA = "Select \r\n"
+			+ "TG.str_desc_tipo_garantia as tipo_garantia,\r\n"
+			+ "GC.num_tasa_garantia as tasa,  \r\n"
+			+ "GC.num_iva_garantia as iva, \r\n"
+			+ "GC.num_prima_garantia as prima, \r\n"
+			+ "GC.num_costo_garantia as costo,  \r\n"
+			+ "GC.num_valor_garantia as valor, \r\n"
+			+ "dtm_fecha_inicio_garantia as fecha_inicio, \r\n"
+			+ "dtm_fecha_fin_garantia as fecha_fin,  \r\n"
+			+ "dtm_fecha_entrega_garantia as fecha_entrega,\r\n"
+			+ "GC.str_ipp_actualizacion_garantia as ipp_garantia,\r\n"
+			+ "GC.num_cantidad_garantia as cantidad\r\n"
+			+ "from tbl_garantias_contratos as GC  \r\n"
+			+ "inner join tbl_contratos as C ON GC.num_id_contrato = C.num_id_contrato  \r\n"
+			+ "inner join tbl_tipos_garantias as TG ON GC.num_id_tipo_garantia = TG.num_id_tipo_garantia  \r\n"
 			+ "where C.num_id_contrato = :idContrato";
+	
+	final String FECHA_PAGO = "SELECT [num_id_fecha_pago]\r\n"
+			+ "      ,[dtm_fecha_pago_periodo]\r\n"
+			+ "      ,[num_id_contrato]\r\n"
+			+ "      ,[str_periodo_pago]\r\n"
+			+ "  FROM [webapp_tradebalance].[dbo].[tbl_fechas_pago_contratos]\r\n"
+			+ "  where num_id_contrato = :idContrato";
+	
 	
 	@Query(value= QUERY_DETAIL_CONTRACT, nativeQuery = true)
 	public String detalle(String idContrato);
@@ -116,6 +132,9 @@ public interface ConsultaRepository extends JpaRepository<Contratos, Integer>{
 	
 	@Query(value= TIPO_GARANTIA, nativeQuery = true)
 	public List<String> garantia (String idContrato);
+	
+	@Query(value= FECHA_PAGO, nativeQuery = true)
+	public List<String> fechaPago (String idContrato);
 	
 	
 }

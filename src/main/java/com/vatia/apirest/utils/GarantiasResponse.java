@@ -2,21 +2,43 @@ package com.vatia.apirest.utils;
 
 public class GarantiasResponse {
 	
-	private String tipo_garantia, cantidad,
-	tasa, iva, prima, costo, valor, fecha_inicio, fecha_fin, fecha_entrega;
+	private String tipo_garantia,tasa, iva, prima, costo, valor, fecha_inicio, fecha_fin, fecha_entrega, ipp_garantia, cantidad;
 	
 	public GarantiasResponse(String [] args) {
 		super();
 		this.tipo_garantia = args[0].trim();
-		this.cantidad = args[1].trim();
-		this.tasa = args[2].trim();
-		this.iva = args[3].trim();
-		this.prima = args[4].trim();
-		this.costo = args[5].trim();
-		this.valor = args[6].trim();
-		this.fecha_inicio = args[7].trim();
-		this.fecha_fin = args[8].trim();
-		this.fecha_entrega = args[9].trim();
+		this.tasa = args[1].trim();
+		this.iva = args[2].trim();
+		this.prima = args[3].trim();
+		this.costo = args[4].trim();
+		this.valor = args[5].trim();
+		this.fecha_inicio = args[6].trim();
+		this.fecha_fin = args[7].trim();
+		this.fecha_entrega = args[8].trim();
+		this.ipp_garantia = args[9].trim();
+		this.cantidad = args[10].trim();
+	}
+	
+			
+
+	
+	@Override
+	public String toString() {
+		return "GarantiasResponse [tipo_garantia=" + tipo_garantia + ", tasa=" + tasa + ", iva=" + iva + ", prima="
+				+ prima + ", costo=" + costo + ", valor=" + valor + ", fecha_inicio=" + fecha_inicio + ", fecha_fin="
+				+ fecha_fin + ", fecha_entrega=" + fecha_entrega + ", ipp_garantia=" + ipp_garantia + ", cantidad="
+				+ cantidad + "]";
+	}
+
+
+
+
+	public String getIpp_garantia() {
+		return ipp_garantia;
+	}
+
+	public void setIpp_garantia(String ipp_garantia) {
+		this.ipp_garantia = ipp_garantia;
 	}
 
 	public String getTipo_garantia() {

@@ -25,6 +25,7 @@ import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.utils.GarantiasResponse;
 import com.vatia.apirest.utils.PreciosResponse;
 import com.vatia.apirest.utils.TipoCantidadResponse;
+import com.vatia.apirest.utils.fechaPagoResponse;
 
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
@@ -173,6 +174,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 		cdr.setPrecios(this.preciosContrato(idContrato));
 		cdr.setCantidad(this.tipoCantidad(idContrato));
 		cdr.setGarantias(this.garantias(idContrato));
+		cdr.setFechaPago(this.fechaPago(idContrato));
 		return cdr;
 	}
 
@@ -205,4 +207,15 @@ public class ConsultaServiceImpl implements ConsultaService {
 		}
 		return garantia;
 	}
+	
+	@Override
+	public List<fechaPagoResponse> fechaPago (String idContrato) {
+		List<fechaPagoResponse> fechaPago = new ArrayList<>();
+		List<String> resulQuery = this.consultaRepository.fechaPago(idContrato);
+		for (String object : resulQuery) {
+			fechaPago.add(new fechaPagoResponse(object.split(",")));
+		}
+		return fechaPago;
+	}
+	
 }

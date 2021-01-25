@@ -11,6 +11,7 @@ import com.vatia.apirest.utils.ContratosRequest;
 import com.vatia.apirest.utils.GarantiasResponse;
 import com.vatia.apirest.utils.PreciosResponse;
 import com.vatia.apirest.utils.TipoCantidadResponse;
+import com.vatia.apirest.utils.fechaPagoResponse;
 
 public interface ConsultaService {
 	
@@ -18,5 +19,6 @@ public interface ConsultaService {
 	public ContratoDetailResponse findById(String idContrato);
 	public List<PreciosResponse> preciosContrato(String idContrato);
 	public List<TipoCantidadResponse> tipoCantidad(String idContrato);
-	public List<GarantiasResponse> garantias(String idContrato);	
+	public List<GarantiasResponse> garantias(String idContrato);
+	public List<fechaPagoResponse> fechaPago (String idContrato);
 }

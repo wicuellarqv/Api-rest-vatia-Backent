@@ -12,6 +12,7 @@ public class ContratoDetailResponse {
 	private List<PreciosResponse> precios;
 	private List<TipoCantidadResponse> cantidad;
 	private List<GarantiasResponse> garantias;
+	private List<fechaPagoResponse> fechaPago;
 	
 	public ContratoDetailResponse(String[] args) {
 		super();
@@ -40,6 +41,15 @@ public class ContratoDetailResponse {
 		}
 	}
 	
+	
+	public List<fechaPagoResponse> getFechaPago() {
+		return fechaPago;
+	}
+
+	public void setFechaPago(List<fechaPagoResponse> fechaPago) {
+		this.fechaPago = fechaPago;
+	}
+
 	public List<GarantiasResponse> getGarantias() {
 		return garantias;
 	}
@@ -68,6 +78,8 @@ public class ContratoDetailResponse {
 		this.cantidad = cantidad;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "ContratoDetailResponse [id_contrato=" + id_contrato + ", num_contrato=" + num_contrato + ", codigo_sic="
@@ -78,7 +90,7 @@ public class ContratoDetailResponse {
 				+ ", email_contacto=" + email_contacto + ", tipo_contrato=" + tipo_contrato + ", tipo_mercado="
 				+ tipo_mercado + ", tipo_precio=" + tipo_precio + ", formula_precio=" + formula_precio
 				+ ", tipo_cantidad=" + tipo_cantidad + ", tipo_garantia=" + tipo_garantia + ", precios=" + precios
-				+ ", cantidad=" + cantidad + ", garantias=" + garantias + "]";
+				+ ", cantidad=" + cantidad + ", garantias=" + garantias + ", fechaPago=" + fechaPago + "]";
 	}
 
 	public void setEstado(String estado) {
