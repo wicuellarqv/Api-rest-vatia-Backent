@@ -38,11 +38,9 @@ public class Cuentas_CeCos_CostInd implements Serializable {
     
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     
-    @Basic(optional = false)
     @Column(name = "str_cuenta_contable")
     private String cuentaContable;
     
-    @Basic(optional = false)
     @Column(name = "str_centro_costo")
     private String centroCosto;
 
