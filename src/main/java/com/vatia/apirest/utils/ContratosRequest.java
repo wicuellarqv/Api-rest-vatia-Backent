@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ContratosRequest {
 	
+	private String idContrato;
 	private String tipoMercado;
 	private String estadoContrato;
 	private String negociacionContrato;
@@ -31,8 +32,33 @@ public class ContratosRequest {
 	private List<PreciosRequest>  preciosRequest;
 	private List<CantidadRequest>  cantidadRequest;	
 	
-
+	public ContratosRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
+	
+	@Override
+	public String toString() {
+		return "ContratosRequest [idContrato=" + idContrato + ", tipoMercado=" + tipoMercado + ", estadoContrato="
+				+ estadoContrato + ", negociacionContrato=" + negociacionContrato + ", fechaInicioContrato="
+				+ fechaInicioContrato + ", fechaFinContrato=" + fechaFinContrato + ", contratoSic=" + contratoSic
+				+ ", cod_SIC_comprador=" + cod_SIC_comprador + ", cod_SIC_vendedor=" + cod_SIC_vendedor
+				+ ", fechaFirma=" + fechaFirma + ", nombreCliente=" + nombreCliente + ", emailContacto=" + emailContacto
+				+ ", tipoContrato=" + tipoContrato + ", telefonoContacto=" + telefonoContacto + ", tipoGarantia="
+				+ tipoGarantia + ", fechaEntregaGarantia=" + fechaEntregaGarantia + ", cantidadContrato="
+				+ cantidadContrato + ", tipoCantidad=" + tipoCantidad + ", tipoPrecio=" + tipoPrecio + ", mesBase="
+				+ mesBase + ", condicionTipoContrato=" + condicionTipoContrato + ", formulaPrecio=" + formulaPrecio
+				+ ", contratoDocumento=" + contratoDocumento + ", numContrato=" + numContrato + ", garantiasContratos="
+				+ garantiasContratos + ", preciosRequest=" + preciosRequest + ", cantidadRequest=" + cantidadRequest
+				+ "]";
+	}
+	public String getIdContrato() {
+		return idContrato;
+	}
+	public void setIdContrato(String idContrato) {
+		this.idContrato = idContrato;
+	}
 	public String getNumContrato() {
 		return numContrato;
 	}

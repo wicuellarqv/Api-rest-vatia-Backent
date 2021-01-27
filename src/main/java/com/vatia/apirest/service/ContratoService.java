@@ -2,6 +2,8 @@ package com.vatia.apirest.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import com.vatia.apirest.model.AgentesComerciales;
 import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.FormulasPrecios;
@@ -39,8 +41,13 @@ public interface ContratoService {
 
 	public AgentesComerciales getAllSicAgenteComercial(String valor);
 	
+	public String getIdSic(JSONObject obj);
+	
 	public String deleteContrato(Integer valor);	
 
 	public SaveResponse saveContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequest,
+			List<FechasPagosRequest> listFechaPagosRequest);
+	
+	public SaveResponse updateContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequest,
 			List<FechasPagosRequest> listFechaPagosRequest);
 }

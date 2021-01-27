@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -193,6 +193,26 @@ public class ContratosController {
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ""), HttpStatus.OK);
 
 	}
+	
+	
+	@GetMapping("/getIdSic")
+	public ResponseEntity<ResponseHTTP> getIdSic(@RequestBody JSONObject obj) {
+		String dato = null;
+		try {
+		
+			dato = contratoService.getIdSic(obj);
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return dato != null
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), dato), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), ""), HttpStatus.OK);
+
+	}
+	
+	
 
 	@GetMapping("/getAllFormulaPrecio")
 	public ResponseEntity<ResponseHTTP> getAllFormulaPrecio() {
@@ -292,6 +312,46 @@ public class ContratosController {
 				}
 			});
 			saveResponse = contratoService.saveContrato(cr, listCantidad, listFechaPagos);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return saveResponse != null
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse),
+						HttpStatus.NOT_FOUND);
+
+	}
+	
+	
+	@PostMapping("/updateContrato")
+	public ResponseEntity<ResponseHTTP> updateContrato(@RequestParam("filesFpago") MultipartFile[] filesFpago,
+			@RequestParam("filesCantidad") MultipartFile[] filesCantidad, @RequestParam String obj) {
+		SaveResponse saveResponse = new SaveResponse();
+		try {
+			Gson g = new Gson();
+			ContratosRequest cr = g.fromJson(obj, ContratosRequest.class);
+			List<CantidadRequest> listCantidad = new ArrayList<CantidadRequest>();
+			List<FechasPagosRequest> listFechaPagos = new ArrayList<FechasPagosRequest>();
+			
+			Arrays.asList(filesFpago).stream().forEach(file -> {
+				if (!file.isEmpty()) {
+					if ((file.getOriginalFilename().toLowerCase()).substring(0, 10).equals("fechaspago")) {
+						listFechaPagos.addAll(createListFechaPagos(file));
+					}
+				}
+			});
+			
+			Arrays.asList(filesCantidad).stream().forEach(file -> {
+				if (!file.isEmpty()) {
+					if ((file.getOriginalFilename().toLowerCase()).substring(0, 8).equals("cantidad")) {
+						listCantidad.addAll(createListCantidad(file));
+					}
+				}
+			});
+			saveResponse = contratoService.updateContrato(cr, listCantidad, listFechaPagos);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
