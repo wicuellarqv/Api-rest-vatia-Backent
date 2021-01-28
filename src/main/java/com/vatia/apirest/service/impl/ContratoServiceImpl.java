@@ -387,7 +387,7 @@ public class ContratoServiceImpl implements ContratoService {
 
 				for (CantidadesContratos cantidadesContratosNew : CantidadesContratosNew) {
 					
-					Date dateFechaNew = new SimpleDateFormat("dd/MM/yyyy").parse(cantidadesContratosNew.getFechaCantidad());
+					Date dateFechaNew = new SimpleDateFormat("yyyy-MM-dd").parse(cantidadesContratosNew.getFechaCantidad());
 
 					// Verifica si la fecha actual es posterior al periodo para eliminar
 					if (objDate.after(dateFechaNew)) {
@@ -512,7 +512,17 @@ public class ContratoServiceImpl implements ContratoService {
 						// Inset cantidad
 						cantidadRepository.save(cantidadesContratosN);
 					}
+					
 				}
+				
+				//Actualiza tipo cantidad sin importar fechas cantidades 
+//				for (CantidadRequest LCantidadRequest : listaCantidadRequest) {					
+//					CantidadesContratos cant = new CantidadesContratos();
+//					cant.setIdTipoCantidad(Integer.parseInt(contratosRequest.getTipoCantidad()));
+//					cant.setIdContrato(Integer.parseInt(contratosRequest.getIdContrato()));
+//					cantidadRepository.save(cant);
+//				}
+				
 			}
 
 
@@ -897,7 +907,11 @@ public class ContratoServiceImpl implements ContratoService {
 				for (CantidadRequest LCantidadRequest : listaCantidadRequest) {
 					cantidadesContratosN.setIdCantidadContrato(0);
 					if (LCantidadRequest.getFecha() != null) {
-						cantidadesContratosN.setFechaCantidad(LCantidadRequest.getFecha());
+						
+					Date date = new SimpleDateFormat("yyyy-MM-dd").parse(LCantidadRequest.getFecha());
+					String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);						
+						
+						cantidadesContratosN.setFechaCantidad(formattedDate);
 					}
 					if (contratosRequest.getTipoCantidad() != null) {
 						cantidadesContratosN.setIdTipoCantidad(Integer.parseInt(contratosRequest.getTipoCantidad()));
