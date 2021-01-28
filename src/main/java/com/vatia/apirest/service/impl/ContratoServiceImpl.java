@@ -1015,8 +1015,10 @@ public class ContratoServiceImpl implements ContratoService {
 			if(listCantidadRequestFile.size() > 0) {
 				for (CantidadRequest LCantidadRequest : listCantidadRequestFile) {
 					cantidadesContratosN.setIdCantidadContrato(0);
-					if (LCantidadRequest.getFecha() != null) {
-						cantidadesContratosN.setFechaCantidad(LCantidadRequest.getFecha());
+					if (LCantidadRequest.getFecha() != null) {					
+					Date date = new SimpleDateFormat("dd/MM/yyyy").parse(LCantidadRequest.getFecha());					
+					String formattedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);						
+					cantidadesContratosN.setFechaCantidad(formattedDate);					
 					}
 					if (contratosRequest.getTipoCantidad() != null) {
 						cantidadesContratosN.setIdTipoCantidad(Integer.parseInt(contratosRequest.getTipoCantidad()));
