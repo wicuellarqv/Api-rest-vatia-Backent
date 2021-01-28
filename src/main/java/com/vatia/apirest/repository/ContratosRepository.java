@@ -19,6 +19,9 @@ public interface ContratosRepository extends JpaRepository<Contratos, Integer>{
 	@Query(value = "SELECT num_id_contrato FROM tbl_contratos WHERE num_id_contrato = ?1", nativeQuery = true)
 	Integer findIdCod (Integer cod);
 	
+	@Query(value = "SELECT * FROM tbl_contratos WHERE num_id_contrato = ?1", nativeQuery = true)
+	Contratos findIdCodC (Integer cod);
+	
 	@Transactional
 	@Modifying
 	@Query(value = "DELETE FROM tbl_contratos WHERE num_id_contrato = ?1", nativeQuery = true)

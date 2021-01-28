@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
 import com.vatia.apirest.model.AgentesComerciales;
+import com.vatia.apirest.model.Cantidad60Meses;
 import com.vatia.apirest.model.CantidadesContratos;
 import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.Contratos;
@@ -182,11 +185,12 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 	
 	@Override
-	public SaveResponse updateContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequestFile,
-			
+	public SaveResponse updateContrato(ContratosRequest contratosRequest, List<CantidadRequest> listCantidadRequestFile,			
 		List<FechasPagosRequest> listFechaPagosRequestFile) {
+		
 		List<CantidadRequest> listaCantidadRequest = null;
 		Contratos ContratosList = new Contratos();
+	    Date objDate = new Date(); // Sistema actual La fecha y la hora se asignan a objDate
 		SaveResponse saveResponse = new SaveResponse();		
 		List<GarantiasRequest> listaGarantiasContratos = new ArrayList<GarantiasRequest>();
 		List<PreciosRequest> listaPreciosRequest = new ArrayList<PreciosRequest>();
@@ -194,14 +198,21 @@ public class ContratoServiceImpl implements ContratoService {
 		CantidadesContratos cantidadesContratosN = new CantidadesContratos();
 		FechasPagoContratos fechasPagoContratosN = new FechasPagoContratos();
 		GarantiasContratos garantiasContratosN = new GarantiasContratos();	
+
 		
 		
 		try {
+			
+			Contratos ContratosNew = new Contratos();
+			ContratosNew = ContratosRepository.findIdCodC(Integer.parseInt(contratosRequest.getIdContrato()));
+			
+			//Valida si existe contrato
+			if (ContratosNew != null) {	
 
 			// Set de campos basicos en la tabla de contratos
 			
-			if (contratosRequest.getIdContrato() != null) {
-				ContratosList.setIdContrato(Integer.parseInt(contratosRequest.getIdContrato()));
+			if (ContratosNew.getIdContrato() != null) {
+				ContratosList.setIdContrato(ContratosNew.getIdContrato());
 			}
 			
 			if (contratosRequest.getTipoMercado() != null) {
@@ -259,15 +270,439 @@ public class ContratoServiceImpl implements ContratoService {
 			}
 			if (contratosRequest.getTelefonoContacto() != null) {
 				ContratosList.setTelContacto(contratosRequest.getTelefonoContacto());
+			}			
+			
+			//update en la tabla contratos 
+			ContratosRepository.save(ContratosList);			
+			
+			listaGarantiasContratos = contratosRequest.getGarantiasContratos();
+			if (listaGarantiasContratos.size() > 0) {
+				
+				garantiaRepository.deleteId(ContratosNew.getIdContrato());
+
+				for (GarantiasRequest LgarantiasContratos : listaGarantiasContratos) {									
+					garantiasContratosN.setIdGarantiaContrato(0);
+					if (LgarantiasContratos.getCantidad() != null) {
+					garantiasContratosN.setCantidadGarantia(LgarantiasContratos.getCantidad());
+					}
+					if (LgarantiasContratos.getInicio() != null) {
+					garantiasContratosN.setFechaEntregaInicioGarantia(LgarantiasContratos.getInicio());
+					}
+					if (LgarantiasContratos.getFin() != null) {
+					garantiasContratosN.setFechaEntregaFinGarantia(LgarantiasContratos.getFin());
+					}					
+					if (LgarantiasContratos.getIpp() != null) {
+					garantiasContratosN.setIppActGarantia(LgarantiasContratos.getIpp());
+					}					
+					if (LgarantiasContratos.getTasa() != null) {
+					garantiasContratosN.setTasaGarantia(LgarantiasContratos.getTasa());
+					}					
+					if (LgarantiasContratos.getIva() != null) {
+					garantiasContratosN.setIvaGarantia(LgarantiasContratos.getIva());
+					}					
+					if (LgarantiasContratos.getValor() != null) {
+					garantiasContratosN.setValorGarantia(LgarantiasContratos.getValor());
+					}
+					if (LgarantiasContratos.getPrima() != null) {
+					garantiasContratosN.setPrimaGarantia(LgarantiasContratos.getPrima());
+					}
+					if (LgarantiasContratos.getCosto() != null) {
+					garantiasContratosN.setCostoGarantia(LgarantiasContratos.getCosto());
+					}
+					if (ContratosNew.getIdContrato() != null) {
+					garantiasContratosN.setIdContrato(ContratosNew.getIdContrato());
+					}
+					if (contratosRequest.getTipoGarantia() != null) {
+					garantiasContratosN.setIdTipoGarantia(Integer.parseInt(contratosRequest.getTipoGarantia()));
+					}
+					if (contratosRequest.getFechaEntregaGarantia() != null) {
+					garantiasContratosN.setFechaEntregaGarantia(contratosRequest.getFechaEntregaGarantia());
+					}		
+					//update en la tabla de garantias 
+					garantiaRepository.save(garantiasContratosN);
+					
+				}
+			}
+					
+			listaPreciosRequest = contratosRequest.getPreciosRequest();
+			
+			if (listaPreciosRequest.size() > 0) {				
+				
+				//Busca los precios contratos con id contrato
+				List<PreciosContratos> PreciosContratosNew = precioContratoRepository.getAllPrecio(ContratosNew.getIdContrato());	
+
+				for (PreciosContratos preciosContratosNew : PreciosContratosNew) {
+					
+					Date dateFechaPeriodoNew = new SimpleDateFormat("yyyy-MM").parse(preciosContratosNew.getFecPeriodoPrecio());
+
+					// Verifica si la fecha actual es posterior al periodo para eliminar
+					if (objDate.after(dateFechaPeriodoNew)) {
+						precioContratoRepository.deleteIdPrecio(preciosContratosNew.getIdPrecioContrato());
+					}
+				}				
+				
+				for (PreciosRequest LPreciosRequest : listaPreciosRequest) {
+					Date dateFechaPeriodo = new SimpleDateFormat("yyyy-MM").parse(LPreciosRequest.getMes());
+					
+					// Verifica si la fecha actual es posterior al periodo para hacer el insert
+					if (objDate.after(dateFechaPeriodo)) {
+						
+						preciosContratoN.setIdPrecioContrato(0);
+						if (LPreciosRequest.getMes() != null) {
+							preciosContratoN.setFecPeriodoPrecio(LPreciosRequest.getMes());
+						}
+						if (contratosRequest.getFormulaPrecio() != null) {
+							preciosContratoN.setFormulaPrecio(Integer.parseInt(contratosRequest.getFormulaPrecio()));
+						}
+						if (ContratosNew.getIdContrato() != null) {
+							preciosContratoN.setIdContrato(ContratosNew.getIdContrato());
+						}
+						if (contratosRequest.getTipoPrecio() != null) {
+							preciosContratoN.setIdTipoPrecio(Integer.parseInt(contratosRequest.getTipoPrecio()));
+						}
+						if (contratosRequest.getMesBase() != null) {
+							preciosContratoN.setMesBase(contratosRequest.getMesBase());
+						}
+
+						// pendiente formula
+						int big = 1234;
+						preciosContratoN.setPrecioPeriodo(new BigDecimal(big));
+
+						if (LPreciosRequest.getPrecioReferencia() != null) {
+							preciosContratoN.setPrecioReferencia(
+									new BigDecimal(LPreciosRequest.getPrecioReferencia().replaceAll(",", ".")));
+						}
+						precioContratoRepository.save(preciosContratoN);
+					}
+				}
 			}
 			
-			ContratosRepository.save(ContratosList);	
+		
+			listaCantidadRequest = contratosRequest.getCantidadRequest();	
 			
+			if (listaCantidadRequest.size() > 0) {
+				
+				//Busca las cantidades contratos con id contrato
+				List<CantidadesContratos> CantidadesContratosNew = cantidadRepository.getAllCantidad(ContratosNew.getIdContrato());	
+
+				for (CantidadesContratos cantidadesContratosNew : CantidadesContratosNew) {
+					
+					Date dateFechaNew = new SimpleDateFormat("dd/MM/yyyy").parse(cantidadesContratosNew.getFechaCantidad());
+
+					// Verifica si la fecha actual es posterior al periodo para eliminar
+					if (objDate.after(dateFechaNew)) {
+						cantidadRepository.deleteIdCant(cantidadesContratosNew.getIdCantidadContrato());
+					}
+				}				
+
+				for (CantidadRequest LCantidadRequest : listaCantidadRequest) {
+
+					Date dateFechaN = new SimpleDateFormat("yyyy-MM-dd").parse(LCantidadRequest.getFecha());
+
+					// Verifica si la fecha actual es posterior al periodo para hacer el insert
+					if (objDate.after(dateFechaN)) {
+						
+						cantidadesContratosN.setIdCantidadContrato(0);
+						if (LCantidadRequest.getFecha() != null) {
+							cantidadesContratosN.setFechaCantidad(LCantidadRequest.getFecha());
+						}
+						if (contratosRequest.getTipoCantidad() != null) {
+							cantidadesContratosN
+									.setIdTipoCantidad(Integer.parseInt(contratosRequest.getTipoCantidad()));
+						}
+						if (ContratosNew.getIdContrato() != null) {
+							cantidadesContratosN.setIdContrato(ContratosNew.getIdContrato());
+						}
+						if (LCantidadRequest.getH1() != null) {
+							cantidadesContratosN
+									.setCantidadH1(new BigDecimal(LCantidadRequest.getH1().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH2() != null) {
+							cantidadesContratosN
+									.setCantidadH2(new BigDecimal(LCantidadRequest.getH2().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH3() != null) {
+							cantidadesContratosN
+									.setCantidadH3(new BigDecimal(LCantidadRequest.getH3().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH4() != null) {
+							cantidadesContratosN
+									.setCantidadH4(new BigDecimal(LCantidadRequest.getH4().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH5() != null) {
+							cantidadesContratosN
+									.setCantidadH5(new BigDecimal(LCantidadRequest.getH5().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH6() != null) {
+							cantidadesContratosN
+									.setCantidadH6(new BigDecimal(LCantidadRequest.getH6().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH7() != null) {
+							cantidadesContratosN
+									.setCantidadH7(new BigDecimal(LCantidadRequest.getH7().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH8() != null) {
+							cantidadesContratosN
+									.setCantidadH8(new BigDecimal(LCantidadRequest.getH8().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH9() != null) {
+							cantidadesContratosN
+									.setCantidadH9(new BigDecimal(LCantidadRequest.getH9().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH10() != null) {
+							cantidadesContratosN
+									.setCantidadH10(new BigDecimal(LCantidadRequest.getH10().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH11() != null) {
+							cantidadesContratosN
+									.setCantidadH11(new BigDecimal(LCantidadRequest.getH11().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH12() != null) {
+							cantidadesContratosN
+									.setCantidadH12(new BigDecimal(LCantidadRequest.getH12().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH13() != null) {
+							cantidadesContratosN
+									.setCantidadH13(new BigDecimal(LCantidadRequest.getH13().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH14() != null) {
+							cantidadesContratosN
+									.setCantidadH14(new BigDecimal(LCantidadRequest.getH14().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH15() != null) {
+							cantidadesContratosN
+									.setCantidadH15(new BigDecimal(LCantidadRequest.getH15().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH16() != null) {
+							cantidadesContratosN
+									.setCantidadH16(new BigDecimal(LCantidadRequest.getH16().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH17() != null) {
+							cantidadesContratosN
+									.setCantidadH17(new BigDecimal(LCantidadRequest.getH17().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH18() != null) {
+							cantidadesContratosN
+									.setCantidadH18(new BigDecimal(LCantidadRequest.getH18().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH19() != null) {
+							cantidadesContratosN
+									.setCantidadH19(new BigDecimal(LCantidadRequest.getH19().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH20() != null) {
+							cantidadesContratosN
+									.setCantidadH20(new BigDecimal(LCantidadRequest.getH20().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH21() != null) {
+							cantidadesContratosN
+									.setCantidadH21(new BigDecimal(LCantidadRequest.getH21().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH22() != null) {
+							cantidadesContratosN
+									.setCantidadH22(new BigDecimal(LCantidadRequest.getH22().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH23() != null) {
+							cantidadesContratosN
+									.setCantidadH23(new BigDecimal(LCantidadRequest.getH23().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH24() != null) {
+							cantidadesContratosN
+									.setCantidadH24(new BigDecimal(LCantidadRequest.getH24().replaceAll(",", ".")));
+						}
+						// Inset cantidad
+						cantidadRepository.save(cantidadesContratosN);
+					}
+				}
+			}
+
+
+			if (listFechaPagosRequestFile.size() > 0) {
+				
+				//Busca las cantidades contratos con id contrato
+				List<FechasPagoContratos> FechasPagoContratosNew = fechaPagoContratoRepository.getAllFechaP(ContratosNew.getIdContrato());	
+
+				for (FechasPagoContratos fechasPagoContratosNew : FechasPagoContratosNew) {
+					
+					Date dateFechaNew = new SimpleDateFormat("dd/MM/yyyy").parse(fechasPagoContratosNew.getPeriodoPago());
+
+					// Verifica si la fecha actual es posterior al periodo para eliminar
+					if (objDate.after(dateFechaNew)) {
+						fechaPagoContratoRepository.deleteIdFecha(fechasPagoContratosNew.getIdFechaPago());
+					}
+				}
+
+				for (FechasPagosRequest fechasPagosRequest : listFechaPagosRequestFile) {
+
+					Date datePeriodo = new SimpleDateFormat("dd/MM/yyyy").parse(fechasPagosRequest.getPeriodo());
+
+					// Verifica si la fecha actual es posterior al periodo para hacer el insert
+					if (objDate.after(datePeriodo)) {
+
+						fechasPagoContratosN.setIdFechaPago(0);
+						if (fechasPagosRequest.getFechaPago() != null) {
+							fechasPagoContratosN.setFechaPagoPeriodo(fechasPagosRequest.getFechaPago());
+						}
+						if (fechasPagosRequest.getPeriodo() != null) {
+							fechasPagoContratosN.setPeriodoPago(fechasPagosRequest.getPeriodo());
+						}
+						if (ContratosNew.getIdContrato() != null) {
+							fechasPagoContratosN.setIdContrato(ContratosNew.getIdContrato());
+						}
+
+						// Inset fecha pago
+						fechaPagoContratoRepository.save(fechasPagoContratosN);
+					}
+				}
+			}
+
+			if (listCantidadRequestFile.size() > 0) {
+
+				// Busca las cantidades contratos con id contrato
+				List<CantidadesContratos> CantidadesContratosNew = cantidadRepository.getAllCantidad(ContratosNew.getIdContrato());
+
+				for (CantidadesContratos cantidadesContratosNew : CantidadesContratosNew) {
+
+					Date dateFechaNew = new SimpleDateFormat("dd/MM/yyyy").parse(cantidadesContratosNew.getFechaCantidad());
+
+					// Verifica si la fecha actual es posterior al periodo para eliminar
+					if (objDate.after(dateFechaNew)) {
+						cantidadRepository.deleteIdCant(cantidadesContratosNew.getIdCantidadContrato());
+					}
+				}
+
+				for (CantidadRequest LCantidadRequest : listCantidadRequestFile) {
+
+					Date dateFechaN = new SimpleDateFormat("dd/MM/yyyy").parse(LCantidadRequest.getFecha());
+
+					// Verifica si la fecha actual es posterior al periodo para hacer el insert
+					if (objDate.after(dateFechaN)) {
+
+						cantidadesContratosN.setIdCantidadContrato(0);
+						if (LCantidadRequest.getFecha() != null) {
+							cantidadesContratosN.setFechaCantidad(LCantidadRequest.getFecha());
+						}
+						if (contratosRequest.getTipoCantidad() != null) {
+							cantidadesContratosN
+									.setIdTipoCantidad(Integer.parseInt(contratosRequest.getTipoCantidad()));
+						}
+						if (ContratosNew.getIdContrato() != null) {
+							cantidadesContratosN.setIdContrato(ContratosNew.getIdContrato());
+						}
+						if (LCantidadRequest.getH1() != null) {
+							cantidadesContratosN
+									.setCantidadH1(new BigDecimal(LCantidadRequest.getH1().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH2() != null) {
+							cantidadesContratosN
+									.setCantidadH2(new BigDecimal(LCantidadRequest.getH2().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH3() != null) {
+							cantidadesContratosN
+									.setCantidadH3(new BigDecimal(LCantidadRequest.getH3().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH4() != null) {
+							cantidadesContratosN
+									.setCantidadH4(new BigDecimal(LCantidadRequest.getH4().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH5() != null) {
+							cantidadesContratosN
+									.setCantidadH5(new BigDecimal(LCantidadRequest.getH5().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH6() != null) {
+							cantidadesContratosN
+									.setCantidadH6(new BigDecimal(LCantidadRequest.getH6().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH7() != null) {
+							cantidadesContratosN
+									.setCantidadH7(new BigDecimal(LCantidadRequest.getH7().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH8() != null) {
+							cantidadesContratosN
+									.setCantidadH8(new BigDecimal(LCantidadRequest.getH8().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH9() != null) {
+							cantidadesContratosN
+									.setCantidadH9(new BigDecimal(LCantidadRequest.getH9().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH10() != null) {
+							cantidadesContratosN
+									.setCantidadH10(new BigDecimal(LCantidadRequest.getH10().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH11() != null) {
+							cantidadesContratosN
+									.setCantidadH11(new BigDecimal(LCantidadRequest.getH11().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH12() != null) {
+							cantidadesContratosN
+									.setCantidadH12(new BigDecimal(LCantidadRequest.getH12().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH13() != null) {
+							cantidadesContratosN
+									.setCantidadH13(new BigDecimal(LCantidadRequest.getH13().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH14() != null) {
+							cantidadesContratosN
+									.setCantidadH14(new BigDecimal(LCantidadRequest.getH14().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH15() != null) {
+							cantidadesContratosN
+									.setCantidadH15(new BigDecimal(LCantidadRequest.getH15().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH16() != null) {
+							cantidadesContratosN
+									.setCantidadH16(new BigDecimal(LCantidadRequest.getH16().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH17() != null) {
+							cantidadesContratosN
+									.setCantidadH17(new BigDecimal(LCantidadRequest.getH17().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH18() != null) {
+							cantidadesContratosN
+									.setCantidadH18(new BigDecimal(LCantidadRequest.getH18().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH19() != null) {
+							cantidadesContratosN
+									.setCantidadH19(new BigDecimal(LCantidadRequest.getH19().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH20() != null) {
+							cantidadesContratosN
+									.setCantidadH20(new BigDecimal(LCantidadRequest.getH20().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH21() != null) {
+							cantidadesContratosN
+									.setCantidadH21(new BigDecimal(LCantidadRequest.getH21().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH22() != null) {
+							cantidadesContratosN
+									.setCantidadH22(new BigDecimal(LCantidadRequest.getH22().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH23() != null) {
+							cantidadesContratosN
+									.setCantidadH23(new BigDecimal(LCantidadRequest.getH23().replaceAll(",", ".")));
+						}
+						if (LCantidadRequest.getH24() != null) {
+							cantidadesContratosN
+									.setCantidadH24(new BigDecimal(LCantidadRequest.getH24().replaceAll(",", ".")));
+						}
+						cantidadRepository.save(cantidadesContratosN);
+					}
+				}
+			}
 			
-			saveResponse.setCodigoContrato(ContratosList.getIdContrato());
-			//saveResponse.setCodigoSicContrato(contrato.getCodSicContrato());			
-			saveResponse.setMsg("Guardado Correctamente");
+			saveResponse.setCodigoContrato(ContratosNew.getIdContrato());
+			saveResponse.setCodigoSicContrato(ContratosNew.getCodSicContrato());			
+			saveResponse.setMsg("Actualizado Correctamente !");
 			saveResponse.setEstado(true);
+			
+			}else
+			{
+				saveResponse.setCodigoContrato(null);
+				saveResponse.setCodigoSicContrato(null);
+				saveResponse.setMsg("El codigo de contrato no existe !");
+				saveResponse.setEstado(false);				
+			}
+			
+			
 		
 		} catch (Exception e) {
 			saveResponse.setCodigoContrato(null);
