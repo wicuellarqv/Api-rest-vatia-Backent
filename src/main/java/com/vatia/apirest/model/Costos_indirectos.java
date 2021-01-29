@@ -49,6 +49,9 @@ public class Costos_indirectos implements Serializable {
     @Column(name = "str_cuenta_contable")
     private String cuentaContable;
     
+    @Column(name = "str_desc_cuenta_contable")
+    private String descCuentaContable;
+        
     @Basic(optional = false)
     @Column(name = "str_centro_costo")
     private String centroCosto;
@@ -67,12 +70,13 @@ public class Costos_indirectos implements Serializable {
 
 
 	public Costos_indirectos(Integer idCostoInd, String yearCostoInd, String mesCostoInd, String cuentaContable,
-			String centroCosto, BigDecimal valorCuenta, Date fechaCapturaCostoInd) {
+			String descCuentaContable, String centroCosto, BigDecimal valorCuenta, Date fechaCapturaCostoInd) {
 		super();
 		this.idCostoInd = idCostoInd;
 		this.yearCostoInd = yearCostoInd;
 		this.mesCostoInd = mesCostoInd;
 		this.cuentaContable = cuentaContable;
+		this.descCuentaContable = descCuentaContable;
 		this.centroCosto = centroCosto;
 		this.valorCuenta = valorCuenta;
 		this.fechaCapturaCostoInd = fechaCapturaCostoInd;
@@ -119,6 +123,16 @@ public class Costos_indirectos implements Serializable {
 	}
 
 
+	public String getDescCuentaContable() {
+		return descCuentaContable;
+	}
+
+
+	public void setDescCuentaContable(String descCuentaContable) {
+		this.descCuentaContable = descCuentaContable;
+	}
+
+
 	public String getCentroCosto() {
 		return centroCosto;
 	}
@@ -147,9 +161,9 @@ public class Costos_indirectos implements Serializable {
 	public void setFechaCapturaCostoInd(Date fechaCapturaCostoInd) {
 		this.fechaCapturaCostoInd = fechaCapturaCostoInd;
 	}
+
+
     
-    
-	
      
       
     }
