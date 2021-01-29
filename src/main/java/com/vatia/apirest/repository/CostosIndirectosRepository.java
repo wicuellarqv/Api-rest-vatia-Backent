@@ -8,7 +8,9 @@ import com.vatia.apirest.model.Costos_indirectos;
 
 public interface CostosIndirectosRepository extends JpaRepository<Costos_indirectos, Integer>{
 	
-	@Query(value = "SELECT * FROM tbl_costos_indirectos I WHERE I.str_mes_costo_ind=?1 AND I.str_year_costo_ind=?2", nativeQuery = true)
+	@Query(value = "SELECT * FROM tbl_costos_indirectos I WHERE I.str_mes_costo_ind=?1 AND I.str_year_costo_ind=?2 ORDER BY str_cuenta_contable\r\n"
+			+ "      ,str_desc_cuenta_contable\r\n"
+			+ "	  ,str_centro_costo ", nativeQuery = true)
 	List<Costos_indirectos> getAllPeriodo (String mes, String ano);
 	
 }
