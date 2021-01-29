@@ -5,7 +5,7 @@ import java.util.List;
 public class PreciosResponse {
 
 	private String periodo_negociacion, formula,
-	periodo_precio, precio_referencia;
+	periodo_precio, precio_referencia, mes_referencia;
 
 	public PreciosResponse(String [] args) {
 		super();
@@ -13,12 +13,26 @@ public class PreciosResponse {
 		this.formula = args[1].trim();
 		this.periodo_precio = args[2].trim();
 		this.precio_referencia = args[3].trim();
+		this.mes_referencia = args[4].trim();
 	}
 	
+
+
 	@Override
 	public String toString() {
-		return "{periodo_negociacion=" + periodo_negociacion + ", formula=" + formula
-				+ ", periodo_precio=" + periodo_precio + ", precio_referencia=" + precio_referencia + "}";
+		return "PreciosResponse [periodo_negociacion=" + periodo_negociacion + ", formula=" + formula
+				+ ", periodo_precio=" + periodo_precio + ", precio_referencia=" + precio_referencia
+				+ ", mes_referencia=" + mes_referencia + "]";
+	}
+
+
+
+	public String getMes_referencia() {
+		return mes_referencia;
+	}
+
+	public void setMes_referencia(String mes_referencia) {
+		this.mes_referencia = mes_referencia;
 	}
 
 	public String getPeriodo_negociacion() {

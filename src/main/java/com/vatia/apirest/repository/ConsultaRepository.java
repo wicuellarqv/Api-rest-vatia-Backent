@@ -55,14 +55,15 @@ public interface ConsultaRepository extends JpaRepository<Contratos, Integer>{
 			+ "	inner join tbl_tipos_garantias tga on tga.num_id_tipo_garantia = gc.num_id_tipo_garantia\r\n"
 			+ "where C.num_id_contrato = :idContrato";
 			
-	 final String PRECIOS_CONTRATOS = "SELECT \r\n"
-	 		+ "PC.dtm_mes_base as periodo_negociacion, \r\n"
-	 		+ "PC.dtm_periodo_precio as periodo_precio, \r\n"
-	 		+ "PC.num_precio_referencia as precio_referencia,\r\n"
-	 		+ "pc.num_precio_periodo as precio\r\n"
-	 		+ "FROM [webapp_tradebalance].[dbo].[tbl_tipos_precio] as TP \r\n"
-	 		+ "inner Join tbl_precios_contratos as PC ON  PC.num_id_tipo_precio= TP.num_id_tipo_precio \r\n"
-	 		+ "inner Join tbl_formulas_precios as FP ON FP.num_id_formula_precio = PC.num_id_formula_precio \r\n"
+	 final String PRECIOS_CONTRATOS = "SELECT  \r\n"
+	 		+ "dtm_mes_base as periodo_negociacion,  \r\n"
+	 		+ "dtm_periodo_precio as periodo_precio,  \r\n"
+	 		+ "num_precio_referencia as precio_referencia,\r\n"
+	 		+ "num_precio_periodo as precio,\r\n"
+	 		+ "PC.dtm_mes_base as mes_referencia\r\n"
+	 		+ "FROM [webapp_tradebalance].[dbo].[tbl_tipos_precio] as TP  \r\n"
+	 		+ "inner Join tbl_precios_contratos as PC ON  PC.num_id_tipo_precio= TP.num_id_tipo_precio  \r\n"
+	 		+ "inner Join tbl_formulas_precios as FP ON FP.num_id_formula_precio = PC.num_id_formula_precio  \r\n"
 	 		+ "WHERE PC.num_id_contrato = :idContrato";
 	 
 	 final String TIPO_CANTIDAD = "Select \r\n"
