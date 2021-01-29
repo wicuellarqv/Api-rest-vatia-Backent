@@ -26,4 +26,9 @@ public interface CantidadRepository extends JpaRepository<CantidadesContratos, I
 	@Query(value = "DELETE FROM tbl_cantidad_contratos WHERE num_id_cantidad_contrato = ?1", nativeQuery = true)
 	int deleteIdCant(@Param(value = "id") Integer id);
 	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE tbl_cantidad_contratos SET num_id_tipo_cantidad = 2 where num_id_contrato = 69 ", nativeQuery = true)
+	int updateTipoCan(@Param(value = "tipoCantidad") Integer tipoCantidad, @Param(value = "idcontrato") Integer idcontrato);
+	
 }
