@@ -1,19 +1,17 @@
 package com.vatia.apirest.utils;
 
-import java.util.List;
-
 public class PreciosResponse {
 
 	private String periodo_negociacion, formula,
-	periodo_precio, precio_referencia, mes_referencia;
+	periodo_precio, precioReferencia, mes;
 
 	public PreciosResponse(String [] args) {
 		super();
 		this.periodo_negociacion = args[0].trim();
 		this.formula = args[1].trim();
 		this.periodo_precio = args[2].trim();
-		this.precio_referencia = args[3].trim();
-		this.mes_referencia = args[4].trim();
+		this.precioReferencia = args[3].trim();
+		this.mes = args[4].trim();
 	}
 	
 
@@ -21,18 +19,26 @@ public class PreciosResponse {
 	@Override
 	public String toString() {
 		return "PreciosResponse [periodo_negociacion=" + periodo_negociacion + ", formula=" + formula
-				+ ", periodo_precio=" + periodo_precio + ", precio_referencia=" + precio_referencia
-				+ ", mes_referencia=" + mes_referencia + "]";
+				+ ", periodo_precio=" + periodo_precio + ", precio_referencia=" + precioReferencia
+				+ ", mes_referencia=" + mes + "]";
 	}
 
 
 
-	public String getMes_referencia() {
-		return mes_referencia;
+	public String getPrecioReferencia() {
+		return precioReferencia;
 	}
 
-	public void setMes_referencia(String mes_referencia) {
-		this.mes_referencia = mes_referencia;
+	public void setPrecioReferencia(String precioReferencia) {
+		this.precioReferencia = precioReferencia;
+	}
+
+	public String getMes() {
+		return mes;
+	}
+
+	public void setMes(String mes) {
+		this.mes = mes;
 	}
 
 	public String getPeriodo_negociacion() {
@@ -58,14 +64,5 @@ public class PreciosResponse {
 	public void setPeriodo_precio(String periodo_precio) {
 		this.periodo_precio = periodo_precio;
 	}
-
-	public String getPrecio_referencia() {
-		return precio_referencia;
-	}
-
-	public void setPrecio_referencia(String precio_referencia) {
-		this.precio_referencia = precio_referencia;
-	}
-	
 	
 }

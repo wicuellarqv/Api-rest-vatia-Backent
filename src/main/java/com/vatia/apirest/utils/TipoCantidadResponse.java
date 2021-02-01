@@ -3,57 +3,53 @@ package com.vatia.apirest.utils;
 public class TipoCantidadResponse {
 	
 
-	private String tipoCantidad, fecha, hora1, hora2, hora3, hora4, hora5, hora6, hora7, hora8, hora9, hora10,
-	hora11, hora12, hora13,  hora14,hora15, hora16,hora17,hora18, hora19, hora20, hora21,hora22 , hora23, hora24;
+	private String tipoCantidad, fecha, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10,
+	h11, h12, h13,  h14, h15, h16, h17, h18, h19, h20, h21, h22 , h23, h24;
 
 	public TipoCantidadResponse(String [] args) {
 		super();
 		this.tipoCantidad = args[0].trim();
 		this.fecha = args[1].trim();
-		this.hora1 = args[2].trim();
-		this.hora2 = args[3].trim();
-		this.hora3 = args[4].trim();
-		this.hora4 = args[5].trim();
-		this.hora5 = args[6].trim();
-		this.hora6 = args[7].trim();	
-		this.hora7 = args[8].trim();
-		this.hora8 = args[9].trim();
-		this.hora9 = args[10].trim();
-		this.hora10 = args[11].trim();
-		this.hora11 = args[12].trim();
-		this.hora12 = args[13].trim();		
-		this.hora13 = args[14].trim();
-		this.hora14 = args[15].trim();
-		this.hora15 = args[16].trim();
-		this.hora16 = args[17].trim();
-		this.hora17 = args[18].trim();
-		this.hora18 = args[19].trim();		
-		this.hora19 = args[20].trim();
-		this.hora20 = args[21].trim();
-		this.hora21 = args[22].trim();
-		this.hora22 = args[23].trim();
-		this.hora23 = args[24].trim();
-		this.hora24 = args[25].trim();
+		this.h1 = args[2].trim();
+		this.h2 = args[3].trim();
+		this.h3 = args[4].trim();
+		this.h4 = args[5].trim();
+		this.h5 = args[6].trim();
+		this.h6 = args[7].trim();	
+		this.h7 = args[8].trim();
+		this.h8 = args[9].trim();
+		this.h9 = args[10].trim();
+		this.h10 = args[11].trim();
+		this.h11 = args[12].trim();
+		this.h12 = args[13].trim();		
+		this.h13 = args[14].trim();
+		this.h14 = args[15].trim();
+		this.h15 = args[16].trim();
+		this.h16 = args[17].trim();
+		this.h17 = args[18].trim();
+		this.h18 = args[19].trim();		
+		this.h19 = args[20].trim();
+		this.h20 = args[21].trim();
+		this.h21 = args[22].trim();
+		this.h22 = args[23].trim();
+		this.h23 = args[24].trim();
+		this.h24 = args[25].trim();
 
 		
 	}
 	
 
 
-	
-	
-	
+
+
 	@Override
 	public String toString() {
-		return "TipoCantidadResponse [tipoCantidad=" + tipoCantidad + ", fecha=" + fecha + ", hora1=" + hora1
-				+ ", hora2=" + hora2 + ", hora3=" + hora3 + ", hora4=" + hora4 + ", hora5=" + hora5 + ", hora6=" + hora6
-				+ ", hora7=" + hora7 + ", hora8=" + hora8 + ", hora9=" + hora9 + ", hora10=" + hora10 + ", hora11="
-				+ hora11 + ", hora12=" + hora12 + ", hora13=" + hora13 + ", hora14=" + hora14 + ", hora15=" + hora15
-				+ ", hora16=" + hora16 + ", hora17=" + hora17 + ", hora18=" + hora18 + ", hora19=" + hora19
-				+ ", hora20=" + hora20 + ", hora21=" + hora21 + ", hora22=" + hora22 + ", hora23=" + hora23
-				+ ", hora24=" + hora24 + "]";
+		return "TipoCantidadResponse [tipoCantidad=" + tipoCantidad + ", fecha=" + fecha + ", h1=" + h1 + ", h2=" + h2
+				+ ", h3=" + h3 + ", h4=" + h4 + ", h5=" + h5 + ", h6=" + h6 + ", h7=" + h7 + ", h8=" + h8 + ", h9=" + h9
+				+ ", h10=" + h10 + ", h11=" + h11 + ", h12=" + h12 + ", h13=" + h13 + ", h14=" + h14 + ", h15=" + h15
+				+ ", h16=" + h16 + ", h17=" + h17 + ", h18=" + h18 + ", h19=" + h19 + ", h20=" + h20 + ", h21=" + h21
+				+ ", h22=" + h22 + ", h23=" + h23 + ", h24=" + h24 + "]";
 	}
-
 
 
 
@@ -75,197 +71,390 @@ public class TipoCantidadResponse {
 		this.fecha = fecha;
 	}
 
-	public String getHora1() {
-		return hora1;
+
+
+
+
+	public String getH1() {
+		return h1;
 	}
 
-	public void setHora1(String hora1) {
-		this.hora1 = hora1;
+
+
+
+
+	public void setH1(String h1) {
+		this.h1 = h1;
 	}
 
-	public String getHora2() {
-		return hora2;
+
+
+
+
+	public String getH2() {
+		return h2;
 	}
 
-	public void setHora2(String hora2) {
-		this.hora2 = hora2;
+
+
+
+
+	public void setH2(String h2) {
+		this.h2 = h2;
 	}
 
-	public String getHora3() {
-		return hora3;
+
+
+
+
+	public String getH3() {
+		return h3;
 	}
 
-	public void setHora3(String hora3) {
-		this.hora3 = hora3;
+
+
+
+
+	public void setH3(String h3) {
+		this.h3 = h3;
 	}
 
-	public String getHora4() {
-		return hora4;
+
+
+
+
+	public String getH4() {
+		return h4;
 	}
 
-	public void setHora4(String hora4) {
-		this.hora4 = hora4;
+
+
+
+
+	public void setH4(String h4) {
+		this.h4 = h4;
 	}
 
-	public String getHora5() {
-		return hora5;
+
+
+
+
+	public String getH5() {
+		return h5;
 	}
 
-	public void setHora5(String hora5) {
-		this.hora5 = hora5;
+
+
+
+
+	public void setH5(String h5) {
+		this.h5 = h5;
 	}
 
-	public String getHora6() {
-		return hora6;
+
+
+
+
+	public String getH6() {
+		return h6;
 	}
 
-	public void setHora6(String hora6) {
-		this.hora6 = hora6;
+
+
+
+
+	public void setH6(String h6) {
+		this.h6 = h6;
 	}
 
-	public String getHora7() {
-		return hora7;
+
+
+
+
+	public String getH7() {
+		return h7;
 	}
 
-	public String getHora8() {
-		return hora8;
+
+
+
+
+	public void setH7(String h7) {
+		this.h7 = h7;
 	}
 
-	public String getHora9() {
-		return hora9;
+
+
+
+
+	public String getH8() {
+		return h8;
 	}
 
-	public String getHora10() {
-		return hora10;
+
+
+
+
+	public void setH8(String h8) {
+		this.h8 = h8;
 	}
 
-	public String getHora11() {
-		return hora11;
+
+
+
+
+	public String getH9() {
+		return h9;
 	}
 
-	public String getHora12() {
-		return hora12;
+
+
+
+
+	public void setH9(String h9) {
+		this.h9 = h9;
 	}
 
-	public String getHora13() {
-		return hora13;
+
+
+
+
+	public String getH10() {
+		return h10;
 	}
 
-	public String getHora14() {
-		return hora14;
+
+
+
+
+	public void setH10(String h10) {
+		this.h10 = h10;
 	}
 
-	public String getHora15() {
-		return hora15;
+
+
+
+
+	public String getH11() {
+		return h11;
 	}
 
-	public String getHora16() {
-		return hora16;
+
+
+
+
+	public void setH11(String h11) {
+		this.h11 = h11;
 	}
 
-	public String getHora17() {
-		return hora17;
+
+
+
+
+	public String getH12() {
+		return h12;
 	}
 
-	public String getHora18() {
-		return hora18;
+
+
+
+
+	public void setH12(String h12) {
+		this.h12 = h12;
 	}
 
-	public String getHora19() {
-		return hora19;
+
+
+
+
+	public String getH13() {
+		return h13;
 	}
 
-	public String getHora20() {
-		return hora20;
+
+
+
+
+	public void setH13(String h13) {
+		this.h13 = h13;
 	}
 
-	public String getHora21() {
-		return hora21;
+
+
+
+
+	public String getH14() {
+		return h14;
 	}
 
-	public String getHora22() {
-		return hora22;
+
+
+
+
+	public void setH14(String h14) {
+		this.h14 = h14;
 	}
 
-	public String getHora23() {
-		return hora23;
+
+
+
+
+	public String getH15() {
+		return h15;
 	}
 
-	public void setHora7(String hora7) {
-		this.hora7 = hora7;
+
+
+
+
+	public void setH15(String h15) {
+		this.h15 = h15;
 	}
 
-	public void setHora8(String hora8) {
-		this.hora8 = hora8;
+
+
+
+
+	public String getH16() {
+		return h16;
 	}
 
-	public void setHora9(String hora9) {
-		this.hora9 = hora9;
+
+
+
+
+	public void setH16(String h16) {
+		this.h16 = h16;
 	}
 
-	public void setHora10(String hora10) {
-		this.hora10 = hora10;
+
+
+
+
+	public String getH17() {
+		return h17;
 	}
 
-	public void setHora11(String hora11) {
-		this.hora11 = hora11;
+
+
+
+
+	public void setH17(String h17) {
+		this.h17 = h17;
 	}
 
-	public void setHora12(String hora12) {
-		this.hora12 = hora12;
+
+
+
+
+	public String getH18() {
+		return h18;
 	}
 
-	public void setHora13(String hora13) {
-		this.hora13 = hora13;
+
+
+
+
+	public void setH18(String h18) {
+		this.h18 = h18;
 	}
 
-	public void setHora14(String hora14) {
-		this.hora14 = hora14;
+
+
+
+
+	public String getH19() {
+		return h19;
 	}
 
-	public void setHora15(String hora15) {
-		this.hora15 = hora15;
+
+
+
+
+	public void setH19(String h19) {
+		this.h19 = h19;
 	}
 
-	public void setHora16(String hora16) {
-		this.hora16 = hora16;
+
+
+
+
+	public String getH20() {
+		return h20;
 	}
 
-	public void setHora17(String hora17) {
-		this.hora17 = hora17;
+
+
+
+
+	public void setH20(String h20) {
+		this.h20 = h20;
 	}
 
-	public void setHora18(String hora18) {
-		this.hora18 = hora18;
+
+
+
+
+	public String getH21() {
+		return h21;
 	}
 
-	public void setHora19(String hora19) {
-		this.hora19 = hora19;
+
+
+
+
+	public void setH21(String h21) {
+		this.h21 = h21;
 	}
 
-	public void setHora20(String hora20) {
-		this.hora20 = hora20;
+
+
+
+
+	public String getH22() {
+		return h22;
 	}
 
-	public void setHora21(String hora21) {
-		this.hora21 = hora21;
+
+
+
+
+	public void setH22(String h22) {
+		this.h22 = h22;
 	}
 
-	public void setHora22(String hora22) {
-		this.hora22 = hora22;
+
+
+
+
+	public String getH23() {
+		return h23;
 	}
 
-	public void setHora23(String hora23) {
-		this.hora23 = hora23;
+
+
+
+
+	public void setH23(String h23) {
+		this.h23 = h23;
 	}
-	
-	public String getHora24() {
-		return hora24;
+
+
+
+
+
+	public String getH24() {
+		return h24;
 	}
-	
-	public void setHora24(String hora24) {
-		this.hora24 = hora24;
+
+
+
+
+
+	public void setH24(String h24) {
+		this.h24 = h24;
 	}
+
 	
 	
 }
