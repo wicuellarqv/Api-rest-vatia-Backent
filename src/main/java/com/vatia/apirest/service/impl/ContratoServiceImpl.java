@@ -215,17 +215,17 @@ public class ContratoServiceImpl implements ContratoService {
 				ContratosList.setIdContrato(ContratosNew.getIdContrato());
 			}
 			
-			if (contratosRequest.getTipoMercado() != null) {
-				ContratosList.setIdTipoMercado(Integer.parseInt(contratosRequest.getTipoMercado()));
+			if (ContratosNew.getIdTipoMercado() != null) {
+				ContratosList.setIdTipoMercado(ContratosNew.getIdTipoMercado());
 			}
 			if (contratosRequest.getEstadoContrato() != null) {
 				ContratosList.setEstadoContrato(contratosRequest.getEstadoContrato());
 			}
-			if (contratosRequest.getTipoContrato() != null) {
-				ContratosList.setIdTipoContrato(Integer.parseInt(contratosRequest.getTipoContrato()));
+			if (ContratosNew.getIdTipoContrato() != null) {
+				ContratosList.setIdTipoContrato(ContratosNew.getIdTipoContrato());
 			}
-			if (contratosRequest.getNegociacionContrato() != null) {
-				ContratosList.setIdNegContrato(Integer.parseInt(contratosRequest.getNegociacionContrato()));
+			if (ContratosNew.getIdNegContrato() != null) {
+				ContratosList.setIdNegContrato(ContratosNew.getIdNegContrato());
 			}
 			if (contratosRequest.getFechaInicioContrato() != null) {
 				ContratosList.setFecPeriodoInicio(contratosRequest.getFechaInicioContrato());
@@ -242,20 +242,13 @@ public class ContratoServiceImpl implements ContratoService {
 			if (contratosRequest.getNumContrato() != null) {
 				ContratosList.setNumContrato(Integer.parseInt(contratosRequest.getNumContrato()));
 			}				
-			if (contratosRequest.getCod_SIC_comprador()!= "") {
-
-				AgentesComerciales agentesComerciales = new AgentesComerciales();
-				agentesComerciales = agenteComercialRepository.findAllCod(contratosRequest.getCod_SIC_comprador());
-				ContratosList.setIdAgenteComprador(agentesComerciales.getIdAgenteCcial());
-
+				
+			if (ContratosNew.getIdAgenteComprador() != null) {
+			ContratosList.setIdAgenteComprador(ContratosNew.getIdAgenteComprador());
 			}
-			if (contratosRequest.getCod_SIC_vendedor()!= "") {
-
-				AgentesComerciales agentesComerciales = new AgentesComerciales();
-				agentesComerciales = agenteComercialRepository.findAllCod(contratosRequest.getCod_SIC_vendedor());
-				ContratosList.setIdAgenteVendedor(agentesComerciales.getIdAgenteCcial());
-			}
-			
+			if (ContratosNew.getIdAgenteVendedor() != null) {
+				ContratosList.setIdAgenteVendedor(ContratosNew.getIdAgenteVendedor());
+			}			
 			if (contratosRequest.getCondicionTipoContrato() != null) {
 				ContratosList.setIdCondicionTipoContrato(Integer.parseInt(contratosRequest.getCondicionTipoContrato()));
 			}

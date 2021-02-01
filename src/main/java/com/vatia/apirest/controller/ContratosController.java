@@ -354,7 +354,7 @@ public class ContratosController {
 			saveResponse = contratoService.updateContrato(cr, listCantidad, listFechaPagos);
 		} catch (Exception e2) {
 			e2.printStackTrace();
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), saveResponse),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
