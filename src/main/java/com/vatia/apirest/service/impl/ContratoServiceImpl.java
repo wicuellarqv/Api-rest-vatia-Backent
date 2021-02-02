@@ -326,7 +326,7 @@ public class ContratoServiceImpl implements ContratoService {
 
 				for (PreciosContratos preciosContratosNew : PreciosContratosNew) {
 					
-					Date dateFechaPeriodoNew = new SimpleDateFormat("yyyy-MM").parse(preciosContratosNew.getFecPeriodoPrecio());
+					Date dateFechaPeriodoNew = new SimpleDateFormat("MM-yyyy").parse(preciosContratosNew.getFecPeriodoPrecio());
 
 					// Verifica si la fecha actual es posterior al periodo para eliminar
 					if (objDate.after(dateFechaPeriodoNew)) {
@@ -335,7 +335,7 @@ public class ContratoServiceImpl implements ContratoService {
 				}				
 				
 				for (PreciosRequest LPreciosRequest : listaPreciosRequest) {
-					Date dateFechaPeriodo = new SimpleDateFormat("yyyy-MM").parse(LPreciosRequest.getMes());
+					Date dateFechaPeriodo = new SimpleDateFormat("MM-yyyy").parse(LPreciosRequest.getMes());
 					
 					// Verifica si la fecha actual es posterior al periodo para hacer el insert
 					if (objDate.after(dateFechaPeriodo)) {
