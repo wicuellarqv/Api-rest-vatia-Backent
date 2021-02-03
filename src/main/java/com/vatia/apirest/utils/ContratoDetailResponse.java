@@ -5,7 +5,7 @@ import java.util.List;
 public class ContratoDetailResponse {
 
 	private String id_contrato, num_contrato, codigo_sic,
-	negocio_contrato, comprador, vendedor, estado, fecha_inicio,
+	negocio_contrato, id_comprador, comprador,id_vendedor,  vendedor, estado, fecha_inicio,
 	fecha_fin, condicion, formula, tel_contacto, nombre_contacto, fecha_firma,
 	documento, email_contacto, tipo_contrato, tipo_mercado, tipo_precio, formula_precio,
 	tipo_cantidad, tipo_garantia;
@@ -21,27 +21,44 @@ public class ContratoDetailResponse {
 		this.num_contrato = args[1].trim();
 		this.codigo_sic = args[2].trim();
 		this.negocio_contrato = args[3].trim();
-		this.comprador = args[4].trim();
-		this.vendedor = args[5].trim();
-		this.estado = args[6].trim();
-		this.fecha_inicio = args[7].trim();
-		this.fecha_fin = args[8].trim();
-		this.condicion = args[9].trim();		
-		this.tel_contacto = args[10].trim();
-		this.nombre_contacto= args[11].trim();		
-		this.fecha_firma= args[12].trim();
-		this.documento= args[13].trim();
-		this.email_contacto= args[14].trim();
-		this.tipo_contrato= args[15].trim();
-		this.tipo_mercado= args[16].trim();
-		this.tipo_precio= args[17].trim();
-		this.formula_precio= args[18].trim();
-		this.tipo_cantidad= args[19].trim();
-		this.tipo_garantia= args[20].trim();
+		this.id_comprador = args[4].trim();
+		this.comprador = args[5].trim();
+		this.id_vendedor = args[6].trim();
+		this.vendedor = args[7].trim();
+		this.estado = args[8].trim();
+		this.fecha_inicio = args[9].trim();
+		this.fecha_fin = args[10].trim();
+		this.condicion = args[11].trim();		
+		this.tel_contacto = args[12].trim();
+		this.nombre_contacto= args[13].trim();		
+		this.fecha_firma= args[14].trim();
+		this.documento= args[15].trim();
+		this.email_contacto= args[16].trim();
+		this.tipo_contrato= args[17].trim();
+		this.tipo_mercado= args[18].trim();
+		this.tipo_precio= args[19].trim();
+		this.formula_precio= args[20].trim();
+		this.tipo_cantidad= args[21].trim();
+		this.tipo_garantia= args[22].trim();
 		}
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "ContratoDetailResponse [id_contrato=" + id_contrato + ", num_contrato=" + num_contrato + ", codigo_sic="
+				+ codigo_sic + ", negocio_contrato=" + negocio_contrato + ", id_comprador=" + id_comprador
+				+ ", comprador=" + comprador + ", id_vendedor=" + id_vendedor + ", vendedor=" + vendedor + ", estado="
+				+ estado + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", condicion=" + condicion
+				+ ", formula=" + formula + ", tel_contacto=" + tel_contacto + ", nombre_contacto=" + nombre_contacto
+				+ ", fecha_firma=" + fecha_firma + ", documento=" + documento + ", email_contacto=" + email_contacto
+				+ ", tipo_contrato=" + tipo_contrato + ", tipo_mercado=" + tipo_mercado + ", tipo_precio=" + tipo_precio
+				+ ", formula_precio=" + formula_precio + ", tipo_cantidad=" + tipo_cantidad + ", tipo_garantia="
+				+ tipo_garantia + ", precios=" + precios + ", cantidad=" + cantidad + ", garantias=" + garantias
+				+ ", fechaPago=" + fechaPago + "]";
+	}
+
+
 	public List<fechaPagoResponse> getFechaPago() {
 		return fechaPago;
 	}
@@ -80,17 +97,23 @@ public class ContratoDetailResponse {
 
 
 
-	@Override
-	public String toString() {
-		return "ContratoDetailResponse [id_contrato=" + id_contrato + ", num_contrato=" + num_contrato + ", codigo_sic="
-				+ codigo_sic + ", negocio_contrato=" + negocio_contrato + ", comprador=" + comprador + ", vendedor="
-				+ vendedor + ", estado=" + estado + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin
-				+ ", condicion=" + condicion + ", formula=" + formula + ", tel_contacto=" + tel_contacto
-				+ ", nombre_contacto=" + nombre_contacto + ", fecha_firma=" + fecha_firma + ", documento=" + documento
-				+ ", email_contacto=" + email_contacto + ", tipo_contrato=" + tipo_contrato + ", tipo_mercado="
-				+ tipo_mercado + ", tipo_precio=" + tipo_precio + ", formula_precio=" + formula_precio
-				+ ", tipo_cantidad=" + tipo_cantidad + ", tipo_garantia=" + tipo_garantia + ", precios=" + precios
-				+ ", cantidad=" + cantidad + ", garantias=" + garantias + ", fechaPago=" + fechaPago + "]";
+	public String getId_comprador() {
+		return id_comprador;
+	}
+
+
+	public void setId_comprador(String id_comprador) {
+		this.id_comprador = id_comprador;
+	}
+
+
+	public String getId_vendedor() {
+		return id_vendedor;
+	}
+
+
+	public void setId_vendedor(String id_vendedor) {
+		this.id_vendedor = id_vendedor;
 	}
 
 	public void setEstado(String estado) {
