@@ -195,7 +195,7 @@ public class ContratosController {
 	}
 	
 	
-	@GetMapping("/getIdSic")
+	@PostMapping("/getIdSic")
 	public ResponseEntity<ResponseHTTP> getIdSic(@RequestBody JSONObject obj) {
 		String dato = null;
 		try {

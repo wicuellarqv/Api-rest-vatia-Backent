@@ -1134,8 +1134,8 @@ public class ContratoServiceImpl implements ContratoService {
 		
 		String msg = null;
 
-		if (obj.get("idContrato") != null) {
-			int idContrato = (int) obj.get("idContrato");
+		if (obj.get("numContrato") != null) {
+			int idContrato = (int) obj.get("numContrato");
 			String contratoN = ContratosRepository.idContrato(idContrato);
 			if (contratoN != null ) {
 				return msg = "Existe el codigo de contrato numero: "+ contratoN;					
