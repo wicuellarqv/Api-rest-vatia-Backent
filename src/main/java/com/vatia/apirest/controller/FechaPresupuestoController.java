@@ -21,32 +21,28 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.vatia.apirest.model.Costos_indirectos;
 import com.vatia.apirest.model.Cuentas_CeCos_CostInd;
+import com.vatia.apirest.model.FechaPresupuesto;
 import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.response.ResponseHTTP;
 import com.vatia.apirest.service.CostosIndirectosService;
+import com.vatia.apirest.service.FechaPresupuestoService;
 import com.vatia.apirest.utils.ContratosRequest;
 
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE})
-@RequestMapping("v1/CostosIndirectos")
-public class CostosIndirectosController {
+@RequestMapping("v1/FechaPresupuesto")
+public class FechaPresupuestoController {
 	@Autowired
-	private CostosIndirectosService CostosIndirectosService;
+	private FechaPresupuestoService fechaPresupuestoService;
 
-	@GetMapping("/getAllPeriodo")
-	public List<Costos_indirectos> getAllPeriodo(@RequestParam String mes,@RequestParam String ano) {
-		
-			return this.CostosIndirectosService.getAllPeriodo(mes, ano);
-
-	}
 	
-	@PostMapping("/saveCostoInditecto")
-	public ResponseEntity<ResponseHTTP> saveCostoInditecto( @RequestBody JSONObject obj) {
+	@PostMapping("/saveFechaPresupuesto")
+	public ResponseEntity<ResponseHTTP> saveFechaPresupuesto( @RequestBody JSONObject obj) {
 		String saveResponse = null;
 		try {			
 		
-			saveResponse = CostosIndirectosService.saveCostoInditecto(obj);			
+			saveResponse = fechaPresupuestoService.saveFechaPresupuesto(obj);			
 			
 		} catch (Exception e2) {
 			e2.printStackTrace();
@@ -61,12 +57,12 @@ public class CostosIndirectosController {
 
 	}
 	
-	@PostMapping("/validaCuenCenC")
-	public ResponseEntity<ResponseHTTP> validaCuenCenC( @RequestBody JSONObject obj) {
-		String status = null;
+	@PostMapping("/updateFechaPresupuesto")
+	public ResponseEntity<ResponseHTTP> updateFechaPresupuesto( @RequestBody JSONObject obj) {
+		String saveResponse = null;
 		try {			
 		
-			status = CostosIndirectosService.validaCuenCenC(obj);			
+			saveResponse = fechaPresupuestoService.updateFechaPresupuesto(obj);			
 			
 		} catch (Exception e2) {
 			e2.printStackTrace();
@@ -74,45 +70,28 @@ public class CostosIndirectosController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		return status != null
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), status), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), status),
+		return saveResponse != null
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), saveResponse), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), saveResponse),
 						HttpStatus.NOT_FOUND);
 
 	}
 	
-	@DeleteMapping ("/deleteCenCost")
-	public ResponseEntity<ResponseHTTP> deleteCenCost(@RequestParam Integer id) {
-		String status = null;
-		try {
-			
-			status = CostosIndirectosService.deleteCenCost(id);
-
-		} catch (Exception e) {
-			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
-					HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		return status != null ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), status), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), status),
-						HttpStatus.INTERNAL_SERVER_ERROR);
-
-	}
 	
-	@GetMapping("/getAllCuentasCecos")
-	public ResponseEntity<ResponseHTTP> getAllCuentasCecos() {
-		List<Cuentas_CeCos_CostInd> cuentas_CeCos_CostInd = new ArrayList<>();
+	@GetMapping("/getAllFechaPresupuesto")
+	public ResponseEntity<ResponseHTTP> getAllFechaPresupuesto() {
+		List<FechaPresupuesto> fechaPresupuesto = new ArrayList<>();
 
 		try {
-			cuentas_CeCos_CostInd = CostosIndirectosService.getAllCuentasCecos();
+			fechaPresupuesto = fechaPresupuestoService.getAllFechaPresupuesto();
 
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return cuentas_CeCos_CostInd.size() > 0
-				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), cuentas_CeCos_CostInd), HttpStatus.OK)
-				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), cuentas_CeCos_CostInd),
+		return fechaPresupuesto.size() > 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), fechaPresupuesto), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), fechaPresupuesto),
 						HttpStatus.NOT_FOUND);
 
 	}
