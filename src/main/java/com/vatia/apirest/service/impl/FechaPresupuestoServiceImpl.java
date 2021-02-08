@@ -5,6 +5,8 @@ import java.util.List;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.vatia.apirest.model.CantidadesContratos;
 import com.vatia.apirest.model.FechaPresupuesto;
 import com.vatia.apirest.repository.FechaPresupuestoRepository;
 import com.vatia.apirest.service.FechaPresupuestoService;
@@ -16,11 +18,11 @@ public class FechaPresupuestoServiceImpl implements FechaPresupuestoService{
 	
 	
 	@Override
-	public List<FechaPresupuesto> getAllFechaPresupuesto() {
+	public List<FechaPresupuesto> getAllFechaPresupuesto(String ano) {
 		List<FechaPresupuesto> fechaPresupuesto = null;
 		try {
 
-			fechaPresupuesto = fechaPresupuestoRepository.findAll();
+			fechaPresupuesto = fechaPresupuestoRepository.getAllFechad(ano);	
 		
 		} catch (Exception e) {
 			System.out.print(" Error en CuentasCecosCost: " + e);

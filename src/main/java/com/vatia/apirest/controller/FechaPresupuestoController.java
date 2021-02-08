@@ -79,11 +79,11 @@ public class FechaPresupuestoController {
 	
 	
 	@GetMapping("/getAllFechaPresupuesto")
-	public ResponseEntity<ResponseHTTP> getAllFechaPresupuesto() {
+	public ResponseEntity<ResponseHTTP> getAllFechaPresupuesto(@RequestParam String ano) {
 		List<FechaPresupuesto> fechaPresupuesto = new ArrayList<>();
 
 		try {
-			fechaPresupuesto = fechaPresupuestoService.getAllFechaPresupuesto();
+			fechaPresupuesto = fechaPresupuestoService.getAllFechaPresupuesto(ano);
 
 		} catch (Exception e) {
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),

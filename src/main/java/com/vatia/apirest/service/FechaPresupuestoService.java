@@ -14,7 +14,7 @@ public interface FechaPresupuestoService {
 	
 	public String updateFechaPresupuesto(JSONObject obj);
 	
-	public List<FechaPresupuesto> getAllFechaPresupuesto();
+	public List<FechaPresupuesto> getAllFechaPresupuesto(String ano);
 	
 		
 }
