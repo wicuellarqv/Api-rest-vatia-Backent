@@ -7,13 +7,14 @@ public class ClientePk implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String ID_CLIENTE;
+	private String idCliente;
 	private String FECHA_ESTADO_HIS_MER;
-	public String getID_CLIENTE() {
-		return ID_CLIENTE;
+	
+	public String getIdCliente() {
+		return idCliente;
 	}
-	public void setID_CLIENTE(String iD_CLIENTE) {
-		ID_CLIENTE = iD_CLIENTE;
+	public void setIdCliente(String idCliente) {
+		this.idCliente = idCliente;
 	}
 	public String getFECHA_ESTADO_HIS_MER() {
 		return FECHA_ESTADO_HIS_MER;
@@ -26,7 +27,7 @@ public class ClientePk implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((FECHA_ESTADO_HIS_MER == null) ? 0 : FECHA_ESTADO_HIS_MER.hashCode());
-		result = prime * result + ((ID_CLIENTE == null) ? 0 : ID_CLIENTE.hashCode());
+		result = prime * result + ((idCliente == null) ? 0 : idCliente.hashCode());
 		return result;
 	}
 	@Override
@@ -43,13 +44,14 @@ public class ClientePk implements Serializable {
 				return false;
 		} else if (!FECHA_ESTADO_HIS_MER.equals(other.FECHA_ESTADO_HIS_MER))
 			return false;
-		if (ID_CLIENTE == null) {
-			if (other.ID_CLIENTE != null)
+		if (idCliente == null) {
+			if (other.idCliente != null)
 				return false;
-		} else if (!ID_CLIENTE.equals(other.ID_CLIENTE))
+		} else if (!idCliente.equals(other.idCliente))
 			return false;
 		return true;
 	}
+	
 	
 	
 }

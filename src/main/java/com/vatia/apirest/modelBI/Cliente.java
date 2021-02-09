@@ -22,7 +22,7 @@ public class Cliente implements Serializable {
 	
 	@Id
 	@Column(name="ID_CLIENTE",updatable = false, insertable= false)
-	private String ID_CLIENTE;
+	private String idCliente;
 	@Column(name="ID_INTERNO",updatable = false, insertable= false)
 	private String ID_INTERNO;
 	@Column(name="NIT_CEDULA",updatable = false, insertable= false)
@@ -73,18 +73,18 @@ public class Cliente implements Serializable {
 	@Column(name="NOMBRE_ESTADO_CLIENTE",updatable = false, insertable= false)
 	private String NOMBRE_ESTADO_CLIENTE;
 	@Column(name="CATEGORIA_CLIENTE",updatable = false, insertable= false)
-	private String CATEGORIA_CLIENTE;
+	private String categoria;
 	
 	public Cliente() {};
 	
-	public Cliente(String iD_CLIENTE, String iD_INTERNO, String nIT_CEDULA, String cODIGO_SIC, String nombreRazonSocial,
+	public Cliente(String idCliente, String iD_INTERNO, String nIT_CEDULA, String cODIGO_SIC, String nombreRazonSocial,
 			String nombreFacturacion, String fECHA_SISTEMA, String iD_ESTADO_CLI, String fECHA_ESTADO_CLI,
 			String iD_ESTADO_HIS_MER, String fECHA_ESTADO_HIS_MER, String nOM_ESTADO_HIS_MER, String iD_GR_CLI,
 			String nOM_GR_CLI, String iD_MUNICIPIO, String nOM_MUNICIPIO, String iD_DEPARTAMENTO,
 			String nOM_DEPARTAMENTO, String iD_AGE_MEN, String nOM_AGE_MEN, String eSTADO_AGE_MEN, String iD_OFERTA,
-			String aPLICA_BOLSA, String tIPO_CONTRATO, String nOMBRE_ESTADO_CLIENTE, String cATEGORIA_CLIENTE) {
+			String aPLICA_BOLSA, String tIPO_CONTRATO, String nOMBRE_ESTADO_CLIENTE, String categoria) {
 		super();
-		ID_CLIENTE = iD_CLIENTE;
+		this.idCliente = idCliente;
 		ID_INTERNO = iD_INTERNO;
 		NIT_CEDULA = nIT_CEDULA;
 		CODIGO_SIC = cODIGO_SIC;
@@ -109,15 +109,16 @@ public class Cliente implements Serializable {
 		APLICA_BOLSA = aPLICA_BOLSA;
 		TIPO_CONTRATO = tIPO_CONTRATO;
 		NOMBRE_ESTADO_CLIENTE = nOMBRE_ESTADO_CLIENTE;
-		CATEGORIA_CLIENTE = cATEGORIA_CLIENTE;
+		this.categoria = categoria;
 	}
 
-	public String getID_CLIENTE() {
-		return ID_CLIENTE;
+
+	public String getIdCliente() {
+		return idCliente;
 	}
 
-	public void setID_CLIENTE(String iD_CLIENTE) {
-		ID_CLIENTE = iD_CLIENTE;
+	public void setIdCliente(String idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getID_INTERNO() {
@@ -312,11 +313,11 @@ public class Cliente implements Serializable {
 		NOMBRE_ESTADO_CLIENTE = nOMBRE_ESTADO_CLIENTE;
 	}
 
-	public String getCATEGORIA_CLIENTE() {
-		return CATEGORIA_CLIENTE;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setCATEGORIA_CLIENTE(String cATEGORIA_CLIENTE) {
-		CATEGORIA_CLIENTE = cATEGORIA_CLIENTE;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 }
