@@ -280,7 +280,7 @@ public class ContratosController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		return status == null ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), status), HttpStatus.OK)
+		return status != null ? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), status), HttpStatus.OK)
 				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), status),
 						HttpStatus.INTERNAL_SERVER_ERROR);
 
