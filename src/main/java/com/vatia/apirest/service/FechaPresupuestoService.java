@@ -10,11 +10,15 @@ import com.vatia.apirest.model.FechaPresupuesto;
 public interface FechaPresupuestoService {
 	
 	
-	public String saveFechaPresupuesto(JSONObject obj);
+	public FechaPresupuesto saveFechaPresupuesto(FechaPresupuesto fechaPresupuesto);
 	
-	public String updateFechaPresupuesto(JSONObject obj);
+	public FechaPresupuesto updateFechaPresupuesto(FechaPresupuesto fechaPresupuesto);
 	
-	public List<FechaPresupuesto> getAllFechaPresupuesto(String ano);
+	public void deleteFechaPresupuesto(FechaPresupuesto fechaPresupuesto);
+	
+	public List<FechaPresupuesto> getAllFechaPresupuesto();
+	
+	public List<FechaPresupuesto> getAllFechaPresupuestoByAnio(String ano);
 	
 		
 }
