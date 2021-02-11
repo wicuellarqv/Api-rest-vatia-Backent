@@ -15,15 +15,15 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, C
 
 	public List<Cliente> findByNombreFacturacionLikeOrderByNombreFacturacionAsc(String nombreLike);
 
-	@Query(value = "SELECT ID_CLIENTE,NOMBRE_FACTURACION,FECHA_ESTADO_HIS_MER"
+	@Query(value = "SELECT ID_CLIENTE,NOMBRE_FACTURACION"
 			+ "  FROM STG_TRADEBALANCE.dbo.STG_DIM_CLIENTE where NOMBRE_FACTURACION like :nombre AND FECHA_ESTADO_HIS_MER IS NOT NULL "
-			+ "  group by ID_CLIENTE,NOMBRE_FACTURACION,FECHA_ESTADO_HIS_MER order by NOMBRE_FACTURACION ASC", nativeQuery = true)
+			+ "  group by ID_CLIENTE,NOMBRE_FACTURACION order by NOMBRE_FACTURACION ASC", nativeQuery = true)
 	public List<Object> nativeFindByLikeClienteNombreFacturacion(@Param("nombre") String nombreLike);
 
-	@Query(value = "SELECT ID_CLIENTE,NOMBRE_FACTURACION,FECHA_ESTADO_HIS_MER  "
-			+ "			  FROM STG_TRADEBALANCE.dbo.STG_DIM_CLIENTE   "
-			+ "			  where NOMBRE_RAZON_SOCIAL like :razon AND FECHA_ESTADO_HIS_MER IS NOT NULL "
-			+ "			  group by ID_CLIENTE,NOMBRE_FACTURACION,FECHA_ESTADO_HIS_MER order by NOMBRE_FACTURACION ASC", nativeQuery = true)
+	@Query(value = "SELECT ID_CLIENTE,NOMBRE_FACTURACION " + 
+			"						  FROM STG_TRADEBALANCE.dbo.STG_DIM_CLIENTE   " + 
+			"						  where NOMBRE_RAZON_SOCIAL like :razon AND FECHA_ESTADO_HIS_MER IS NOT NULL " + 
+			"						  group by ID_CLIENTE,NOMBRE_FACTURACION order by NOMBRE_FACTURACION ASC", nativeQuery = true)
 	public List<Object> nativeFindByLikeClienteRazonSocial(@Param("razon") String razon);
 
 	@Query(value = "SELECT DISTINCT CATEGORIA_CLIENTE  "
