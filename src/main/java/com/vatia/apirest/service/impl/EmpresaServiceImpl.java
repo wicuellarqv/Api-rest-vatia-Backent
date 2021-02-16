@@ -21,9 +21,8 @@ public class EmpresaServiceImpl implements EmpresaService{
 	}
 
 	@Override
-	public void save(Empresa empresa) {
-		// TODO Auto-generated method stub
-		empresaRepository.save(empresa);
+	public Empresa save(Empresa empresa) {
+		return empresaRepository.save(empresa);
 	}
 
 	@Override

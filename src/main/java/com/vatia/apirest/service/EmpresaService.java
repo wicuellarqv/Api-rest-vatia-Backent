@@ -9,7 +9,7 @@ public interface EmpresaService {
 
 	public List<Empresa> findAll();
 
-	public void save(Empresa empresa);
+	public Empresa save(Empresa empresa);
 
 	public void deleteById(Integer id);
 }
