@@ -4,7 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import com.vatia.apirest.modelBI.Capains;
 import com.vatia.apirest.modelBI.Cliente;
+import com.vatia.apirest.repositoryBI.CapainsRepository;
 import com.vatia.apirest.repositoryBI.ClienteRepository;
 import com.vatia.apirest.service.BIService;
 import com.vatia.apirest.utils.CheckPageable;
@@ -15,6 +18,9 @@ public class BIServiceImpl implements BIService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private CapainsRepository capainsRepository;
 	
 	@Override
 	public List<Cliente> getAllClientes() {
@@ -51,6 +57,11 @@ public class BIServiceImpl implements BIService {
 	@Override
 	public List<Object> getCagoriasCliente() {
 		return clienteRepository.nativeCategoriasCliente();
+	}
+
+	@Override
+	public List<Capains> getPlantasLike(String planta) {
+		return capainsRepository.nativeFindLikeByPlanta(planta);
 	}
 
 	

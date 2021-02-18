@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.vatia.apirest.modelBI.Capains;
 import com.vatia.apirest.modelBI.Cliente;
 
 public interface BIService {
@@ -21,4 +22,6 @@ public interface BIService {
 	public Page<Cliente> getLikeClientesByCategoriaPage(int page, int size, String categoria);
 
 	public Page<Cliente> getLikeClientesByCatAndRazPage(int page, int size, String categoria, String razonSocial);
+	
+	public List<Capains> getPlantasLike(String planta);
 }

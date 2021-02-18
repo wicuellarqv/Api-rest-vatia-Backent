@@ -32,6 +32,7 @@ public class EmpresaController {
 		try {
 			ResponseEmpresa = empresaService.save(empresa);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.vatia.apirest.modelBI.Capains;
 import com.vatia.apirest.modelBI.Cliente;
 import com.vatia.apirest.service.BIService;
 import com.vatia.apirest.response.ResponseCheck;
@@ -131,7 +133,24 @@ public class BIController {
 		}
 
 	}
+	
+	
+	@PostMapping("/get_plantas_like")
+	public ResponseEntity<ResponseHTTP> getLikePlantas(@RequestBody Capains capains) {
+		List<Capains> plantas = new ArrayList<>();
 
+		try {
+			plantas = biService.getPlantasLike(capains.getPlanta());
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return plantas.size() > 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), plantas), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), plantas), HttpStatus.NOT_FOUND);
+
+	}
+	
 	static class clientePageRequest implements Serializable {
 		private static final long serialVersionUID = 1L;
 		private int page;
