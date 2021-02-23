@@ -22,7 +22,7 @@ public class CategoriaEstado implements Serializable {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name = "id")
-	Integer id;
+	private Integer id;
 	
 	@ManyToOne()
 	@JoinColumn(name = "categoria", referencedColumnName = "id")

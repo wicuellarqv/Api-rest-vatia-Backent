@@ -17,7 +17,7 @@ public class EmpresaServiceImpl implements EmpresaService{
 	@Override
 	public List<Empresa> findAll() {
 		// TODO Auto-generated method stub
-		return empresaRepository.findAll();
+		return (List<Empresa>) empresaRepository.findAll();
 	}
 
 	@Override

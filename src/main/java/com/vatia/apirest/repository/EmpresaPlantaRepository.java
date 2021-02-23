@@ -2,9 +2,9 @@ package com.vatia.apirest.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import com.vatia.apirest.model.Empresa;
+import com.vatia.apirest.model.EmpresaPlanta;
 
 @Repository
-public interface EmpresaRepository extends CrudRepository<Empresa, Integer> {
+public interface EmpresaPlantaRepository extends CrudRepository<EmpresaPlanta, Integer> {
 
 }

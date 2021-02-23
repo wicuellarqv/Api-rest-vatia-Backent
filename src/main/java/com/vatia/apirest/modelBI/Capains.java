@@ -18,77 +18,77 @@ public class Capains implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "FECHA", updatable = false, insertable = false)
-	public Date FECHA;
+	public Date fecha;
 	@Column(name = "VERSION", updatable = false, insertable = false)
-	public String VERSION;
+	public String version;
 	@Column(name = "AGENTE", updatable = false, insertable = false)
-	public String AGENTE;
+	public String agente;
 	@Id
 	@Column(name = "PLANTA", updatable = false, insertable = false)
 	public String planta;
 	@Column(name = "NOMBRE", updatable = false, insertable = false)
 	public String nombre;
 	@Column(name = "CAPACIDAD_INSTAL", updatable = false, insertable = false)
-	public Double CAPACIDAD_INSTAL;
+	public Double capacidadInstall;
 	@Column(name = "DESPACHO_CENTRAL", updatable = false, insertable = false)
-	public String DESPACHO_CENTRAL;
+	public String despachoCentral;
 	@Column(name = "TIPO", updatable = false, insertable = false)
-	public String TIPO;
+	public String tipo;
 	@Column(name = "TIPO_TECNOLOGIA", updatable = false, insertable = false)
-	public String TIPO_TECNOLOGIA;
+	public String tipoTecnologia;
 	@Column(name = "EXPLOT_COMERCIAL", updatable = false, insertable = false)
-	public String EXPLOT_COMERCIAL;
+	public String explotComercial;
 	@Column(name = "SUB_MER_CON_ASO", updatable = false, insertable = false)
-	public String SUB_MER_CON_ASO;
+	public String subMerConAso;
 	@Column(name = "USUARIO", updatable = false, insertable = false)
-	public String USUARIO;
+	public String usuario;
 	@Column(name = "FECHA_SISTEMA", updatable = false, insertable = false)
-	public String FECHA_SISTEMA;
+	public String fechaSistema;
 
 	public Capains() {
 	}
 
-	public Capains(Date fECHA, String vERSION, String aGENTE, String planta, String nombre, Double cAPACIDAD_INSTAL,
-			String dESPACHO_CENTRAL, String tIPO, String tIPO_TECNOLOGIA, String eXPLOT_COMERCIAL,
-			String sUB_MER_CON_ASO, String uSUARIO, String fECHA_SISTEMA) {
+	public Capains(Date fecha, String version, String agente, String planta, String nombre, Double capacidadInstall,
+			String despachoCentral, String tipo, String tipoTecnologia, String explotComercial, String subMerConAso,
+			String usuario, String fechaSistema) {
 		super();
-		FECHA = fECHA;
-		VERSION = vERSION;
-		AGENTE = aGENTE;
+		this.fecha = fecha;
+		this.version = version;
+		this.agente = agente;
 		this.planta = planta;
 		this.nombre = nombre;
-		CAPACIDAD_INSTAL = cAPACIDAD_INSTAL;
-		DESPACHO_CENTRAL = dESPACHO_CENTRAL;
-		TIPO = tIPO;
-		TIPO_TECNOLOGIA = tIPO_TECNOLOGIA;
-		EXPLOT_COMERCIAL = eXPLOT_COMERCIAL;
-		SUB_MER_CON_ASO = sUB_MER_CON_ASO;
-		USUARIO = uSUARIO;
-		FECHA_SISTEMA = fECHA_SISTEMA;
+		this.capacidadInstall = capacidadInstall;
+		this.despachoCentral = despachoCentral;
+		this.tipo = tipo;
+		this.tipoTecnologia = tipoTecnologia;
+		this.explotComercial = explotComercial;
+		this.subMerConAso = subMerConAso;
+		this.usuario = usuario;
+		this.fechaSistema = fechaSistema;
 	}
 
-	public Date getFECHA() {
-		return FECHA;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setFECHA(Date fECHA) {
-		FECHA = fECHA;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
-	public String getVERSION() {
-		return VERSION;
+	public String getVersion() {
+		return version;
 	}
 
-	public void setVERSION(String vERSION) {
-		VERSION = vERSION;
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
-	public String getAGENTE() {
-		return AGENTE;
+	public String getAgente() {
+		return agente;
 	}
 
-	public void setAGENTE(String aGENTE) {
-		AGENTE = aGENTE;
+	public void setAgente(String agente) {
+		this.agente = agente;
 	}
 
 	public String getPlanta() {
@@ -107,67 +107,68 @@ public class Capains implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Double getCAPACIDAD_INSTAL() {
-		return CAPACIDAD_INSTAL;
+	public Double getCapacidadInstall() {
+		return capacidadInstall;
 	}
 
-	public void setCAPACIDAD_INSTAL(Double cAPACIDAD_INSTAL) {
-		CAPACIDAD_INSTAL = cAPACIDAD_INSTAL;
+	public void setCapacidadInstall(Double capacidadInstall) {
+		this.capacidadInstall = capacidadInstall;
 	}
 
-	public String getDESPACHO_CENTRAL() {
-		return DESPACHO_CENTRAL;
+	public String getDespachoCentral() {
+		return despachoCentral;
 	}
 
-	public void setDESPACHO_CENTRAL(String dESPACHO_CENTRAL) {
-		DESPACHO_CENTRAL = dESPACHO_CENTRAL;
+	public void setDespachoCentral(String despachoCentral) {
+		this.despachoCentral = despachoCentral;
 	}
 
-	public String getTIPO() {
-		return TIPO;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setTIPO(String tIPO) {
-		TIPO = tIPO;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
-	public String getTIPO_TECNOLOGIA() {
-		return TIPO_TECNOLOGIA;
+	public String getTipoTecnologia() {
+		return tipoTecnologia;
 	}
 
-	public void setTIPO_TECNOLOGIA(String tIPO_TECNOLOGIA) {
-		TIPO_TECNOLOGIA = tIPO_TECNOLOGIA;
+	public void setTipoTecnologia(String tipoTecnologia) {
+		this.tipoTecnologia = tipoTecnologia;
 	}
 
-	public String getEXPLOT_COMERCIAL() {
-		return EXPLOT_COMERCIAL;
+	public String getExplotComercial() {
+		return explotComercial;
 	}
 
-	public void setEXPLOT_COMERCIAL(String eXPLOT_COMERCIAL) {
-		EXPLOT_COMERCIAL = eXPLOT_COMERCIAL;
+	public void setExplotComercial(String explotComercial) {
+		this.explotComercial = explotComercial;
 	}
 
-	public String getSUB_MER_CON_ASO() {
-		return SUB_MER_CON_ASO;
+	public String getSubMerConAso() {
+		return subMerConAso;
 	}
 
-	public void setSUB_MER_CON_ASO(String sUB_MER_CON_ASO) {
-		SUB_MER_CON_ASO = sUB_MER_CON_ASO;
+	public void setSubMerConAso(String subMerConAso) {
+		this.subMerConAso = subMerConAso;
 	}
 
-	public String getUSUARIO() {
-		return USUARIO;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setUSUARIO(String uSUARIO) {
-		USUARIO = uSUARIO;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
-	public String getFECHA_SISTEMA() {
-		return FECHA_SISTEMA;
+	public String getFechaSistema() {
+		return fechaSistema;
 	}
 
-	public void setFECHA_SISTEMA(String fECHA_SISTEMA) {
-		FECHA_SISTEMA = fECHA_SISTEMA;
-	};
+	public void setFechaSistema(String fechaSistema) {
+		this.fechaSistema = fechaSistema;
+	}
+
 }

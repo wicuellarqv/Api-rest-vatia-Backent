@@ -22,7 +22,7 @@ public class CategoriaCliente implements Serializable {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name = "id")
-	Integer id;
+	private Integer id;
 	
 	@Column(name = "id_cliente")
 	private String idCliente;
