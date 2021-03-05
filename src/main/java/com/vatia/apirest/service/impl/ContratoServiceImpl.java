@@ -4,23 +4,14 @@ package com.vatia.apirest.service.impl;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
 import com.vatia.apirest.model.AgentesComerciales;
-import com.vatia.apirest.model.Cantidad60Meses;
 import com.vatia.apirest.model.CantidadesContratos;
 import com.vatia.apirest.model.CondicionTipoContrato;
 import com.vatia.apirest.model.Contratos;
@@ -29,23 +20,24 @@ import com.vatia.apirest.model.FormulasPrecios;
 import com.vatia.apirest.model.GarantiasContratos;
 import com.vatia.apirest.model.ModalidadesContratos;
 import com.vatia.apirest.model.NegociacionesContratos;
+import com.vatia.apirest.model.PlantaCantContrato;
 import com.vatia.apirest.model.PreciosContratos;
 import com.vatia.apirest.model.SaveResponse;
 import com.vatia.apirest.model.TiposCantidad;
-import com.vatia.apirest.model.TiposMercados;
-import com.vatia.apirest.model.TiposPrecio;
 import com.vatia.apirest.model.TiposContratos;
 import com.vatia.apirest.model.TiposGarantias;
+import com.vatia.apirest.model.TiposMercados;
+import com.vatia.apirest.model.TiposPrecio;
 import com.vatia.apirest.repository.AgenteComercialRepository;
 import com.vatia.apirest.repository.CTContratoRepository;
 import com.vatia.apirest.repository.CantidadRepository;
-import com.vatia.apirest.repository.ConsultaRepository;
 import com.vatia.apirest.repository.ContratosRepository;
 import com.vatia.apirest.repository.FechaPagoContratoRepository;
 import com.vatia.apirest.repository.FormulaPrecioRepository;
 import com.vatia.apirest.repository.GarantiaRepository;
 import com.vatia.apirest.repository.ModalidadContratoRepository;
 import com.vatia.apirest.repository.NegocioContratoRepository;
+import com.vatia.apirest.repository.PlantaCantContratoRepository;
 import com.vatia.apirest.repository.PrecioContratoRepository;
 import com.vatia.apirest.repository.TipoCantidadRepository;
 import com.vatia.apirest.repository.TipoContratoRepository;
@@ -106,6 +98,9 @@ public class ContratoServiceImpl implements ContratoService {
 	
 	@Autowired
 	private FechaPagoContratoRepository fechaPagoContratoRepository;
+	
+	@Autowired
+	private PlantaCantContratoRepository plantaCantContratoRepository;
 
 	@Override
 	public List<TiposMercados> getAllTipoMercado() {
@@ -514,6 +509,26 @@ public class ContratoServiceImpl implements ContratoService {
 				cantidadRepository.updateTipoCan(tipoCantidad,idcontratocan);
 				
 				
+			}
+			
+			// BORRARMOS LOS DATOS DE PLANTA CANTIDAD CONTRATO Y METEMOS LOS NUEVOS
+			if(contratosRequest.getPlantaCantContratos().size() > 0) {
+				List<PlantaCantContrato> delListObject = plantaCantContratoRepository.nativeFindByIdContrato(ContratosNew.getIdContrato());
+				if(delListObject.size() > 0) {
+					for (PlantaCantContrato plantaCantContrato : delListObject) {
+						plantaCantContratoRepository.deleteById(plantaCantContrato.getId());
+					}
+				}
+				//INSERTAMOS LOS NUEVOS
+				for (PlantaCantContrato plantaCantContrato : contratosRequest.getPlantaCantContratos()) {
+					PlantaCantContrato newPlantaCantContrato = new PlantaCantContrato();
+					newPlantaCantContrato.setPlanta(plantaCantContrato.getPlanta());
+					newPlantaCantContrato.setNombrePlanta(plantaCantContrato.getNombrePlanta());
+					newPlantaCantContrato.setCantidadCubierta(plantaCantContrato.getCantidadCubierta());
+					newPlantaCantContrato.setCreateAt(new Date());
+					newPlantaCantContrato.setContrato(ContratosNew);
+					plantaCantContratoRepository.save(newPlantaCantContrato);
+				}
 			}
 
 
@@ -985,6 +1000,20 @@ public class ContratoServiceImpl implements ContratoService {
 						cantidadesContratosN.setCantidadH24(new BigDecimal(LCantidadRequest.getH24().replaceAll(",", ".")));					
 					}
 					cantidadRepository.save(cantidadesContratosN);
+				}
+			}
+			
+			//INSERTAMOS la lista de plantas cantidad contratos
+			
+			if(contratosRequest.getPlantaCantContratos().size() > 0) {
+				for (PlantaCantContrato plantaCantContrato : contratosRequest.getPlantaCantContratos()) {
+					PlantaCantContrato newPlantaCantContrato = new PlantaCantContrato();
+					newPlantaCantContrato.setPlanta(plantaCantContrato.getPlanta());
+					newPlantaCantContrato.setNombrePlanta(plantaCantContrato.getNombrePlanta());
+					newPlantaCantContrato.setCantidadCubierta(plantaCantContrato.getCantidadCubierta());
+					newPlantaCantContrato.setCreateAt(new Date());
+					newPlantaCantContrato.setContrato(contrato);
+					plantaCantContratoRepository.save(newPlantaCantContrato);
 				}
 			}
 			

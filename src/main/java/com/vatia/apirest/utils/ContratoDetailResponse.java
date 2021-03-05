@@ -2,6 +2,8 @@ package com.vatia.apirest.utils;
 
 import java.util.List;
 
+import com.vatia.apirest.model.PlantaCantContrato;
+
 public class ContratoDetailResponse {
 
 	private String id_contrato, num_contrato, codigo_sic,
@@ -13,6 +15,7 @@ public class ContratoDetailResponse {
 	private List<TipoCantidadResponse> cantidad;
 	private List<GarantiasResponse> garantias;
 	private List<fechaPagoResponse> fechaPago;
+	private List<PlantaCantContrato> plantaCantContratos;
 	
 	public ContratoDetailResponse(String[] args) {
 		super();
@@ -286,6 +289,16 @@ public class ContratoDetailResponse {
 
 	public void setTipo_garantia(String tipo_garantia) {
 		this.tipo_garantia = tipo_garantia;
+	}
+
+
+	public List<PlantaCantContrato> getPlantaCantContratos() {
+		return plantaCantContratos;
+	}
+
+
+	public void setPlantaCantContratos(List<PlantaCantContrato> plantaCantContratos) {
+		this.plantaCantContratos = plantaCantContratos;
 	}
 
 	

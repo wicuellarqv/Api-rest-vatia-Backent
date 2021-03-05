@@ -1,9 +1,13 @@
 package com.vatia.apirest.utils;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ContratosRequest {
+import com.vatia.apirest.model.PlantaCantContrato;
+
+public class ContratosRequest implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private String idContrato;
 	private String tipoMercado;
 	private String estadoContrato;
@@ -30,13 +34,54 @@ public class ContratosRequest {
 	private String numContrato;	
 	private List<GarantiasRequest>  garantiasContratos;
 	private List<PreciosRequest>  preciosRequest;
-	private List<CantidadRequest>  cantidadRequest;	
+	private List<CantidadRequest>  cantidadRequest;
+	private List<PlantaCantContrato> plantaCantContratos;
 	
 	public ContratosRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public ContratosRequest(String idContrato, String tipoMercado, String estadoContrato, String negociacionContrato,
+			String fechaInicioContrato, String fechaFinContrato, String contratoSic, String cod_SIC_comprador,
+			String cod_SIC_vendedor, String fechaFirma, String nombreCliente, String emailContacto, String tipoContrato,
+			String telefonoContacto, String tipoGarantia, String fechaEntregaGarantia, String cantidadContrato,
+			String tipoCantidad, String tipoPrecio, String mesBase, String condicionTipoContrato, String formulaPrecio,
+			String contratoDocumento, String numContrato, List<GarantiasRequest> garantiasContratos,
+			List<PreciosRequest> preciosRequest, List<CantidadRequest> cantidadRequest,
+			List<PlantaCantContrato> plantaCantContratos) {
+		super();
+		this.idContrato = idContrato;
+		this.tipoMercado = tipoMercado;
+		this.estadoContrato = estadoContrato;
+		this.negociacionContrato = negociacionContrato;
+		this.fechaInicioContrato = fechaInicioContrato;
+		this.fechaFinContrato = fechaFinContrato;
+		this.contratoSic = contratoSic;
+		this.cod_SIC_comprador = cod_SIC_comprador;
+		this.cod_SIC_vendedor = cod_SIC_vendedor;
+		this.fechaFirma = fechaFirma;
+		this.nombreCliente = nombreCliente;
+		this.emailContacto = emailContacto;
+		this.tipoContrato = tipoContrato;
+		this.telefonoContacto = telefonoContacto;
+		this.tipoGarantia = tipoGarantia;
+		this.fechaEntregaGarantia = fechaEntregaGarantia;
+		this.cantidadContrato = cantidadContrato;
+		this.tipoCantidad = tipoCantidad;
+		this.tipoPrecio = tipoPrecio;
+		this.mesBase = mesBase;
+		this.condicionTipoContrato = condicionTipoContrato;
+		this.formulaPrecio = formulaPrecio;
+		this.contratoDocumento = contratoDocumento;
+		this.numContrato = numContrato;
+		this.garantiasContratos = garantiasContratos;
+		this.preciosRequest = preciosRequest;
+		this.cantidadRequest = cantidadRequest;
+		this.plantaCantContratos = plantaCantContratos;
+	}
+
+
 	
 	@Override
 	public String toString() {
@@ -50,9 +95,10 @@ public class ContratosRequest {
 				+ cantidadContrato + ", tipoCantidad=" + tipoCantidad + ", tipoPrecio=" + tipoPrecio + ", mesBase="
 				+ mesBase + ", condicionTipoContrato=" + condicionTipoContrato + ", formulaPrecio=" + formulaPrecio
 				+ ", contratoDocumento=" + contratoDocumento + ", numContrato=" + numContrato + ", garantiasContratos="
-				+ garantiasContratos + ", preciosRequest=" + preciosRequest + ", cantidadRequest=" + cantidadRequest
-				+ "]";
+				+ garantiasContratos.size() + ", preciosRequest=" + preciosRequest.size() + ", cantidadRequest=" + cantidadRequest.size()
+				+ ", plantaCantContratos=" + plantaCantContratos.size() + "]";
 	}
+
 	public String getIdContrato() {
 		return idContrato;
 	}
@@ -214,5 +260,11 @@ public class ContratosRequest {
 	}
 	public void setNombreCliente(String nombreCliente) {
 		this.nombreCliente = nombreCliente;
-	}	
+	}
+	public List<PlantaCantContrato> getPlantaCantContratos() {
+		return plantaCantContratos;
+	}
+	public void setPlantaCantContratos(List<PlantaCantContrato> plantaCantContratos) {
+		this.plantaCantContratos = plantaCantContratos;
+	}
 }

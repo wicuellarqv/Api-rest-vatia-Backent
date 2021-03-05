@@ -17,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.vatia.apirest.model.PlantaCantContrato;
 import com.vatia.apirest.repository.ConsultaRepository;
+import com.vatia.apirest.repository.PlantaCantContratoRepository;
 import com.vatia.apirest.service.ConsultaService;
 import com.vatia.apirest.utils.ConsultaContratosResponse;
 import com.vatia.apirest.utils.ContratoDetailResponse;
@@ -31,6 +33,10 @@ import com.vatia.apirest.utils.fechaPagoResponse;
 public class ConsultaServiceImpl implements ConsultaService {
 	@Autowired
 	private ConsultaRepository consultaRepository;
+	
+	@Autowired
+	private PlantaCantContratoRepository plantaCantContratoRepository;
+	
 	// @Autowired
 	static String dbURL = "jdbc:sqlserver://10.112.201.35\\PROGENERAL;databaseName=webapp_tradebalance;user=webapp_tradebalance;password=W3b4pp.Tr4de$$";
 	public static void conected() {
@@ -61,29 +67,29 @@ public class ConsultaServiceImpl implements ConsultaService {
 		
 		List<ConsultaContratosResponse> Contratos = new ArrayList<>();
 	
-		String query = "select \r\n"
-				+ "c.num_id_contrato id_contrato, \r\n"
-				+ "c.num_contrato num_contrato,\r\n"
-				+ "c.str_codigo_sic_contrato cod_sic_contrato,\r\n"
-				+ "nc.str_desc_negoc_contrato negociacion,\r\n"
-				+ "tc.str_desc_tipo_contrato tipo_contrato,\r\n"
-				+ "ctc.str_desc_condicion_tipo_contrato condicion,\r\n"
-				+ "tm.str_desc_tipo_mercado tipo_mercado,\r\n"
-				+ "c.num_id_agnte_ccial_comp id_comprador,\r\n"
-				+ "a.str_nombre_agente_ccial comprador,\r\n"
-				+ "c.num_id_agnte_ccial_vend id_vendedor,\r\n"
-				+ "ag.str_nombre_agente_ccial vendedor,\r\n"
-				+ "c.dtm_periodo_fin fecha_fin,\r\n"
-				+ "c.dtm_periodo_inicio fecha_inicio,\r\n"
-				+ "c.str_estado estado\r\n"
-				+ "from tbl_contratos c \r\n"
-				+ "inner join tbl_condiciones_tipos_contratos ctc on c.num_id_condicion_tipo_contrato=ctc.num_id_condicion_tipo_contrato\r\n"
-				+ "inner join tbl_negoc_contratos nc on c.num_id_negoc_contrato=nc.num_id_negoc_contrato\r\n"
-				+ "inner join tbl_tipos_contratos tc on c.num_id_tipo_contrato=tc.num_id_tipo_contrato\r\n"
-				+ "inner join tbl_agentes_comerciales a on c.num_id_agnte_ccial_comp=a.num_id_agente_ccial\r\n"
-				+ "inner join tbl_agentes_comerciales ag on c.num_id_agnte_ccial_vend= ag.num_id_agente_ccial\r\n"
-				+ "inner join tbl_tipos_mercados tm on c.num_id_tipo_mercado=tm.num_id_tipo_mercado\r\n"
-				+ "where 1=1";
+		String query = "select "
+				+ "c.num_id_contrato id_contrato, "
+				+ "c.num_contrato num_contrato, "
+				+ "c.str_codigo_sic_contrato cod_sic_contrato, "
+				+ "nc.str_desc_negoc_contrato negociacion, "
+				+ "tc.str_desc_tipo_contrato tipo_contrato, "
+				+ "ctc.str_desc_condicion_tipo_contrato condicion, "
+				+ "tm.str_desc_tipo_mercado tipo_mercado, "
+				+ "c.num_id_agnte_ccial_comp id_comprador, "
+				+ "a.str_nombre_agente_ccial comprador, "
+				+ "c.num_id_agnte_ccial_vend id_vendedor, "
+				+ "ag.str_nombre_agente_ccial vendedor, "
+				+ "c.dtm_periodo_fin fecha_fin, "
+				+ "c.dtm_periodo_inicio fecha_inicio, "
+				+ "c.str_estado estado "
+				+ "from tbl_contratos c "
+				+ "left join tbl_condiciones_tipos_contratos ctc on c.num_id_condicion_tipo_contrato=ctc.num_id_condicion_tipo_contrato "
+				+ "left join tbl_negoc_contratos nc on c.num_id_negoc_contrato=nc.num_id_negoc_contrato "
+				+ "left join tbl_tipos_contratos tc on c.num_id_tipo_contrato=tc.num_id_tipo_contrato "
+				+ "left join tbl_agentes_comerciales a on c.num_id_agnte_ccial_comp=a.num_id_agente_ccial "
+				+ "left join tbl_agentes_comerciales ag on c.num_id_agnte_ccial_vend= ag.num_id_agente_ccial "
+				+ "left join tbl_tipos_mercados tm on c.num_id_tipo_mercado=tm.num_id_tipo_mercado "
+				+ "where 1=1 ";
 		
 		if(obj.get("numContrato") != null) {
 			query+=" and c.num_contrato = " + obj.get("numContrato").toString();
@@ -168,14 +174,30 @@ public class ConsultaServiceImpl implements ConsultaService {
 	 */
 	@Override
 	public ContratoDetailResponse findById(String idContrato) {
-		String queryResult = this.consultaRepository.detalle(idContrato);
-		String[] args = queryResult.split(",");
-		ContratoDetailResponse cdr = new ContratoDetailResponse(args);
-		cdr.setPrecios(this.preciosContrato(idContrato));
-		cdr.setCantidad(this.tipoCantidad(idContrato));
-		cdr.setGarantias(this.garantias(idContrato));
-		cdr.setFechaPago(this.fechaPago(idContrato));
-		return cdr;
+		try {
+			String queryResult = this.consultaRepository.detalle(idContrato);
+			String[] args = queryResult.split(",");
+			ContratoDetailResponse cdr = new ContratoDetailResponse(args);
+			cdr.setPrecios(this.preciosContrato(idContrato));
+			cdr.setCantidad(this.tipoCantidad(idContrato));
+			cdr.setGarantias(this.garantias(idContrato));
+			cdr.setFechaPago(this.fechaPago(idContrato));
+			System.out.println("consulte el contrato: " + idContrato);
+			cdr.setPlantaCantContratos(this.plantaCatContrato(idContrato));
+			return cdr;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	public List<PlantaCantContrato> plantaCatContrato(String idContrato) {
+		List<PlantaCantContrato> plantaCatContratos = new ArrayList<>();
+		System.out.println("busque el objeto de planta cantidad contrato");
+		plantaCatContratos = plantaCantContratoRepository.nativeFindByIdContrato(Integer.parseInt(idContrato));
+		System.out.println("encontre: " + plantaCatContratos.size() + " elementos");
+		return plantaCatContratos;
 	}
 
 	@Override
