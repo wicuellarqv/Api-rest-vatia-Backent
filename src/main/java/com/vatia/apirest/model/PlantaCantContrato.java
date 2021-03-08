@@ -43,6 +43,7 @@ public class PlantaCantContrato implements Serializable {
 	private Integer cantidadCubierta;
 
 	@ManyToOne()
+	@JsonIgnore
 	@JoinColumn(name = "contrato", referencedColumnName = "num_id_contrato")
 	private Contratos contrato;
 	

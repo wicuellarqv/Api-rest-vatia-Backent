@@ -193,8 +193,6 @@ public class ContratoServiceImpl implements ContratoService {
 		CantidadesContratos cantidadesContratosN = new CantidadesContratos();
 		FechasPagoContratos fechasPagoContratosN = new FechasPagoContratos();
 		GarantiasContratos garantiasContratosN = new GarantiasContratos();	
-
-		
 		
 		try {
 			
@@ -206,21 +204,21 @@ public class ContratoServiceImpl implements ContratoService {
 
 			// Set de campos basicos en la tabla de contratos
 			
-			if (ContratosNew.getIdContrato() != null) {
-				ContratosList.setIdContrato(ContratosNew.getIdContrato());
+			if (contratosRequest.getIdContrato() != null) {
+				ContratosList.setIdContrato(Integer.parseInt(contratosRequest.getIdContrato()));
 			}
 			
-			if (ContratosNew.getIdTipoMercado() != null) {
-				ContratosList.setIdTipoMercado(ContratosNew.getIdTipoMercado());
+			if (contratosRequest.getTipoMercado() != null) {
+				ContratosList.setIdTipoMercado(Integer.parseInt(contratosRequest.getTipoMercado()));
 			}
 			if (contratosRequest.getEstadoContrato() != null) {
 				ContratosList.setEstadoContrato(contratosRequest.getEstadoContrato());
 			}
-			if (ContratosNew.getIdTipoContrato() != null) {
-				ContratosList.setIdTipoContrato(ContratosNew.getIdTipoContrato());
+			if (contratosRequest.getTipoContrato() != null) {
+				ContratosList.setIdTipoContrato(Integer.parseInt(contratosRequest.getTipoContrato()));
 			}
-			if (ContratosNew.getIdNegContrato() != null) {
-				ContratosList.setIdNegContrato(ContratosNew.getIdNegContrato());
+			if (contratosRequest.getNegociacionContrato() != null) {
+				ContratosList.setIdNegContrato(Integer.parseInt(contratosRequest.getNegociacionContrato()));
 			}
 			if (contratosRequest.getFechaInicioContrato() != null) {
 				ContratosList.setFecPeriodoInicio(contratosRequest.getFechaInicioContrato());
@@ -238,11 +236,15 @@ public class ContratoServiceImpl implements ContratoService {
 				ContratosList.setNumContrato(Integer.parseInt(contratosRequest.getNumContrato()));
 			}				
 				
-			if (ContratosNew.getIdAgenteComprador() != null) {
-			ContratosList.setIdAgenteComprador(ContratosNew.getIdAgenteComprador());
+			if (contratosRequest.getCod_SIC_comprador() != null) {
+				AgentesComerciales agentesComerciales = new AgentesComerciales();
+				agentesComerciales = agenteComercialRepository.findAllCod(contratosRequest.getCod_SIC_comprador());
+				ContratosList.setIdAgenteComprador(agentesComerciales.getIdAgenteCcial());
 			}
-			if (ContratosNew.getIdAgenteVendedor() != null) {
-				ContratosList.setIdAgenteVendedor(ContratosNew.getIdAgenteVendedor());
+			if (contratosRequest.getCod_SIC_vendedor() != null) {
+				AgentesComerciales agentesComerciales = new AgentesComerciales();
+				agentesComerciales = agenteComercialRepository.findAllCod(contratosRequest.getCod_SIC_vendedor());
+				ContratosList.setIdAgenteVendedor(agentesComerciales.getIdAgenteCcial());
 			}			
 			if (contratosRequest.getCondicionTipoContrato() != null) {
 				ContratosList.setIdCondicionTipoContrato(Integer.parseInt(contratosRequest.getCondicionTipoContrato()));
@@ -260,7 +262,7 @@ public class ContratoServiceImpl implements ContratoService {
 				ContratosList.setTelContacto(contratosRequest.getTelefonoContacto());
 			}			
 			
-			//update en la tabla contratos 
+			//update en la tabla contratos
 			ContratosRepository.save(ContratosList);			
 			
 			listaGarantiasContratos = contratosRequest.getGarantiasContratos();
