@@ -20,6 +20,8 @@ public interface CategoriaService {
 	
 	public List<CategoriaCliente> getAllCategoriasClientes();
 	
+	public List<CategoriaCliente> getCategCliByTipoCategoria(Integer tipo);
+	
 	public CategoriaCliente saveCategoriaCliente(CategoriaCliente categoriaCliente);
 	
 	public Boolean deleteCategoriaCliente(CategoriaCliente categoriaCliente);

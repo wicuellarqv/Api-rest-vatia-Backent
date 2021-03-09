@@ -124,6 +124,22 @@ public class CategClienteController {
 
 	}
 	
+	@PostMapping("/categorias_clientes_by_tipo_cat")
+	public ResponseEntity<ResponseHTTP> getCategoriasCliByTipoCateg(@RequestBody Categoria categoria) {
+		List<CategoriaCliente> categoriasCli = new ArrayList<>();
+
+		try {
+			categoriasCli = categoriaService.getCategCliByTipoCategoria(categoria.getTipo());
+		} catch (Exception e) {
+			return new ResponseEntity<>(new ResponseHTTP(HttpStatus.INTERNAL_SERVER_ERROR.value(), null),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return categoriasCli.size() > 0
+				? new ResponseEntity<>(new ResponseHTTP(HttpStatus.OK.value(), categoriasCli), HttpStatus.OK)
+				: new ResponseEntity<>(new ResponseHTTP(HttpStatus.NOT_FOUND.value(), categoriasCli), HttpStatus.NOT_FOUND);
+
+	}
+	
 	@PostMapping("/categorias_clientes")
 	public ResponseEntity<ResponseHTTP> createCategoriaCli(@RequestBody List<CategoriaCliente> ListCategoriaCliente) {
 		List<CategoriaCliente> responseCategoriaCliList =  new ArrayList<CategoriaCliente>();

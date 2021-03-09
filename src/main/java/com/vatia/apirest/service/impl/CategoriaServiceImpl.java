@@ -133,4 +133,9 @@ public class CategoriaServiceImpl implements CategoriaService {
 			return categoriasCli;
 		}
 	}
+
+	@Override
+	public List<CategoriaCliente> getCategCliByTipoCategoria(Integer tipo) {
+		return categoriaClienteRepository.nativeFindCategCliByTipoCategoria(tipo);
+	}
 }
