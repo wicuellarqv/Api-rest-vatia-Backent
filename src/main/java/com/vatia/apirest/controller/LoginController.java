@@ -3,8 +3,6 @@ package com.vatia.apirest.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.vatia.apirest.repository.LoginRepository;
 import com.vatia.apirest.utils.ldapAuth;
 
 import javax.ws.rs.core.Response;
@@ -32,15 +30,23 @@ public class LoginController {
 	//@CrossOrigin(origins = "http://10.112.201.220:80")
 	@PostMapping("/auth")
 	public Response login(@RequestParam String user, @RequestParam String password) throws Exception {
-	//	Boolean status = LoginRepository.validateLogin(user, password);
 		ldapAuth ldapAuth = new ldapAuth(user, password);
 		if (ldapAuth.isAutenticado()) {
+			String[] atributos = ldapAuth.getAtributos();
+			for (String atri : atributos) {
+				System.out.println(atri);
+			}
 			System.out.println("Usuario " + user + " Autenticado Correctamente");
 			String token = getJWTToken("admin");
-			// System.out.print(token);
 			JSONObject json = new JSONObject();
+			JSONObject usuario = new JSONObject();
 			json.appendField("token", token);
-			// json.appendField("token", "Token");
+			usuario.appendField("nombre", atributos[0]);
+			usuario.appendField("mail", atributos[1]);
+			usuario.appendField("title", atributos[2]);
+			usuario.appendField("company", atributos[3]);
+			usuario.appendField("whenCreated", atributos[4]);
+			json.appendField("user", usuario);
 			return Response.status(Response.Status.ACCEPTED).entity(json).build();
 		} else {
 			System.out.println("Usuario " + user + " No se Puedo Autenticar");
